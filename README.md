@@ -39,7 +39,7 @@ To change default colorset (for lines) and colormap:
 import matplotlib.pyplot as plt
 plt.rc('axes', prop_cycle=plt.cycler('color', list(tc.tol_cset('bright'))))
 
-plt.rc.register_cmap('rainbow_PuRd', tc.tol_cmap('rainbow_PuRd'))
+plt.cm.register_cmap('rainbow_PuRd', tc.tol_cmap('rainbow_PuRd'))
 plt.rc('image', cmap='rainbow_PuRd')
 ```
 
