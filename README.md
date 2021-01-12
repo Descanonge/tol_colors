@@ -18,7 +18,7 @@ pip install .
 
 Show the available colorsets, colormaps, and discrete rainbow colormap:
 ``` python
-import toc_colors as tc
+import tol_colors as tc
 tc.main()
 ```
 
