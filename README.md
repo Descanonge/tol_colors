@@ -9,8 +9,8 @@ His work and details on how to use thoses schemes can be found on his [website](
 ## Install
 
 ``` sh
-git clone https://github.com/Descanonge/tol_color
-cd tol_color
+git clone https://github.com/Descanonge/tol_colors.git
+cd tol_colors
 pip install .
 ```
 
