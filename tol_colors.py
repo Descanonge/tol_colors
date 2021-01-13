@@ -22,8 +22,9 @@ def discretemap(colormap, hexclrs):
     clrs = to_rgba_array(hexclrs)
     clrs = np.vstack([clrs[0], clrs, clrs[-1]])
     cdict = {}
-    for ki, key in enumerate(('red','green','blue')):
-        cdict[key] = [ (i/(len(clrs)-2.), clrs[i, ki], clrs[i+1, ki]) for i in range(len(clrs)-1) ]
+    for ki, key in enumerate(('red', 'green', 'blue')):
+        cdict[key] = [(i/(len(clrs)-2.), clrs[i, ki], clrs[i+1, ki])
+                      for i in range(len(clrs)-1)]
     return LinearSegmentedColormap(colormap, cdict)
 
 
@@ -45,11 +46,11 @@ class TOLcmaps(object):
         self.funcdict = dict(
             zip(self.namelist,
                 (self.__sunset_discrete, self.__sunset, self.__BuRd_discrete,
-                self.__BuRd, self.__PRGn_discrete, self.__PRGn,
-                self.__YlOrBr_discrete, self.__YlOrBr, self.__WhOrBr,
-                self.__iridescent, self.__rainbow_PuRd, self.__rainbow_PuBr,
-                self.__rainbow_WhRd, self.__rainbow_WhBr,
-                self.__rainbow_discrete)))
+                 self.__BuRd, self.__PRGn_discrete, self.__PRGn,
+                 self.__YlOrBr_discrete, self.__YlOrBr, self.__WhOrBr,
+                 self.__iridescent, self.__rainbow_PuRd, self.__rainbow_PuBr,
+                 self.__rainbow_WhRd, self.__rainbow_WhBr,
+                 self.__rainbow_discrete)))
 
     def __sunset_discrete(self):
         """
@@ -208,26 +209,34 @@ class TOLcmaps(object):
                 '#90C987', '#CAE0AB', '#F7F056', '#F7CB45', '#F6C141',
                 '#F4A736', '#F1932D', '#EE8026', '#E8601C', '#E65518',
                 '#DC050C', '#A5170E', '#72190E', '#42150A']
-        indexes = [[9], [9, 25], [9, 17, 25], [9, 14, 17, 25], [9, 13, 14, 17,
-                25], [9, 13, 14, 16, 17, 25], [8, 9, 13, 14, 16, 17, 25], [8,
-                9, 13, 14, 16, 17, 22, 25], [8, 9, 13, 14, 16, 17, 22, 25, 27],
-                [8, 9, 13, 14, 16, 17, 20, 23, 25, 27], [8, 9, 11, 13, 14, 16,
-                17, 20, 23, 25, 27], [2, 5, 8, 9, 11, 13, 14, 16, 17, 20, 23,
-                25], [2, 5, 8, 9, 11, 13, 14, 15, 16, 17, 20, 23, 25], [2, 5,
-                8, 9, 11, 13, 14, 15, 16, 17, 19, 21, 23, 25], [2, 5, 8, 9, 11,
-                13, 14, 15, 16, 17, 19, 21, 23, 25, 27], [2, 4, 6, 8, 9, 11,
-                13, 14, 15, 16, 17, 19, 21, 23, 25, 27], [2, 4, 6, 7, 8, 9, 11,
-                13, 14, 15, 16, 17, 19, 21, 23, 25, 27], [2, 4, 6, 7, 8, 9, 11,
-                13, 14, 15, 16, 17, 19, 21, 23, 25, 26, 27], [1, 3, 4, 6, 7, 8,
-                9, 11, 13, 14, 15, 16, 17, 19, 21, 23, 25, 26, 27], [1, 3, 4,
-                6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 19, 21, 23, 25, 26,
-                27], [1, 3, 4, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 18, 20,
-                22, 24, 25, 26, 27], [1, 3, 4, 6, 7, 8, 9, 10, 12, 13, 14, 15,
-                16, 17, 18, 20, 22, 24, 25, 26, 27, 28], [0, 1, 3, 4, 6, 7, 8,
-                9, 10, 12, 13, 14, 15, 16, 17, 18, 20, 22, 24, 25, 26, 27, 28]]
         if lut == None or lut < 1 or lut > 23:
+        indexes = [[9], [9, 25], [9, 17, 25], [9, 14, 17, 25],
+                   [9, 13, 14, 17, 25], [9, 13, 14, 16, 17, 25],
+                   [8, 9, 13, 14, 16, 17, 25], [8, 9, 13, 14, 16, 17, 22, 25],
+                   [8, 9, 13, 14, 16, 17, 22, 25, 27],
+                   [8, 9, 13, 14, 16, 17, 20, 23, 25, 27],
+                   [8, 9, 11, 13, 14, 16, 17, 20, 23, 25, 27],
+                   [2, 5, 8, 9, 11, 13, 14, 16, 17, 20, 23, 25],
+                   [2, 5, 8, 9, 11, 13, 14, 15, 16, 17, 20, 23, 25],
+                   [2, 5, 8, 9, 11, 13, 14, 15, 16, 17, 19, 21, 23, 25],
+                   [2, 5, 8, 9, 11, 13, 14, 15, 16, 17, 19, 21, 23, 25, 27],
+                   [2, 4, 6, 8, 9, 11, 13, 14, 15, 16, 17, 19, 21, 23, 25, 27],
+                   [2, 4, 6, 7, 8, 9, 11, 13, 14, 15, 16, 17, 19, 21, 23, 25,
+                    27],
+                   [2, 4, 6, 7, 8, 9, 11, 13, 14, 15, 16, 17, 19, 21, 23, 25,
+                    26, 27],
+                   [1, 3, 4, 6, 7, 8, 9, 11, 13, 14, 15, 16, 17, 19, 21, 23, 25,
+                    26, 27],
+                   [1, 3, 4, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 19, 21, 23,
+                    25, 26, 27],
+                   [1, 3, 4, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 18, 20, 22,
+                    24, 25, 26, 27],
+                   [1, 3, 4, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 18, 20, 22,
+                    24, 25, 26, 27, 28],
+                   [0, 1, 3, 4, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 18, 20,
+                    22, 24, 25, 26, 27, 28]]
             lut = 22
-        self.cmap = discretemap(self.cname, [ clrs[i] for i in indexes[lut-1] ])
+        self.cmap = discretemap(self.cname, [clrs[i] for i in indexes[lut-1]])
         if lut == 23:
             self.cmap.set_bad('#777777')
         else:
@@ -254,7 +263,7 @@ class TOLcmaps(object):
 def tol_cmap(colormap=None, lut=None):
     """
     Continuous and discrete color sets for ordered data.
-    
+
     Return a matplotlib colormap.
     Parameter lut is ignored for all colormaps except 'rainbow_discrete'.
     """
@@ -280,7 +289,7 @@ def tol_cset(colorset=None):
       - list(cset) gives a list with all colors
     """
     from collections import namedtuple
-    
+
     namelist = ('bright', 'high-contrast', 'vibrant', 'muted', 'light')
     if colorset == None:
         return namelist
@@ -288,35 +297,36 @@ def tol_cset(colorset=None):
         colorset = 'bright'
         print('*** Warning: requested colorset not defined,',
               'known colorsets are {}.'.format(namelist),
-              'Using {}.'.format(colorset)) 
+              'Using {}.'.format(colorset))
 
     if colorset == 'bright':
         cset = namedtuple('Bcset',
-                    'blue red green yellow cyan purple grey black')
+                          'blue red green yellow cyan purple grey black')
         return cset('#4477AA', '#EE6677', '#228833', '#CCBB44', '#66CCEE',
                     '#AA3377', '#BBBBBB', '#000000')
-    
+
     if colorset == 'high-contrast':
-        cset = namedtuple('Hcset',
-                    'blue yellow red black')
+        cset = namedtuple('Hcset', 'blue yellow red black')
         return cset('#004488', '#DDAA33', '#BB5566', '#000000')
 
     if colorset == 'vibrant':
         cset = namedtuple('Vcset',
-                    'orange blue cyan magenta red teal grey black')
+                          'orange blue cyan magenta red teal grey black')
         return cset('#EE7733', '#0077BB', '#33BBEE', '#EE3377', '#CC3311',
                     '#009988', '#BBBBBB', '#000000')
 
     if colorset == 'muted':
         cset = namedtuple('Mcset',
-                    'rose indigo sand green cyan wine teal olive purple pale_grey black')
+                          ('rose indigo sand green cyan wine '
+                           'teal olive purple pale_grey black'))
         return cset('#CC6677', '#332288', '#DDCC77', '#117733', '#88CCEE',
                     '#882255', '#44AA99', '#999933', '#AA4499', '#DDDDDD',
                     '#000000')
 
     if colorset == 'light':
         cset = namedtuple('Lcset',
-                    'light_blue orange light_yellow pink light_cyan mint pear olive pale_grey black')
+                          ('light_blue orange light_yellow pink light_cyan '
+                           'mint pear olive pale_grey black'))
         return cset('#77AADD', '#EE8866', '#EEDD88', '#FFAABB', '#99DDFF',
                     '#44BB99', '#BBCC33', '#AAAA00', '#DDDDDD', '#000000')
 
@@ -345,7 +355,7 @@ def main():
         ax.set_title(scheme)
     plt.show()
 
-    # Show colormaps tol_cmap(<scheme>). 
+    # Show colormaps tol_cmap(<scheme>).
     schemes = tol_cmap()
     gradient = np.linspace(0, 1, 256)
     gradient = np.vstack((gradient, gradient))
@@ -358,7 +368,7 @@ def main():
         fig.text(pos[0] - 0.01, pos[1] + pos[3]/2., scheme, va='center', ha='right', fontsize=10)
     plt.show()
 
-    # Show colormaps tol_cmap('rainbow_discrete', <lut>). 
+    # Show colormaps tol_cmap('rainbow_discrete', <lut>).
     gradient = np.linspace(0, 1, 256)
     gradient = np.vstack((gradient, gradient))
     fig, axes = plt.subplots(nrows=23)
