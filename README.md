@@ -8,6 +8,12 @@ His work and details on how to use thoses schemes can be found on his [website](
 
 ## Install
 
+Using [pip](https://pypi.org/project/tol_colors/):
+``` sh
+pip install tol_colors
+```
+
+From source:
 ``` sh
 git clone https://github.com/Descanonge/tol_colors.git
 cd tol_colors
@@ -43,6 +49,10 @@ plt.cm.register_cmap('rainbow_PuRd', tc.tol_cmap('rainbow_PuRd'))
 plt.rc('image', cmap='rainbow_PuRd')
 ```
 
+## Requirements
+
+- numpy
+- matplotlib
 
 ## See also
 
@@ -50,5 +60,3 @@ Other packages already implement these colorschemes and might better suit your n
  - [color_tol](https://github.com/lazarillo/color_tol)
  - [pyplot-themes](https://github.com/raybuhr/pyplot-themes)
 
-
-[docs]: docs
