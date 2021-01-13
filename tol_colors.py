@@ -12,7 +12,7 @@ import numpy as np
 from matplotlib.colors import LinearSegmentedColormap, to_rgba_array
 
 
-__version__ = "1.0.1"
+__version__ = "1.0.2"
 
 
 def discretemap(colormap, hexclrs):
