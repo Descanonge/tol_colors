@@ -48,4 +48,4 @@ setup(name='tol_colors',
 
       py_modules=['tol_colors'],
 
-      requires=['numpy', 'matplotlib'])
+      install_requires=['numpy', 'matplotlib'])

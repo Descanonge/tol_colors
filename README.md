@@ -3,14 +3,21 @@
 
 > Color schemes for lines and maps, color-blind safe
 
+<div align="left">
+
+[![PyPI version](https://badge.fury.io/py/tol-colors.svg)](https://badge.fury.io/py/tol-colors)
+[![Release status](https://img.shields.io/github/v/release/Descanonge/tol_colors)](https://github.com/Descanonge/tol_colors/releases)
+
+</div>
+
 Thoses color schemes were designed by Paul Tol. This repository is only packaging his work so that it can be easily installed using pip.
 His work and details on how to use thoses schemes can be found on his [website](https://personal.sron.nl/~pault/) and in the [docs](./docs) directory.
 
 ## Install
 
-Using [pip](https://pypi.org/project/tol_colors/):
+Using pip:
 ``` sh
-pip install tol_colors
+pip install tol-colors
 ```
 
 From source:
