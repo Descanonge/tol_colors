@@ -209,7 +209,6 @@ class TOLcmaps(object):
                 '#90C987', '#CAE0AB', '#F7F056', '#F7CB45', '#F6C141',
                 '#F4A736', '#F1932D', '#EE8026', '#E8601C', '#E65518',
                 '#DC050C', '#A5170E', '#72190E', '#42150A']
-        if lut == None or lut < 1 or lut > 23:
         indexes = [[9], [9, 25], [9, 17, 25], [9, 14, 17, 25],
                    [9, 13, 14, 17, 25], [9, 13, 14, 16, 17, 25],
                    [8, 9, 13, 14, 16, 17, 25], [8, 9, 13, 14, 16, 17, 22, 25],
@@ -235,6 +234,7 @@ class TOLcmaps(object):
                     24, 25, 26, 27, 28],
                    [0, 1, 3, 4, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 18, 20,
                     22, 24, 25, 26, 27, 28]]
+        if lut is None or lut < 1 or lut > 23:
             lut = 22
         self.cmap = discretemap(self.cname, [clrs[i] for i in indexes[lut-1]])
         if lut == 23:
@@ -268,7 +268,7 @@ def tol_cmap(colormap=None, lut=None):
     Parameter lut is ignored for all colormaps except 'rainbow_discrete'.
     """
     obj = TOLcmaps()
-    if colormap == None:
+    if colormap is None:
         return obj.namelist
     if colormap not in obj.namelist:
         colormap = 'rainbow_PuRd'
@@ -291,7 +291,7 @@ def tol_cset(colorset=None):
     from collections import namedtuple
 
     namelist = ('bright', 'high-contrast', 'vibrant', 'muted', 'light')
-    if colorset == None:
+    if colorset is None:
         return namelist
     if colorset not in namelist:
         colorset = 'bright'
