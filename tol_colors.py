@@ -12,6 +12,9 @@ import numpy as np
 from matplotlib.colors import LinearSegmentedColormap, to_rgba_array
 
 
+__version__ = "1.0.1"
+
+
 def discretemap(colormap, hexclrs):
     """
     Produce a colormap from a list of discrete colors without interpolation.

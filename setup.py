@@ -10,8 +10,19 @@ def get_long_description(rel_path):
         return file.read()
 
 
+def get_version(rel_path):
+    with open(path.join(here, rel_path)) as file:
+        lines = file.read().splitlines()
+    for line in lines:
+        if line.startswith('__version__'):
+            delim = '"' if '"' in line else "'"
+            return line.split(delim)[1]
+    else:
+        raise RuntimeError("Unable to find version string.")
+
+
 setup(name='tol_colors',
-      version=1.0,
+      version=get_version('tol_colors.py'),
 
       description="Color schemes for lines and maps, color-blind safe",
       long_description=get_long_description('README.md'),
