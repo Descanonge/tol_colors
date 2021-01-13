@@ -28,7 +28,7 @@ setup(name='tol_colors',
       long_description=get_long_description('README.md'),
       long_description_content_type='text/markdown',
 
-      keywords='color schemes palette color-blind',
+      keywords='visualization colormap colorset',
 
       url='https://personal.sron.nl/~pault',
       project_urls={
@@ -39,8 +39,13 @@ setup(name='tol_colors',
 
       classifiers=[
           'Programming Language :: Python :: 3',
+          'License :: OSI Approved :: BSD License',
+          'Operating System :: OS Independent',
           'Development Status :: 5 - Production/Stable',
-          'Intended Audience :: Science/Research'
+          'Intended Audience :: Science/Research',
+          'Topic :: Scientific/Engineering :: Visualization'
       ],
 
-      py_modules="tol_colors")
+      py_modules=['tol_colors'],
+
+      requires=['numpy', 'matplotlib'])
