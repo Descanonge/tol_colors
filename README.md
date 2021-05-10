@@ -5,8 +5,8 @@
 
 <div align="left">
 
-[![PyPI version](https://badge.fury.io/py/tol-colors.svg)](https://badge.fury.io/py/tol-colors)
-[![Release status](https://img.shields.io/github/v/release/Descanonge/tol_colors)](https://github.com/Descanonge/tol_colors/releases)
+[![PyPI](https://img.shields.io/pypi/v/tol-colors)](https://pypi.org/project/tol-colors)
+[![GitHub release](https://img.shields.io/github/v/release/Descanonge/tol_colors)](https://github.com/Descanonge/tol_colors/releases)
 
 </div>
 
