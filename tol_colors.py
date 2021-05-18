@@ -8,11 +8,15 @@ All rights reserved.
 
 License:  Standard 3-clause BSD
 """
+import logging
 import numpy as np
 from matplotlib.colors import LinearSegmentedColormap, to_rgba_array
 
 
 __version__ = "1.0.2"
+
+
+log = logging.getLogger(__name__)
 
 
 def discretemap(colormap, hexclrs):
@@ -272,9 +276,8 @@ def tol_cmap(colormap=None, lut=None):
         return obj.namelist
     if colormap not in obj.namelist:
         colormap = 'rainbow_PuRd'
-        print('*** Warning: requested colormap not defined,',
-              'known colormaps are {}.'.format(obj.namelist),
-              'Using {}.'.format(colormap))
+        logging.warning("Requested colormap not defined, using '%s' "
+                        "known colormaps are %s.", colormap, obj.namelist)
     return obj.get(colormap, lut)
 
 
@@ -295,10 +298,6 @@ def tol_cset(colorset=None):
         return namelist
     if colorset not in namelist:
         colorset = 'bright'
-        print('*** Warning: requested colorset not defined,',
-              'known colorsets are {}.'.format(namelist),
-              'Using {}.'.format(colorset))
-
     if colorset == 'bright':
         cset = namedtuple('Bcset',
                           'blue red green yellow cyan purple grey black')
@@ -329,6 +328,8 @@ def tol_cset(colorset=None):
                            'mint pear olive pale_grey black'))
         return cset('#77AADD', '#EE8866', '#EEDD88', '#FFAABB', '#99DDFF',
                     '#44BB99', '#BBCC33', '#AAAA00', '#DDDDDD', '#000000')
+        logging.warning("Requested colormap not defined, using '%s' "
+                        "known colormaps are %s.", colorset, namelist)
 
 
 def main():
