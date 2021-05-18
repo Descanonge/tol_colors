@@ -11,22 +11,24 @@ License:  Standard 3-clause BSD
 from collections import namedtuple
 import json
 import logging
-from os import path
+try:
+    import importlib.resources as importlib_resources
+except ImportError:
+    import importlib_resources
 
 import numpy as np
 from matplotlib import pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap, to_rgba_array
 
 
-__version__ = "1.1.0"
+__version__ = "1.2.0"
 
 
 log = logging.getLogger(__name__)
 
 
 def read_colorsets():
-    colorsets_file = path.join(path.dirname(__file__), 'colorsets.json')
-    with open(colorsets_file, 'r') as f:
+    with importlib_resources.open_text('tol_colors', 'colorsets.json') as f:
         colorsets_js = json.load(f)
 
     colorsets = {}

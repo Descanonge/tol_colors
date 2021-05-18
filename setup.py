@@ -1,5 +1,5 @@
 
-from setuptools import setup
+from setuptools import setup, find_packages
 from os import path
 
 here = path.abspath(path.dirname(__file__))
@@ -22,7 +22,7 @@ def get_version(rel_path):
 
 
 setup(name='tol_colors',
-      version=get_version('tol_colors.py'),
+      version=get_version('src/tol_colors/__init__.py'),
 
       description="Color schemes for lines and maps, color-blind safe",
       long_description=get_long_description('README.md'),
@@ -46,7 +46,8 @@ setup(name='tol_colors',
           'Topic :: Scientific/Engineering :: Visualization'
       ],
 
-      py_modules=['tol_colors'],
-      data_files=[('', ['colorsets.json'])],
+      package_dir={'': 'src'},
+      packages=find_packages(where='src'),
+      include_package_data=True,
 
       install_requires=['numpy', 'matplotlib'])
