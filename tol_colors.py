@@ -9,7 +9,9 @@ All rights reserved.
 License:  Standard 3-clause BSD
 """
 from collections import namedtuple
+import json
 import logging
+from os import path
 
 import numpy as np
 from matplotlib import pyplot as plt
@@ -20,6 +22,25 @@ __version__ = "1.0.2"
 
 
 log = logging.getLogger(__name__)
+
+
+def read_colorsets():
+    colorsets_file = path.join(path.dirname(__file__), 'colorsets.json')
+    with open(colorsets_file, 'r') as f:
+        colorsets_js = json.load(f)
+
+    colorsets = {}
+    for cset in colorsets_js:
+        name = cset["name"]
+        typename = name[:3] + "_cset"
+        colors = cset["colors"]
+        cset = namedtuple(typename, ' '.join(list(colors.keys())))
+        colorsets[name] = cset(*colors.values())
+
+    return colorsets
+
+
+colorsets = read_colorsets()
 
 
 def discretemap(colormap, hexclrs):
@@ -258,59 +279,28 @@ def tol_cset(colorset=None):
         Name of the color set. If None return the list of possible sets.
         If not in defined sets, will default to 'bright'.
     """
-    namelist = list(_schemes.keys())
+    namelist = list(colorsets.keys())
     if colorset is None:
         return namelist
     if colorset not in namelist:
         colorset = 'bright'
-    if colorset == 'bright':
-        cset = namedtuple('Bcset',
-                          'blue red green yellow cyan purple grey black')
-        return cset('#4477AA', '#EE6677', '#228833', '#CCBB44', '#66CCEE',
-                    '#AA3377', '#BBBBBB', '#000000')
-
-    if colorset == 'high-contrast':
-        cset = namedtuple('Hcset', 'blue yellow red black')
-        return cset('#004488', '#DDAA33', '#BB5566', '#000000')
-
-    if colorset == 'vibrant':
-        cset = namedtuple('Vcset',
-                          'orange blue cyan magenta red teal grey black')
-        return cset('#EE7733', '#0077BB', '#33BBEE', '#EE3377', '#CC3311',
-                    '#009988', '#BBBBBB', '#000000')
-
-    if colorset == 'muted':
-        cset = namedtuple('Mcset',
-                          ('rose indigo sand green cyan wine '
-                           'teal olive purple pale_grey black'))
-        return cset('#CC6677', '#332288', '#DDCC77', '#117733', '#88CCEE',
-                    '#882255', '#44AA99', '#999933', '#AA4499', '#DDDDDD',
-                    '#000000')
-
-    if colorset == 'light':
-        cset = namedtuple('Lcset',
-                          ('light_blue orange light_yellow pink light_cyan '
-                           'mint pear olive pale_grey black'))
-        return cset('#77AADD', '#EE8866', '#EEDD88', '#FFAABB', '#99DDFF',
-                    '#44BB99', '#BBCC33', '#AAAA00', '#DDDDDD', '#000000')
         logging.warning("Requested colormap not defined, using '%s' "
                         "known colormaps are %s.", colorset, namelist)
+    return colorsets[colorset]
 
 
 def main():
     # Show colorsets tol_cset(<scheme>).
-    schemes = tol_cset()
-    fig, axes = plt.subplots(ncols=len(schemes))
+    fig, axes = plt.subplots(ncols=len(colorsets))
     fig.subplots_adjust(top=0.92, bottom=0.02, left=0.02, right=0.92)
-    for ax, scheme in zip(axes, schemes):
-        cset = tol_cset(scheme)
+    for ax, (cset_name, cset) in zip(axes, colorsets.items()):
         names = cset._fields
         colors = list(cset)
         for name, color in zip(names, colors):
             ax.scatter([], [], c=color, s=80, label=name)
         ax.set_axis_off()
         ax.legend(loc=2)
-        ax.set_title(scheme)
+        ax.set_title(cset_name)
     plt.show()
 
     # Show colormaps tol_cmap(<scheme>).

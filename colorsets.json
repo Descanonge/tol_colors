@@ -1,0 +1,104 @@
+[
+    {
+        "name": "bright",
+        "colors": {
+            "blue": "#4477AA",
+            "red": "#EE6677",
+            "green": "#228833",
+            "yellow": "#CCBB44",
+            "cyan": "#66CCEE",
+            "purple": "#AA3377",
+            "grey": "#BBBBBB",
+            "black": "#000000"
+        }
+    },
+    {
+        "name": "high-contrast",
+        "colors": {
+            "blue": "#004488",
+            "yellow": "#DDAA33",
+            "red": "#BB5566",
+            "black": "#000000"
+        }
+    },
+    {
+        "name": "vibrant",
+        "colors": {
+            "orange": "#EE7733",
+            "blue": "#0077BB",
+            "cyan": "#33BBEE",
+            "magenta": "#EE3377",
+            "red": "#CC3311",
+            "teal": "#009988",
+            "grey": "#BBBBBB",
+            "black": "#000000"
+        }
+    },
+    {
+        "name": "muted",
+        "colors": {
+            "rose": "#CC6677",
+            "indigo": "#332288",
+            "sand": "#DDCC77",
+            "green": "#117733",
+            "cyan": "#88CCEE",
+            "wine": "#882255",
+            "teal": "#44AA99",
+            "olive": "#999933",
+            "purple": "#AA4499",
+            "pale_grey": "#DDDDDD",
+            "black": "#000000"
+        }
+    },
+    {
+        "name": "medium-contrast",
+        "colors": {
+            "light_blue": "#6699CC",
+            "dark_blue": "#004488",
+            "light_yellow": "#EECC66",
+            "dark_red": "#994455",
+            "dark_yellow": "#997700",
+            "light_red": "#EE99AA",
+            "black": "#000000"
+        }
+    },
+    {
+        "name": "pale",
+        "colors": {
+            "pale_blue": "#BBCCEE",
+            "pale_red": "#FFCCCC",
+            "pale_green": "#CCDDAA",
+            "pale_yellow": "#EEEEBB",
+            "pale_cyan": "#CCEEFF",
+            "pale_grey": "#DDDDDD",
+            "black": "#000000"
+        }
+    },
+    {
+        "name": "dark",
+        "colors": {
+            "dark_blue": "#222255",
+            "dark_red": "#663333",
+            "dark_green": "#225522",
+            "dark_yellow": "#666633",
+            "dark_cyan": "#225555",
+            "dark_grey": "#555555",
+            "black": "#000000"
+        }
+    },
+    {
+        "name": "light",
+        "colors": {
+            "light_blue": "#77AADD",
+            "orange": "#EE8866",
+            "light_yellow": "#EEDD88",
+            "pink": "#FFAABB",
+            "light_cyan": "#99DDFF",
+            "mint": "#44BB99",
+            "pear": "#BBCC33",
+            "olive": "#AAAA00",
+            "pale_grey": "#DDDDDD",
+            "black": "#000000"
+        }
+    }
+]
