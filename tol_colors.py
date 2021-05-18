@@ -18,7 +18,7 @@ from matplotlib import pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap, to_rgba_array
 
 
-__version__ = "1.0.2"
+__version__ = "1.1.0"
 
 
 log = logging.getLogger(__name__)
