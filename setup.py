@@ -47,5 +47,6 @@ setup(name='tol_colors',
       ],
 
       py_modules=['tol_colors'],
+      data_files=[('', ['colorsets.json'])],
 
       install_requires=['numpy', 'matplotlib'])
