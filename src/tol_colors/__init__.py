@@ -261,8 +261,8 @@ def tol_cmap(colormap=None, lut=None):
         return obj.namelist
     if colormap not in obj.namelist:
         colormap = 'rainbow_PuRd'
-        logging.warning("Requested colormap not defined, using '%s' "
-                        "known colormaps are %s.", colormap, obj.namelist)
+        logging.warning("Requested colormap not defined, using '%s'. "
+                        "Known colormaps are %s.", colormap, obj.namelist)
     return obj.get(colormap, lut)
 
 
@@ -270,7 +270,7 @@ def tol_cset(colorset=None):
     """Discrete color sets for qualitative data.
 
     Define a namedtuple instance with the colors.
-    Examples for: cset = tol_cset(<scheme>)
+    Examples for: cset = tol_cset("<scheme>")
       - cset.red and cset[1] give the same color (in default 'bright' colorset)
       - cset._fields gives a tuple with all color names
       - list(cset) gives a list with all colors
@@ -286,8 +286,8 @@ def tol_cset(colorset=None):
         return namelist
     if colorset not in namelist:
         colorset = 'bright'
-        logging.warning("Requested colormap not defined, using '%s' "
-                        "known colormaps are %s.", colorset, namelist)
+        logging.warning("Requested colorset not defined, using '%s'. "
+                        "Known colorsets are %s.", colorset, namelist)
     return colorsets[colorset]
 
 
