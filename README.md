@@ -50,9 +50,10 @@ See the functions docstrings for details.
 To change default colorset (for lines) and colormap:
 ``` python
 import matplotlib.pyplot as plt
-plt.rc('axes', prop_cycle=plt.cycler('color', list(tc.tol_cset('bright'))))
+import tol_colors
 
-plt.cm.register_cmap('rainbow_PuRd', tc.tol_cmap('rainbow_PuRd'))
+plt.rc('axes', prop_cycle=plt.cycler('color', list(tol_colors.tol_cset('bright'))))
+plt.colormaps.register(name='rainbow_PuRd', cmap=tol_colors.tol_cmap('rainbow_PuRd'))
 plt.rc('image', cmap='rainbow_PuRd')
 ```
 
