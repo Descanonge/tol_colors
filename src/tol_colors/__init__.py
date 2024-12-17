@@ -8,18 +8,13 @@ All rights reserved.
 
 License:  Standard 3-clause BSD
 """
-from collections import namedtuple
-import json
+
 import logging
-try:
-    import importlib.resources as importlib_resources
-except ImportError:
-    import importlib_resources
+import typing as t
+from collections import namedtuple
 
 import numpy as np
-from matplotlib import pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap, to_rgba_array
-
 
 __version__ = "1.2.1"
 
@@ -27,223 +22,753 @@ __version__ = "1.2.1"
 log = logging.getLogger(__name__)
 
 
-def read_colorsets():
-    with importlib_resources.open_text('tol_colors', 'colorsets.json') as f:
-        colorsets_js = json.load(f)
-
-    colorsets = {}
-    for cset in colorsets_js:
-        name = cset["name"]
-        typename = name[:3] + "_cset"
-        colors = cset["colors"]
-        cset = namedtuple(typename, ' '.join(list(colors.keys())))
-        colorsets[name] = cset(*colors.values())
-
-    return colorsets
-
-
-colorsets = read_colorsets()
-
-
 def discretemap(colormap, hexclrs):
     """Produce a colormap from a list of discrete colors without interpolation."""
     clrs = to_rgba_array(hexclrs)
     clrs = np.vstack([clrs[0], clrs, clrs[-1]])
     cdict = {}
-    for ki, key in enumerate(('red', 'green', 'blue')):
-        cdict[key] = [(i/(len(clrs)-2.), clrs[i, ki], clrs[i+1, ki])
-                      for i in range(len(clrs)-1)]
+    for ki, key in enumerate(("red", "green", "blue")):
+        cdict[key] = [
+            (i / (len(clrs) - 2.0), clrs[i, ki], clrs[i + 1, ki])
+            for i in range(len(clrs) - 1)
+        ]
     return LinearSegmentedColormap(colormap, cdict)
 
 
-class TOLcmaps(object):
-    """Class TOLcmaps definition. """
+class ColorsetDefinitions:
+    """Definitions of the colorsets."""
+
+    colorset_names = [
+        "bright",
+        "muted",
+        "vibrant",
+        "high_contrast",
+        "medium_contrast",
+        "pale",
+        "light",
+        "dark",
+    ]
+
+    Bright = namedtuple("Bright", "blue, red, green, yellow, cyan, purple, grey, black")
+
+    @classmethod
+    def bright(cls) -> Bright:
+        return cls.Bright(
+            blue="#4477AA",
+            red="#EE6677",
+            green="#228833",
+            yellow="#CCBB44",
+            cyan="#66CCEE",
+            purple="#AA3377",
+            grey="#BBBBBB",
+            black="#000000",
+        )
+
+    Muted = namedtuple(
+        "Muted",
+        "rose, indigo, sand, green, cyan, wine, teal, olive, purple, pale_grey, black",
+    )
+
+    @classmethod
+    def muted(cls) -> Muted:
+        return cls.Muted(
+            rose="#CC6677",
+            indigo="#332288",
+            sand="#DDCC77",
+            green="#117733",
+            cyan="#88CCEE",
+            wine="#882255",
+            teal="#44AA99",
+            olive="#999933",
+            purple="#AA4499",
+            pale_grey="#DDDDDD",
+            black="#000000",
+        )
+
+    Vibrant = namedtuple(
+        "Vibrant", "orange, blue, cyan, magenta, red, teal, grey, black"
+    )
+
+    @classmethod
+    def vibrant(cls) -> Vibrant:
+        return cls.Vibrant(
+            orange="#EE7733",
+            blue="#0077BB",
+            cyan="#33BBEE",
+            magenta="#EE3377",
+            red="#CC3311",
+            teal="#009988",
+            grey="#BBBBBB",
+            black="#000000",
+        )
+
+    HighContrast = namedtuple("HighContrast", "blue, yellow, red, black")
+
+    @classmethod
+    def high_contrast(cls) -> HighContrast:
+        return cls.HighContrast(
+            blue="#004488", yellow="#DDAA33", red="#BB5566", black="#000000"
+        )
+
+    MediumContrast = namedtuple(
+        "MediumContrast",
+        "light_blue, dark_blue, light_yellow, dark_yellow light_red, dark_red, black",
+    )
+
+    @classmethod
+    def medium_contrast(cls) -> MediumContrast:
+        return cls.MediumContrast(
+            light_blue="#6699CC",
+            dark_blue="#004488",
+            light_yellow="#EECC66",
+            dark_yellow="#997700",
+            light_red="#EE99AA",
+            dark_red="#994455",
+            black="#000000",
+        )
+
+    Pale = namedtuple(
+        "Pale",
+        "pale_blue, pale_red, pale_green, pale_yellow, pale_cyan, pale_grey, black",
+    )
+
+    @classmethod
+    def pale(cls) -> Pale:
+        return cls.Pale(
+            pale_blue="#BBCCEE",
+            pale_red="#FFCCCC",
+            pale_green="#CCDDAA",
+            pale_yellow="#EEEEBB",
+            pale_cyan="#CCEEFF",
+            pale_grey="#DDDDDD",
+            black="#000000",
+        )
+
+    Light = namedtuple(
+        "Light",
+        [
+            "light_blue",
+            "orange",
+            "light_yellow",
+            "pink",
+            "light_cyan",
+            "mint",
+            "pear",
+            "olive",
+            "pale_grey",
+            "black",
+        ],
+    )
+
+    @classmethod
+    def light(cls) -> Light:
+        return cls.Light(
+            light_blue="#77AADD",
+            orange="#EE8866",
+            light_yellow="#EEDD88",
+            pink="#FFAABB",
+            light_cyan="#99DDFF",
+            mint="#44BB99",
+            pear="#BBCC33",
+            olive="#AAAA00",
+            pale_grey="#DDDDDD",
+            black="#000000",
+        )
+
+    Dark = namedtuple(
+        "Dark",
+        "dark_blue, dark_red, dark_green, dark_yellow, dark_cyan, dark_grey, black",
+    )
+
+    @classmethod
+    def dark(cls) -> Dark:
+        return cls.Dark(
+            dark_blue="#222255",
+            dark_red="#663333",
+            dark_green="#225522",
+            dark_yellow="#666633",
+            dark_cyan="#225555",
+            dark_grey="#555555",
+            black="#000000",
+        )
+
+    @classmethod
+    def build_colorset(cls, name: str, *args, **kwargs) -> tuple[t.Any]:
+        if name not in cls.colorset_names:
+            raise KeyError(
+                f"Unknown colorset '{name}', the "
+                f"defined colorsets are {cls.colorset_names}"
+            )
+        func = getattr(cls, name)
+        return func(*args, **kwargs)
+
+
+@t.overload
+def get_colorset(name: t.Literal["bright"]) -> ColorsetDefinitions.Bright: ...
+
+
+@t.overload
+def get_colorset(name: t.Literal["muted"]) -> ColorsetDefinitions.Muted: ...
+
+
+@t.overload
+def get_colorset(name: t.Literal["vibrant"]) -> ColorsetDefinitions.Vibrant: ...
+
+
+@t.overload
+def get_colorset(
+    name: t.Literal["high_contrast", "high-contrast"],
+) -> ColorsetDefinitions.HighContrast: ...
+
+
+@t.overload
+def get_colorset(
+    name: t.Literal["medium_contrast", "medium-contrast"],
+) -> ColorsetDefinitions.MediumContrast: ...
+
+
+@t.overload
+def get_colorset(name: t.Literal["pale"]) -> ColorsetDefinitions.Pale: ...
+
+
+@t.overload
+def get_colorset(name: t.Literal["light"]) -> ColorsetDefinitions.Light: ...
+
+
+@t.overload
+def get_colorset(name: t.Literal["dark"]) -> ColorsetDefinitions.Dark: ...
+
+
+@t.overload
+def get_colorset(name: str) -> t.NamedTuple: ...
+
+
+def get_colorset(
+    name: str,
+) -> (
+    tuple[t.Any]
+    | ColorsetDefinitions.Bright
+    | ColorsetDefinitions.Muted
+    | ColorsetDefinitions.Vibrant
+    | ColorsetDefinitions.HighContrast
+    | ColorsetDefinitions.MediumContrast
+    | ColorsetDefinitions.Pale
+    | ColorsetDefinitions.Light
+    | ColorsetDefinitions.Dark
+):
+    name = name.replace("-", "_")
+    return ColorsetDefinitions.build_colorset(name)
+
+
+class TOLcmaps:
+    """Class TOLcmaps definition."""
+
     def __init__(self):
         self.cmap = None
         self.cname = None
         self.namelist = (
-            'sunset_discrete', 'sunset', 'BuRd_discrete', 'BuRd',
-            'PRGn_discrete', 'PRGn', 'YlOrBr_discrete', 'YlOrBr', 'WhOrBr',
-            'iridescent', 'rainbow_PuRd', 'rainbow_PuBr', 'rainbow_WhRd',
-            'rainbow_WhBr', 'rainbow_discrete')
+            "sunset_discrete",
+            "sunset",
+            "BuRd_discrete",
+            "BuRd",
+            "PRGn_discrete",
+            "PRGn",
+            "YlOrBr_discrete",
+            "YlOrBr",
+            "WhOrBr",
+            "iridescent",
+            "rainbow_PuRd",
+            "rainbow_PuBr",
+            "rainbow_WhRd",
+            "rainbow_WhBr",
+            "rainbow_discrete",
+        )
 
         self.funcdict = dict(
-            zip(self.namelist,
-                (self.__sunset_discrete, self.__sunset, self.__BuRd_discrete,
-                 self.__BuRd, self.__PRGn_discrete, self.__PRGn,
-                 self.__YlOrBr_discrete, self.__YlOrBr, self.__WhOrBr,
-                 self.__iridescent, self.__rainbow_PuRd, self.__rainbow_PuBr,
-                 self.__rainbow_WhRd, self.__rainbow_WhBr,
-                 self.__rainbow_discrete)))
+            zip(
+                self.namelist,
+                (
+                    self.__sunset_discrete,
+                    self.__sunset,
+                    self.__BuRd_discrete,
+                    self.__BuRd,
+                    self.__PRGn_discrete,
+                    self.__PRGn,
+                    self.__YlOrBr_discrete,
+                    self.__YlOrBr,
+                    self.__WhOrBr,
+                    self.__iridescent,
+                    self.__rainbow_PuRd,
+                    self.__rainbow_PuBr,
+                    self.__rainbow_WhRd,
+                    self.__rainbow_WhBr,
+                    self.__rainbow_discrete,
+                ),
+                strict=False,
+            )
+        )
 
     def __sunset_discrete(self):
         """Define colormap 'sunset_discrete'."""
-        clrs = ['#364B9A', '#4A7BB7', '#6EA6CD', '#98CAE1', '#C2E4EF',
-                '#EAECCC', '#FEDA8B', '#FDB366', '#F67E4B', '#DD3D2D',
-                '#A50026']
+        clrs = [
+            "#364B9A",
+            "#4A7BB7",
+            "#6EA6CD",
+            "#98CAE1",
+            "#C2E4EF",
+            "#EAECCC",
+            "#FEDA8B",
+            "#FDB366",
+            "#F67E4B",
+            "#DD3D2D",
+            "#A50026",
+        ]
         self.cmap = discretemap(self.cname, clrs)
-        self.cmap.set_bad('#FFFFFF')
+        self.cmap.set_bad("#FFFFFF")
 
     def __sunset(self):
         """Define colormap 'sunset'."""
-        clrs = ['#364B9A', '#4A7BB7', '#6EA6CD', '#98CAE1', '#C2E4EF',
-                '#EAECCC', '#FEDA8B', '#FDB366', '#F67E4B', '#DD3D2D',
-                '#A50026']
+        clrs = [
+            "#364B9A",
+            "#4A7BB7",
+            "#6EA6CD",
+            "#98CAE1",
+            "#C2E4EF",
+            "#EAECCC",
+            "#FEDA8B",
+            "#FDB366",
+            "#F67E4B",
+            "#DD3D2D",
+            "#A50026",
+        ]
         self.cmap = LinearSegmentedColormap.from_list(self.cname, clrs)
-        self.cmap.set_bad('#FFFFFF')
+        self.cmap.set_bad("#FFFFFF")
 
     def __BuRd_discrete(self):
         """Define colormap 'BuRd_discrete'."""
-        clrs = ['#2166AC', '#4393C3', '#92C5DE', '#D1E5F0', '#F7F7F7',
-                '#FDDBC7', '#F4A582', '#D6604D', '#B2182B']
+        clrs = [
+            "#2166AC",
+            "#4393C3",
+            "#92C5DE",
+            "#D1E5F0",
+            "#F7F7F7",
+            "#FDDBC7",
+            "#F4A582",
+            "#D6604D",
+            "#B2182B",
+        ]
         self.cmap = discretemap(self.cname, clrs)
-        self.cmap.set_bad('#FFEE99')
+        self.cmap.set_bad("#FFEE99")
 
     def __BuRd(self):
         """Define colormap 'BuRd'."""
-        clrs = ['#2166AC', '#4393C3', '#92C5DE', '#D1E5F0', '#F7F7F7',
-                '#FDDBC7', '#F4A582', '#D6604D', '#B2182B']
+        clrs = [
+            "#2166AC",
+            "#4393C3",
+            "#92C5DE",
+            "#D1E5F0",
+            "#F7F7F7",
+            "#FDDBC7",
+            "#F4A582",
+            "#D6604D",
+            "#B2182B",
+        ]
         self.cmap = LinearSegmentedColormap.from_list(self.cname, clrs)
-        self.cmap.set_bad('#FFEE99')
+        self.cmap.set_bad("#FFEE99")
 
     def __PRGn_discrete(self):
         """Define colormap 'PRGn_discrete'."""
-        clrs = ['#762A83', '#9970AB', '#C2A5CF', '#E7D4E8', '#F7F7F7',
-                '#D9F0D3', '#ACD39E', '#5AAE61', '#1B7837']
+        clrs = [
+            "#762A83",
+            "#9970AB",
+            "#C2A5CF",
+            "#E7D4E8",
+            "#F7F7F7",
+            "#D9F0D3",
+            "#ACD39E",
+            "#5AAE61",
+            "#1B7837",
+        ]
         self.cmap = discretemap(self.cname, clrs)
-        self.cmap.set_bad('#FFEE99')
+        self.cmap.set_bad("#FFEE99")
 
     def __PRGn(self):
         """Define colormap 'PRGn'."""
-        clrs = ['#762A83', '#9970AB', '#C2A5CF', '#E7D4E8', '#F7F7F7',
-                '#D9F0D3', '#ACD39E', '#5AAE61', '#1B7837']
+        clrs = [
+            "#762A83",
+            "#9970AB",
+            "#C2A5CF",
+            "#E7D4E8",
+            "#F7F7F7",
+            "#D9F0D3",
+            "#ACD39E",
+            "#5AAE61",
+            "#1B7837",
+        ]
         self.cmap = LinearSegmentedColormap.from_list(self.cname, clrs)
-        self.cmap.set_bad('#FFEE99')
+        self.cmap.set_bad("#FFEE99")
 
     def __YlOrBr_discrete(self):
         """Define colormap 'YlOrBr_discrete'."""
-        clrs = ['#FFFFE5', '#FFF7BC', '#FEE391', '#FEC44F', '#FB9A29',
-                '#EC7014', '#CC4C02', '#993404', '#662506']
+        clrs = [
+            "#FFFFE5",
+            "#FFF7BC",
+            "#FEE391",
+            "#FEC44F",
+            "#FB9A29",
+            "#EC7014",
+            "#CC4C02",
+            "#993404",
+            "#662506",
+        ]
         self.cmap = discretemap(self.cname, clrs)
-        self.cmap.set_bad('#888888')
+        self.cmap.set_bad("#888888")
 
     def __YlOrBr(self):
         """Define colormap 'YlOrBr'."""
-        clrs = ['#FFFFE5', '#FFF7BC', '#FEE391', '#FEC44F', '#FB9A29',
-                '#EC7014', '#CC4C02', '#993404', '#662506']
+        clrs = [
+            "#FFFFE5",
+            "#FFF7BC",
+            "#FEE391",
+            "#FEC44F",
+            "#FB9A29",
+            "#EC7014",
+            "#CC4C02",
+            "#993404",
+            "#662506",
+        ]
         self.cmap = LinearSegmentedColormap.from_list(self.cname, clrs)
-        self.cmap.set_bad('#888888')
+        self.cmap.set_bad("#888888")
 
     def __WhOrBr(self):
         """Define colormap 'WhOrBr'."""
-        clrs = ['#FFFFFF', '#FFF7BC', '#FEE391', '#FEC44F', '#FB9A29',
-                '#EC7014', '#CC4C02', '#993404', '#662506']
+        clrs = [
+            "#FFFFFF",
+            "#FFF7BC",
+            "#FEE391",
+            "#FEC44F",
+            "#FB9A29",
+            "#EC7014",
+            "#CC4C02",
+            "#993404",
+            "#662506",
+        ]
         self.cmap = LinearSegmentedColormap.from_list(self.cname, clrs)
-        self.cmap.set_bad('#888888')
+        self.cmap.set_bad("#888888")
 
     def __iridescent(self):
         """Define colormap 'iridescent'."""
-        clrs = ['#FEFBE9', '#FCF7D5', '#F5F3C1', '#EAF0B5', '#DDECBF',
-                '#D0E7CA', '#C2E3D2', '#B5DDD8', '#A8D8DC', '#9BD2E1',
-                '#8DCBE4', '#81C4E7', '#7BBCE7', '#7EB2E4', '#88A5DD',
-                '#9398D2', '#9B8AC4', '#9D7DB2', '#9A709E', '#906388',
-                '#805770', '#684957', '#46353A']
+        clrs = [
+            "#FEFBE9",
+            "#FCF7D5",
+            "#F5F3C1",
+            "#EAF0B5",
+            "#DDECBF",
+            "#D0E7CA",
+            "#C2E3D2",
+            "#B5DDD8",
+            "#A8D8DC",
+            "#9BD2E1",
+            "#8DCBE4",
+            "#81C4E7",
+            "#7BBCE7",
+            "#7EB2E4",
+            "#88A5DD",
+            "#9398D2",
+            "#9B8AC4",
+            "#9D7DB2",
+            "#9A709E",
+            "#906388",
+            "#805770",
+            "#684957",
+            "#46353A",
+        ]
         self.cmap = LinearSegmentedColormap.from_list(self.cname, clrs)
-        self.cmap.set_bad('#999999')
+        self.cmap.set_bad("#999999")
 
     def __rainbow_PuRd(self):
         """Define colormap 'rainbow_PuRd'."""
-        clrs = ['#6F4C9B', '#6059A9', '#5568B8', '#4E79C5', '#4D8AC6',
-                '#4E96BC', '#549EB3', '#59A5A9', '#60AB9E', '#69B190',
-                '#77B77D', '#8CBC68', '#A6BE54', '#BEBC48', '#D1B541',
-                '#DDAA3C', '#E49C39', '#E78C35', '#E67932', '#E4632D',
-                '#DF4828', '#DA2222']
+        clrs = [
+            "#6F4C9B",
+            "#6059A9",
+            "#5568B8",
+            "#4E79C5",
+            "#4D8AC6",
+            "#4E96BC",
+            "#549EB3",
+            "#59A5A9",
+            "#60AB9E",
+            "#69B190",
+            "#77B77D",
+            "#8CBC68",
+            "#A6BE54",
+            "#BEBC48",
+            "#D1B541",
+            "#DDAA3C",
+            "#E49C39",
+            "#E78C35",
+            "#E67932",
+            "#E4632D",
+            "#DF4828",
+            "#DA2222",
+        ]
         self.cmap = LinearSegmentedColormap.from_list(self.cname, clrs)
-        self.cmap.set_bad('#FFFFFF')
+        self.cmap.set_bad("#FFFFFF")
 
     def __rainbow_PuBr(self):
         """Define colormap 'rainbow_PuBr'."""
-        clrs = ['#6F4C9B', '#6059A9', '#5568B8', '#4E79C5', '#4D8AC6',
-                '#4E96BC', '#549EB3', '#59A5A9', '#60AB9E', '#69B190',
-                '#77B77D', '#8CBC68', '#A6BE54', '#BEBC48', '#D1B541',
-                '#DDAA3C', '#E49C39', '#E78C35', '#E67932', '#E4632D',
-                '#DF4828', '#DA2222', '#B8221E', '#95211B', '#721E17',
-                '#521A13']
+        clrs = [
+            "#6F4C9B",
+            "#6059A9",
+            "#5568B8",
+            "#4E79C5",
+            "#4D8AC6",
+            "#4E96BC",
+            "#549EB3",
+            "#59A5A9",
+            "#60AB9E",
+            "#69B190",
+            "#77B77D",
+            "#8CBC68",
+            "#A6BE54",
+            "#BEBC48",
+            "#D1B541",
+            "#DDAA3C",
+            "#E49C39",
+            "#E78C35",
+            "#E67932",
+            "#E4632D",
+            "#DF4828",
+            "#DA2222",
+            "#B8221E",
+            "#95211B",
+            "#721E17",
+            "#521A13",
+        ]
         self.cmap = LinearSegmentedColormap.from_list(self.cname, clrs)
-        self.cmap.set_bad('#FFFFFF')
+        self.cmap.set_bad("#FFFFFF")
 
     def __rainbow_WhRd(self):
         """Define colormap 'rainbow_WhRd'."""
-        clrs = ['#E8ECFB', '#DDD8EF', '#D1C1E1', '#C3A8D1', '#B58FC2',
-                '#A778B4', '#9B62A7', '#8C4E99', '#6F4C9B', '#6059A9',
-                '#5568B8', '#4E79C5', '#4D8AC6', '#4E96BC', '#549EB3',
-                '#59A5A9', '#60AB9E', '#69B190', '#77B77D', '#8CBC68',
-                '#A6BE54', '#BEBC48', '#D1B541', '#DDAA3C', '#E49C39',
-                '#E78C35', '#E67932', '#E4632D', '#DF4828', '#DA2222']
+        clrs = [
+            "#E8ECFB",
+            "#DDD8EF",
+            "#D1C1E1",
+            "#C3A8D1",
+            "#B58FC2",
+            "#A778B4",
+            "#9B62A7",
+            "#8C4E99",
+            "#6F4C9B",
+            "#6059A9",
+            "#5568B8",
+            "#4E79C5",
+            "#4D8AC6",
+            "#4E96BC",
+            "#549EB3",
+            "#59A5A9",
+            "#60AB9E",
+            "#69B190",
+            "#77B77D",
+            "#8CBC68",
+            "#A6BE54",
+            "#BEBC48",
+            "#D1B541",
+            "#DDAA3C",
+            "#E49C39",
+            "#E78C35",
+            "#E67932",
+            "#E4632D",
+            "#DF4828",
+            "#DA2222",
+        ]
         self.cmap = LinearSegmentedColormap.from_list(self.cname, clrs)
-        self.cmap.set_bad('#666666')
+        self.cmap.set_bad("#666666")
 
     def __rainbow_WhBr(self):
         """Define colormap 'rainbow_WhBr'."""
-        clrs = ['#E8ECFB', '#DDD8EF', '#D1C1E1', '#C3A8D1', '#B58FC2',
-                '#A778B4', '#9B62A7', '#8C4E99', '#6F4C9B', '#6059A9',
-                '#5568B8', '#4E79C5', '#4D8AC6', '#4E96BC', '#549EB3',
-                '#59A5A9', '#60AB9E', '#69B190', '#77B77D', '#8CBC68',
-                '#A6BE54', '#BEBC48', '#D1B541', '#DDAA3C', '#E49C39',
-                '#E78C35', '#E67932', '#E4632D', '#DF4828', '#DA2222',
-                '#B8221E', '#95211B', '#721E17', '#521A13']
+        clrs = [
+            "#E8ECFB",
+            "#DDD8EF",
+            "#D1C1E1",
+            "#C3A8D1",
+            "#B58FC2",
+            "#A778B4",
+            "#9B62A7",
+            "#8C4E99",
+            "#6F4C9B",
+            "#6059A9",
+            "#5568B8",
+            "#4E79C5",
+            "#4D8AC6",
+            "#4E96BC",
+            "#549EB3",
+            "#59A5A9",
+            "#60AB9E",
+            "#69B190",
+            "#77B77D",
+            "#8CBC68",
+            "#A6BE54",
+            "#BEBC48",
+            "#D1B541",
+            "#DDAA3C",
+            "#E49C39",
+            "#E78C35",
+            "#E67932",
+            "#E4632D",
+            "#DF4828",
+            "#DA2222",
+            "#B8221E",
+            "#95211B",
+            "#721E17",
+            "#521A13",
+        ]
         self.cmap = LinearSegmentedColormap.from_list(self.cname, clrs)
-        self.cmap.set_bad('#666666')
+        self.cmap.set_bad("#666666")
 
     def __rainbow_discrete(self, lut=None):
         """Define colormap 'rainbow_discrete'."""
-        clrs = ['#E8ECFB', '#D9CCE3', '#D1BBD7', '#CAACCB', '#BA8DB4',
-                '#AE76A3', '#AA6F9E', '#994F88', '#882E72', '#1965B0',
-                '#437DBF', '#5289C7', '#6195CF', '#7BAFDE', '#4EB265',
-                '#90C987', '#CAE0AB', '#F7F056', '#F7CB45', '#F6C141',
-                '#F4A736', '#F1932D', '#EE8026', '#E8601C', '#E65518',
-                '#DC050C', '#A5170E', '#72190E', '#42150A']
-        indexes = [[9], [9, 25], [9, 17, 25], [9, 14, 17, 25],
-                   [9, 13, 14, 17, 25], [9, 13, 14, 16, 17, 25],
-                   [8, 9, 13, 14, 16, 17, 25], [8, 9, 13, 14, 16, 17, 22, 25],
-                   [8, 9, 13, 14, 16, 17, 22, 25, 27],
-                   [8, 9, 13, 14, 16, 17, 20, 23, 25, 27],
-                   [8, 9, 11, 13, 14, 16, 17, 20, 23, 25, 27],
-                   [2, 5, 8, 9, 11, 13, 14, 16, 17, 20, 23, 25],
-                   [2, 5, 8, 9, 11, 13, 14, 15, 16, 17, 20, 23, 25],
-                   [2, 5, 8, 9, 11, 13, 14, 15, 16, 17, 19, 21, 23, 25],
-                   [2, 5, 8, 9, 11, 13, 14, 15, 16, 17, 19, 21, 23, 25, 27],
-                   [2, 4, 6, 8, 9, 11, 13, 14, 15, 16, 17, 19, 21, 23, 25, 27],
-                   [2, 4, 6, 7, 8, 9, 11, 13, 14, 15, 16, 17, 19,
-                    21, 23, 25, 27],
-                   [2, 4, 6, 7, 8, 9, 11, 13, 14, 15, 16, 17, 19,
-                    21, 23, 25, 26, 27],
-                   [1, 3, 4, 6, 7, 8, 9, 11, 13, 14, 15, 16, 17,
-                    19, 21, 23, 25, 26, 27],
-                   [1, 3, 4, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16,
-                    17, 19, 21, 23, 25, 26, 27],
-                   [1, 3, 4, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16,
-                    17, 18, 20, 22, 24, 25, 26, 27],
-                   [1, 3, 4, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16,
-                    17, 18, 20, 22, 24, 25, 26, 27, 28],
-                   [0, 1, 3, 4, 6, 7, 8, 9, 10, 12, 13, 14, 15,
-                    16, 17, 18, 20, 22, 24, 25, 26, 27, 28]]
+        clrs = [
+            "#E8ECFB",
+            "#D9CCE3",
+            "#D1BBD7",
+            "#CAACCB",
+            "#BA8DB4",
+            "#AE76A3",
+            "#AA6F9E",
+            "#994F88",
+            "#882E72",
+            "#1965B0",
+            "#437DBF",
+            "#5289C7",
+            "#6195CF",
+            "#7BAFDE",
+            "#4EB265",
+            "#90C987",
+            "#CAE0AB",
+            "#F7F056",
+            "#F7CB45",
+            "#F6C141",
+            "#F4A736",
+            "#F1932D",
+            "#EE8026",
+            "#E8601C",
+            "#E65518",
+            "#DC050C",
+            "#A5170E",
+            "#72190E",
+            "#42150A",
+        ]
+        indexes = [
+            [9],
+            [9, 25],
+            [9, 17, 25],
+            [9, 14, 17, 25],
+            [9, 13, 14, 17, 25],
+            [9, 13, 14, 16, 17, 25],
+            [8, 9, 13, 14, 16, 17, 25],
+            [8, 9, 13, 14, 16, 17, 22, 25],
+            [8, 9, 13, 14, 16, 17, 22, 25, 27],
+            [8, 9, 13, 14, 16, 17, 20, 23, 25, 27],
+            [8, 9, 11, 13, 14, 16, 17, 20, 23, 25, 27],
+            [2, 5, 8, 9, 11, 13, 14, 16, 17, 20, 23, 25],
+            [2, 5, 8, 9, 11, 13, 14, 15, 16, 17, 20, 23, 25],
+            [2, 5, 8, 9, 11, 13, 14, 15, 16, 17, 19, 21, 23, 25],
+            [2, 5, 8, 9, 11, 13, 14, 15, 16, 17, 19, 21, 23, 25, 27],
+            [2, 4, 6, 8, 9, 11, 13, 14, 15, 16, 17, 19, 21, 23, 25, 27],
+            [2, 4, 6, 7, 8, 9, 11, 13, 14, 15, 16, 17, 19, 21, 23, 25, 27],
+            [2, 4, 6, 7, 8, 9, 11, 13, 14, 15, 16, 17, 19, 21, 23, 25, 26, 27],
+            [1, 3, 4, 6, 7, 8, 9, 11, 13, 14, 15, 16, 17, 19, 21, 23, 25, 26, 27],
+            [1, 3, 4, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 19, 21, 23, 25, 26, 27],
+            [
+                1,
+                3,
+                4,
+                6,
+                7,
+                8,
+                9,
+                10,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                20,
+                22,
+                24,
+                25,
+                26,
+                27,
+            ],
+            [
+                1,
+                3,
+                4,
+                6,
+                7,
+                8,
+                9,
+                10,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                20,
+                22,
+                24,
+                25,
+                26,
+                27,
+                28,
+            ],
+            [
+                0,
+                1,
+                3,
+                4,
+                6,
+                7,
+                8,
+                9,
+                10,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                20,
+                22,
+                24,
+                25,
+                26,
+                27,
+                28,
+            ],
+        ]
         if lut is None or lut < 1 or lut > 23:
             lut = 22
-        self.cmap = discretemap(self.cname, [clrs[i] for i in indexes[lut-1]])
+        self.cmap = discretemap(self.cname, [clrs[i] for i in indexes[lut - 1]])
         if lut == 23:
-            self.cmap.set_bad('#777777')
+            self.cmap.set_bad("#777777")
         else:
-            self.cmap.set_bad('#FFFFFF')
+            self.cmap.set_bad("#FFFFFF")
 
     def show(self):
         """List names of defined colormaps."""
-        print(' '.join(repr(n) for n in self.namelist))
+        print(" ".join(repr(n) for n in self.namelist))
 
-    def get(self, cname='rainbow_PuRd', lut=None):
+    def get(self, cname="rainbow_PuRd", lut=None):
         """Return requested colormap, default is 'rainbow_PuRd'."""
         self.cname = cname
-        if cname == 'rainbow_discrete':
+        if cname == "rainbow_discrete":
             self.__rainbow_discrete(lut)
         else:
             self.funcdict[cname]()
@@ -260,9 +785,12 @@ def tol_cmap(colormap=None, lut=None):
     if colormap is None:
         return obj.namelist
     if colormap not in obj.namelist:
-        colormap = 'rainbow_PuRd'
-        logging.warning("Requested colormap not defined, using '%s'. "
-                        "Known colormaps are %s.", colormap, obj.namelist)
+        colormap = "rainbow_PuRd"
+        logging.warning(
+            "Requested colormap not defined, using '%s'. " "Known colormaps are %s.",
+            colormap,
+            obj.namelist,
+        )
     return obj.get(colormap, lut)
 
 
