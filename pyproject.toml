@@ -1,0 +1,73 @@
+# Project build file
+
+[build-system]
+requires = ['setuptools']
+build-backend = 'setuptools.build_meta'
+
+[project]
+version = '1.3.0'
+
+name = 'tol_colors'
+authors = [
+    {name='Clément Haëck', email='clement.haeck@posteo.net'}
+]
+description = 'Color schemes for lines and maps, color-blind safe'
+
+readme = 'README.md'
+requires-python = '>=3.9'
+classifiers = [
+    'Programming Language :: Python :: 3',
+    'License :: OSI Approved :: BSD License',
+    'Operating System :: OS Independent',
+    'Development Status :: 5 - Production/Stable',
+    'Intended Audience :: Science/Research',
+    'Topic :: Scientific/Engineering :: Visualization'
+]
+
+dependencies = [
+    'numpy',
+    'matplotlib',
+]
+
+[project.urls]
+'Source' = 'https://github.com/Descanonge/tol_colors'
+
+[tool.mypy]
+disable_error_code = ['annotation-unchecked']
+ignore_missing_imports = true
+
+[tool.ruff]
+line-length = 88
+target-version = 'py311'
+
+[tool.ruff.lint]
+select = [
+       'E',  # pycodestyle
+       'W',  # pycodestyle
+       'I',  # isort
+       'N',  # pep8-name
+       'B',  # bugbear
+       'G',  # flake8-logging-format
+       'F',  # pyflakes
+       'UP',  #pyupgrade
+       'D',  #pydocstyle
+       'PL', #pylint
+]
+
+ignore = [
+       'E226', # missing whitespace around arithmetic operator
+       'D105', # missing docstring for magical method
+       'D204', # one blank line after class
+       'D213', # multiline docstring start at 2nd line
+       'D417', # not all parameters need doc
+]
+unfixable = ["F401"]
+
+[too.ruff.lint.pycodestyle]
+max-line-length = 90
+
+[tool.ruff.lint.pydocstyle]
+convention = 'numpy'
+
+[tool.ruff.format]
+quote-style = 'double'
