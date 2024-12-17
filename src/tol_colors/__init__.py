@@ -809,55 +809,14 @@ def tol_cset(colorset=None):
         Name of the color set. If None return the list of possible sets.
         If not in defined sets, will default to 'bright'.
     """
-    namelist = list(colorsets.keys())
+    namelist = ColorsetDefinitions.colorset_names
     if colorset is None:
         return namelist
     if colorset not in namelist:
-        colorset = 'bright'
-        logging.warning("Requested colorset not defined, using '%s'. "
-                        "Known colorsets are %s.", colorset, namelist)
-    return colorsets[colorset]
-
-
-def main():
-    # Show colorsets tol_cset(<scheme>).
-    fig, axes = plt.subplots(ncols=len(colorsets))
-    fig.subplots_adjust(top=0.92, bottom=0.02, left=0.02, right=0.92)
-    for ax, (cset_name, cset) in zip(axes, colorsets.items()):
-        names = cset._fields
-        colors = list(cset)
-        for name, color in zip(names, colors):
-            ax.scatter([], [], c=color, s=80, label=name)
-        ax.set_axis_off()
-        ax.legend(loc=2)
-        ax.set_title(cset_name)
-    plt.show()
-
-    # Show colormaps tol_cmap(<scheme>).
-    schemes = tol_cmap()
-    gradient = np.linspace(0, 1, 256)
-    gradient = np.vstack((gradient, gradient))
-    fig, axes = plt.subplots(nrows=len(schemes))
-    fig.subplots_adjust(top=0.98, bottom=0.02, left=0.2, right=0.99)
-    for ax, scheme in zip(axes, schemes):
-        pos = list(ax.get_position().bounds)
-        ax.set_axis_off()
-        ax.imshow(gradient, aspect=4, cmap=tol_cmap(scheme))
-        fig.text(pos[0] - 0.01, pos[1] + pos[3]/2., scheme, va='center', ha='right', fontsize=10)
-    plt.show()
-
-    # Show colormaps tol_cmap('rainbow_discrete', <lut>).
-    gradient = np.linspace(0, 1, 256)
-    gradient = np.vstack((gradient, gradient))
-    fig, axes = plt.subplots(nrows=23)
-    fig.subplots_adjust(top=0.98, bottom=0.02, left=0.25, right=0.99)
-    for lut, ax in enumerate(axes, start=1):
-        pos = list(ax.get_position().bounds)
-        ax.set_axis_off()
-        ax.imshow(gradient, aspect=4, cmap=tol_cmap('rainbow_discrete', lut))
-        fig.text(pos[0] - 0.01, pos[1] + pos[3]/2., 'rainbow_discrete, ' + str(lut), va='center', ha='right', fontsize=10)
-    plt.show()
-
-
-if __name__ == '__main__':
-    main()
+        colorset = "bright"
+        logging.warning(
+            "Requested colorset not defined, using '%s'. " "Known colorsets are %s.",
+            colorset,
+            namelist,
+        )
+    return get_colorset(colorset)
