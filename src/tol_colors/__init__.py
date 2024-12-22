@@ -10,8 +10,9 @@ License:  Standard 3-clause BSD
 """
 
 import logging
-import typing as t
 from collections import namedtuple
+from collections.abc import Sequence
+from typing import Any, Literal, NamedTuple, overload
 
 import numpy as np
 from matplotlib.colors import LinearSegmentedColormap, to_rgba_array
@@ -36,7 +37,11 @@ def discretemap(colormap, hexclrs):
 
 
 class ColorsetDefinitions:
-    """Definitions of the colorsets."""
+    """Definitions of the colorsets.
+
+    Each colorset has a class method to its name which return a corresponding
+    named-tuple. The named-tuple class is defined as a class attribute.
+    """
 
     colorset_names = [
         "bright",
@@ -48,11 +53,13 @@ class ColorsetDefinitions:
         "light",
         "dark",
     ]
+    """List of available colorset. Must correspond to method names."""
 
     Bright = namedtuple("Bright", "blue, red, green, yellow, cyan, purple, grey, black")
 
     @classmethod
     def bright(cls) -> Bright:
+        """Define "bright", the main scheme for lines and their labels."""
         return cls.Bright(
             blue="#4477AA",
             red="#EE6677",
@@ -71,6 +78,11 @@ class ColorsetDefinitions:
 
     @classmethod
     def muted(cls) -> Muted:
+        """Define the "muted" qualitative colour scheme.
+
+        It is equally colour-blind safe with more colours, but lacking a clear red or
+        medium blue. Pale grey is meant for bad data in maps.
+        """
         return cls.Muted(
             rose="#CC6677",
             indigo="#332288",
@@ -91,6 +103,12 @@ class ColorsetDefinitions:
 
     @classmethod
     def vibrant(cls) -> Vibrant:
+        """Define the "vibrant" qualitative colour scheme.
+
+        It is equally colour-blind safe. It has been designed for data visualization
+        framework TensorBoard, built around their signature orange ``FF7043``. That
+        colour has been replaced here to make it print-friendly.
+        """
         return cls.Vibrant(
             orange="#EE7733",
             blue="#0077BB",
@@ -106,6 +124,11 @@ class ColorsetDefinitions:
 
     @classmethod
     def high_contrast(cls) -> HighContrast:
+        """Define the "high-contrast" qualitative colour scheme.
+
+        It is colour-blind safe and optimized for contrast. This scheme also works well
+        for people with monochrome vision and in a monochrome printout.
+        """
         return cls.HighContrast(
             blue="#004488", yellow="#DDAA33", red="#BB5566", black="#000000"
         )
@@ -117,6 +140,12 @@ class ColorsetDefinitions:
 
     @classmethod
     def medium_contrast(cls) -> MediumContrast:
+        """Define the "medium-contrast" qualitative colour scheme.
+
+        It is colour-blind safe with more colours. It is also optimized for contrast to
+        work in a monochrome printout, but the differences are inevitably smaller. It is
+        designed for situations needing colour pairs
+        """
         return cls.MediumContrast(
             light_blue="#6699CC",
             dark_blue="#004488",
@@ -134,6 +163,15 @@ class ColorsetDefinitions:
 
     @classmethod
     def pale(cls) -> Pale:
+        """Define the "pale" qualitative colour scheme.
+
+        The colours are not very distinct in either normal or colour-blind vision; they
+        are not meant for lines or maps, but for marking text. Use the pale colours for
+        the background of black text, for example to highlight cells in a table. One of
+        the dark colours can be chosen for text itself on a white background, for
+        example when a large block of text has to be marked. In both cases, the text
+        remains easily readable.
+        """
         return cls.Pale(
             pale_blue="#BBCCEE",
             pale_red="#FFCCCC",
@@ -143,6 +181,11 @@ class ColorsetDefinitions:
             pale_grey="#DDDDDD",
             black="#000000",
         )
+
+    Dark = namedtuple(
+        "Dark",
+        "dark_blue, dark_red, dark_green, dark_yellow, dark_cyan, dark_grey, black",
+    )
 
     Light = namedtuple(
         "Light",
@@ -162,6 +205,13 @@ class ColorsetDefinitions:
 
     @classmethod
     def light(cls) -> Light:
+        """Define the "light" qualitative colour scheme.
+
+        It was designed to fill labelled cells with more and lighter colours than
+        contained in the bright scheme, using more distinct colours than that in the
+        pale scheme, but keeping black labels clearly readable. However, it can also be
+        used for general qualitative maps.
+        """
         return cls.Light(
             light_blue="#77AADD",
             orange="#EE8866",
@@ -182,6 +232,15 @@ class ColorsetDefinitions:
 
     @classmethod
     def dark(cls) -> Dark:
+        """Define the "dark" qualitative colour scheme.
+
+        The colours are not very distinct in either normal or colour-blind vision; they
+        are not meant for lines or maps, but for marking text. Use the pale colours for
+        the background of black text, for example to highlight cells in a table. One of
+        the dark colours can be chosen for text itself on a white background, for
+        example when a large block of text has to be marked. In both cases, the text
+        remains easily readable.
+        """
         return cls.Dark(
             dark_blue="#222255",
             dark_red="#663333",
@@ -194,6 +253,7 @@ class ColorsetDefinitions:
 
     @classmethod
     def build_colorset(cls, name: str, *args, **kwargs) -> tuple[t.Any]:
+        """Return one of the colorset named-tuple."""
         if name not in cls.colorset_names:
             raise KeyError(
                 f"Unknown colorset '{name}', the "
@@ -203,60 +263,75 @@ class ColorsetDefinitions:
         return func(*args, **kwargs)
 
 
-@t.overload
-def get_colorset(name: t.Literal["bright"]) -> ColorsetDefinitions.Bright: ...
+@overload
+def get_colorset(name: Literal["bright"]) -> ColorsetDefinitions.Bright: ...
 
 
-@t.overload
-def get_colorset(name: t.Literal["muted"]) -> ColorsetDefinitions.Muted: ...
+@overload
+def get_colorset(name: Literal["muted"]) -> ColorsetDefinitions.Muted: ...
 
 
-@t.overload
-def get_colorset(name: t.Literal["vibrant"]) -> ColorsetDefinitions.Vibrant: ...
+@overload
+def get_colorset(name: Literal["vibrant"]) -> ColorsetDefinitions.Vibrant: ...
 
 
-@t.overload
+@overload
 def get_colorset(
-    name: t.Literal["high_contrast", "high-contrast"],
+    name: Literal["high_contrast", "high-contrast"],
 ) -> ColorsetDefinitions.HighContrast: ...
 
 
-@t.overload
+@overload
 def get_colorset(
-    name: t.Literal["medium_contrast", "medium-contrast"],
+    name: Literal["medium_contrast", "medium-contrast"],
 ) -> ColorsetDefinitions.MediumContrast: ...
 
 
-@t.overload
-def get_colorset(name: t.Literal["pale"]) -> ColorsetDefinitions.Pale: ...
+@overload
+def get_colorset(name: Literal["pale"]) -> ColorsetDefinitions.Pale: ...
 
 
-@t.overload
-def get_colorset(name: t.Literal["light"]) -> ColorsetDefinitions.Light: ...
+@overload
+def get_colorset(name: Literal["dark"]) -> ColorsetDefinitions.Dark: ...
 
 
-@t.overload
-def get_colorset(name: t.Literal["dark"]) -> ColorsetDefinitions.Dark: ...
+@overload
+def get_colorset(name: Literal["light"]) -> ColorsetDefinitions.Light: ...
 
 
-@t.overload
-def get_colorset(name: str) -> t.NamedTuple: ...
+@overload
+def get_colorset(name: str) -> NamedTuple: ...
 
 
 def get_colorset(
     name: str,
 ) -> (
-    tuple[t.Any]
+    tuple[Any]
     | ColorsetDefinitions.Bright
     | ColorsetDefinitions.Muted
     | ColorsetDefinitions.Vibrant
     | ColorsetDefinitions.HighContrast
     | ColorsetDefinitions.MediumContrast
     | ColorsetDefinitions.Pale
-    | ColorsetDefinitions.Light
     | ColorsetDefinitions.Dark
+    | ColorsetDefinitions.Light
 ):
-    name = name.replace("-", "_")
+    """Return discrete colorsets for qualitative data.
+
+    The colorset is returned as a named-tuple instance containing the colors in hex
+    format.
+
+    - cset.red and cset[1] give the same color (in default 'bright' colorset)
+    - cset._fields gives a tuple with all color names
+    - list(cset) gives a list with all colors
+
+    Parameters
+    ----------
+    name
+        Name of the color set. It must be one of "bright", "muted", "vibrant",
+        "high_contrast", "medium_contrast", "pale", "dark", or "light". Hyphens are
+        automatically replaced, so "hight-contrast" works as well.
+    """
     return ColorsetDefinitions.build_colorset(name)
 
 

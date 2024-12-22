@@ -1,3 +1,5 @@
+"""Showcase color sets and maps."""
+
 import numpy as np
 from matplotlib import pyplot as plt
 from matplotlib.patches import RegularPolygon
@@ -6,6 +8,7 @@ from tol_colors import ColorsetDefinitions, get_colorset, tol_cmap
 
 
 def main():
+    """Create three plots to showcase colorsets, colormaps, and rainbow_discrete."""
     # Show colorsets get_colorset(<scheme>).
     cset_names = ColorsetDefinitions.colorset_names
     fig, axes = plt.subplots(
@@ -36,7 +39,7 @@ def main():
         ax.set_aspect("equal")
         ax.set_axis_off()
         ax.set_title(cset_name, weight="bold")
-    plt.show()
+    # plt.show()
 
     # Show colormaps tol_cmap(<scheme>).
     schemes = tol_cmap()
@@ -56,7 +59,7 @@ def main():
             ha="right",
             fontsize=10,
         )
-    plt.show()
+    # plt.show()
 
     # Show colormaps tol_cmap('rainbow_discrete', <lut>).
     gradient = np.linspace(0, 1, 256)
