@@ -10,8 +10,8 @@
 
 </div>
 
-Thoses color schemes were designed by Paul Tol. This repository is only packaging his work so that it can be easily installed using pip.
-His work and details on how to use thoses schemes can be found on his [website](https://personal.sron.nl/~pault/) and in the [docs](./docs) directory.
+Those color schemes were designed by Paul Tol. This repository is only packaging his work so that it can be easily installed using pip.
+His work and details on how to use those schemes can be found on his [website](https://personal.sron.nl/~pault/) and in the [docs](./docs) directory.
 
 ## Install
 
@@ -29,31 +29,28 @@ pip install .
 
 ## Get started
 
-Show the available colorsets, colormaps, and discrete rainbow colormap:
-``` python
-import tol_colors as tc
-tc.main()
-```
-
 Get a colorset:
 ``` python
-cset = tc.tol_cset('bright')
+cset = tc.get_colorset('bright')
 ```
 
 Get a colormap:
 ``` python
-cmap = tc.tol_cmap('sunset')
+cmap = tc.get_colormap('sunset')
 ```
 
-See the functions docstrings for details.
+Show the available colorsets, colormaps, and the discrete rainbow colormap:
+``` shell
+python -m tol_colors
+```
 
-To change default colorset (for lines) and colormap:
+See each function docstring for details.
+
+To change the default matplotlib colorset or colormap:
 ``` python
 import matplotlib.pyplot as plt
-import tol_colors
-
-plt.rc('axes', prop_cycle=plt.cycler('color', list(tol_colors.tol_cset('bright'))))
-plt.colormaps.register(name='rainbow_PuRd', cmap=tol_colors.tol_cmap('rainbow_PuRd'))
+plt.rc('axes', prop_cycle=plt.cycler('color', list(tc.get_colorset('bright'))))
+plt.colormaps.register(name='rainbow_PuRd', cmap=tc.get_colormap('rainbow_PuRd'))
 plt.rc('image', cmap='rainbow_PuRd')
 ```
 
