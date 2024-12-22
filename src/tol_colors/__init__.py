@@ -235,15 +235,15 @@ class ColorsetDefinitions:
         )
 
     @classmethod
-    def build_colorset(cls, name: str, *args, **kwargs) -> tuple[t.Any]:
+    def build_colorset(cls, name: str) -> tuple[Any]:
         """Return one of the colorset named-tuple."""
+        name = name.replace("-", "_")
         if name not in cls.colorset_names:
             raise KeyError(
                 f"Unknown colorset '{name}', the "
                 f"defined colorsets are {cls.colorset_names}"
             )
-        func = getattr(cls, name)
-        return func(*args, **kwargs)
+        return getattr(cls, name)()
 
 
 @overload
