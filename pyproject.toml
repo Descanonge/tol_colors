@@ -63,6 +63,9 @@ ignore = [
 ]
 unfixable = ["F401"]
 
+[tool.ruff.lint.per-file-ignores]
+"src/tol_colors/__init__.py"= ["N802"]
+
 [too.ruff.lint.pycodestyle]
 max-line-length = 90
 
