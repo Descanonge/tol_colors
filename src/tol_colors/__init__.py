@@ -18,7 +18,7 @@ from typing import Any, Literal, NamedTuple, overload
 import numpy as np
 from matplotlib.colors import LinearSegmentedColormap, to_rgba_array
 
-__version__ = "1.2.1"
+__version__ = "1.3.0"
 
 
 log = logging.getLogger(__name__)
