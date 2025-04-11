@@ -11,7 +11,7 @@
 </div>
 
 Those color schemes were designed by Paul Tol. This repository is only packaging his work so that it can be easily installed using pip.
-His work and details on how to use those schemes can be found on his [website](https://personal.sron.nl/~pault/) and in the [technical note](./docs/colorschemes.pdf).
+His work and details on how to use those schemes can be found on his [website](https://personal.sron.nl/~pault/), in the khroma R package [documentation](https://cran.r-project.org/web/packages/khroma/vignettes/tol.html), or in the [docs](./docs) directory.
 
 ## Install
 
