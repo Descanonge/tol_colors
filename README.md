@@ -53,7 +53,7 @@ An equally colorblind-safe alternative is the **"vibrant"** scheme:
 
 ![vibrant](/docs/img/vibrant.svg)
 
-When fewer colors are enough is the **"high-contrast"** scheme, which also works when
+When fewer colors are enough the **"high-contrast"** scheme is adapted, and also works when
 converted to greyscale:
 
 ![high-contrast](/docs/img/high-contrast.svg)
@@ -96,18 +96,18 @@ These schemes are meant to be used as colormaps. They can be obtained by name vi
 ``` python
 cmap = tc.get_colormap('sunset')
 ```
-The colormaps are linearly interpolated (smoothed), but the *sunset*, *BuRd*, *PRGn*, *YlOrBr* and *rainbow* schemes can be kept discrete/segmented by adding `_discrete` to the scheme name (*ie* tc.get_colormap('sunset_discrete')).
+The colormaps are linearly interpolated (smoothed), but the *sunset*, *BuRd*, *PRGn*, *YlOrBr* and *rainbow* schemes can be kept discrete/segmented by adding `_discrete` to the scheme name (*ie* `tc.get_colormap('sunset_discrete')`).
 The circled color is meant for bad data.
 
 There are three diverging schemes. **"sunset"** is related to the ColorBrewer RdYlBu scheme, but with darker central colours and made more symmetric:
 
 ![sunset](/docs/img/sunset.svg)
 
-**"BuRd"** is the reversed ColorBrewer RdBu scheme:
+**"BuRd"** is the reversed ColorBrewer *RdBu* scheme:
 
 ![BuRd](/docs/img/BuRd.svg)
 
-**"PRGn"** is the ColorBrewer PRGn scheme, with green shifted to make it print-friendly:
+**"PRGn"** is the ColorBrewer *PRGn* scheme, with green shifted to make it print-friendly:
 
 ![PRGn](/docs/img/PRGn.svg)
 
