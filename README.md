@@ -117,8 +117,8 @@ There are three sequential schemes. **"YlOrBr"** is the ColorBrewer *YlOrBr* sch
 
 ![iridescent](/docs/img/iridescent.svg)
 
-Finally, there is a smoothed **"rainbow"** scheme. It is often better to use a limited range of these colors.
-If the lowest data value occurs often, start at off-white instead of purple. If the highest data value occurs often, end at red instead of brown.
+Finally, there is a smoothed **"rainbow"** scheme. It is often better to use a limited range of these colors. Variants are already defined to that end.
+If the lowest data value occurs often, start at off-white instead of purple ("rainbow_WhRd" and "rainbow_WhBr"). If the highest data value occurs often, end at red instead of brown ("rainbow_WhRd" and "rainbow_PuRd").
 For color-blind people, the light purples and light blues should not be mixed much.
 
 ![rainbow](/docs/img/rainbow.svg)
