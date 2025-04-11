@@ -4,9 +4,9 @@
 <svg
    version="1.1"
    id="svg1"
-   width="498.4436"
-   height="71.31469"
-   viewBox="0 0 498.4436 71.314688"
+   width="532.5838"
+   height="71.186836"
+   viewBox="0 0 532.5838 71.186835"
    sodipodi:docname="bright.svg"
    inkscape:version="1.4.1 (1:1.4.1+202503302257+93de688d07)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
@@ -137,9 +137,9 @@
      inkscape:pageopacity="0.0"
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
-     inkscape:zoom="1.1334849"
-     inkscape:cx="145.12765"
-     inkscape:cy="91.311315"
+     inkscape:zoom="2.2669698"
+     inkscape:cx="18.306375"
+     inkscape:cy="-14.777436"
      inkscape:window-width="1680"
      inkscape:window-height="1013"
      inkscape:window-x="1920"
@@ -149,14 +149,15 @@
     <inkscape:page
        x="0"
        y="0"
-       width="498.4436"
-       height="71.31469"
+       width="532.5838"
+       height="71.186836"
        id="page2"
        margin="0"
        bleed="0" />
   </sodipodi:namedview>
   <g
-     id="g14">
+     id="g14"
+     transform="translate(34.205258,-0.06392025)">
     <path
        d="M 567.949,404.871 404.871,567.949 H 174.219 L 11.1406,404.871 V 174.219 L 174.219,11.1406 H 404.871 L 567.949,174.219"
        style="fill:#4477aa;fill-opacity:1;fill-rule:nonzero;stroke:none"
@@ -183,9 +184,9 @@
          id="tspan26929">4477AA</tspan></text>
     <text
        xml:space="preserve"
-       transform="matrix(1.27848,0,0,1.27848,25.4188,51.797364)"
        clip-path="none"
-       id="text26930"><tspan
+       id="text26930"
+       transform="matrix(1.27848,0,0,1.27848,25.4188,51.797364)"><tspan
          style="font-variant:normal;font-weight:normal;font-size:9px;font-family:Carlito;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
          x="0"
          dx="0 0.0054687499 0 0.0054687499"
@@ -193,7 +194,8 @@
          id="tspan26930">blue</tspan></text>
   </g>
   <g
-     id="g15">
+     id="g15"
+     transform="translate(34.205258,-0.06392025)">
     <path
        d="M 1124.77,404.871 961.68,567.949 H 731.039 L 567.949,404.871 V 174.219 L 731.039,11.1406 H 961.68 l 163.09,163.0784"
        style="fill:#66ccee;fill-opacity:1;fill-rule:nonzero;stroke:none"
@@ -230,7 +232,8 @@
          id="tspan26934">cyan</tspan></text>
   </g>
   <g
-     id="g16">
+     id="g16"
+     transform="translate(34.205258,-0.06392025)">
     <path
        d="M 1681.59,404.871 1518.5,567.949 H 1287.86 L 1124.77,404.871 V 174.219 L 1287.86,11.1406 h 230.64 l 163.09,163.0784"
        style="fill:#228833;fill-opacity:1;fill-rule:nonzero;stroke:none"
@@ -267,7 +270,8 @@
          id="tspan26938">green</tspan></text>
   </g>
   <g
-     id="g17">
+     id="g17"
+     transform="translate(34.205258,-0.06392025)">
     <path
        d="M 2238.41,404.871 2075.32,567.949 H 1844.68 L 1681.59,404.871 V 174.219 L 1844.68,11.1406 h 230.64 l 163.09,163.0784"
        style="fill:#ccbb44;fill-opacity:1;fill-rule:nonzero;stroke:none"
@@ -305,7 +309,8 @@
          id="tspan26942">yellow</tspan></text>
   </g>
   <g
-     id="g18">
+     id="g18"
+     transform="translate(34.205258,-0.06392025)">
     <path
        d="M 2795.23,404.871 2632.14,567.949 H 2401.5 L 2238.41,404.871 V 174.219 L 2401.5,11.1406 h 230.64 l 163.09,163.0784"
        style="fill:#ee6677;fill-opacity:1;fill-rule:nonzero;stroke:none"
@@ -342,7 +347,8 @@
          id="tspan26946">red</tspan></text>
   </g>
   <g
-     id="g19">
+     id="g19"
+     transform="translate(34.205258,-0.06392025)">
     <path
        d="M 3352.05,404.871 3188.96,567.949 H 2958.32 L 2795.23,404.871 V 174.219 L 2958.32,11.1406 h 230.64 l 163.09,163.0784"
        style="fill:#aa3377;fill-opacity:1;fill-rule:nonzero;stroke:none"
@@ -379,7 +385,8 @@
          id="tspan26950">purple</tspan></text>
   </g>
   <g
-     id="g20">
+     id="g20"
+     transform="translate(34.205258,-0.06392025)">
     <path
        d="M 3908.86,404.871 3745.78,567.949 H 3515.13 L 3352.05,404.871 V 174.219 L 3515.13,11.1406 h 230.65 l 163.08,163.0784"
        style="fill:#bbbbbb;fill-opacity:1;fill-rule:nonzero;stroke:none"
@@ -416,4 +423,15 @@
          y="0"
          id="tspan26954">grey</tspan></text>
   </g>
+  <text
+     xml:space="preserve"
+     clip-path="none"
+     id="text1"
+     x="-0.80903602"
+     y="38.599216"
+     style="font-size:15.3418px;stroke-width:1.27848"><tspan
+       style="font-variant:normal;font-weight:normal;font-size:11.5063px;font-family:Carlito;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.27848"
+       x="-0.80903602"
+       y="38.599216"
+       id="tspan1">bright</tspan></text>
 </svg>

@@ -4,9 +4,9 @@
 <svg
    version="1.1"
    id="svg1"
-   width="640.08691"
-   height="65.403931"
-   viewBox="0 0 640.08691 65.40393"
+   width="678.69501"
+   height="65.403946"
+   viewBox="0 0 678.695 65.403945"
    sodipodi:docname="muted.svg"
    inkscape:version="1.4.1 (1:1.4.1+202503302257+93de688d07)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
@@ -178,7 +178,7 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:zoom="3.530635"
-     inkscape:cx="110.03686"
+     inkscape:cx="35.262779"
      inkscape:cy="42.910128"
      inkscape:window-width="1680"
      inkscape:window-height="1013"
@@ -189,14 +189,26 @@
     <inkscape:page
        x="0"
        y="0"
-       width="640.08691"
-       height="65.403931"
+       width="678.69501"
+       height="65.403946"
        id="page2"
        margin="0"
        bleed="0" />
   </sodipodi:namedview>
+  <text
+     xml:space="preserve"
+     clip-path="none"
+     id="text1"
+     x="56.806736"
+     y="36.654438"
+     style="font-size:15.3418px;text-align:end;text-anchor:end;stroke-width:1.27848"><tspan
+       style="font-variant:normal;font-weight:normal;font-size:11.5063px;font-family:Carlito;text-align:end;writing-mode:lr-tb;text-anchor:end;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.27848"
+       x="29.911886"
+       y="36.654438"
+       id="tspan1">muted</tspan></text>
   <g
-     id="g28">
+     id="g28"
+     transform="translate(38.609551,1.2928e-5)">
     <path
        d="M 553.762,408.32 394.75,567.328 H 169.871 L 10.8594,408.32 V 183.441 L 169.871,24.4297 H 394.75 L 553.762,183.441"
        style="fill:#332288;fill-opacity:1;fill-rule:nonzero;stroke:none"
@@ -236,7 +248,8 @@
          id="tspan27239">indigo</tspan></text>
   </g>
   <g
-     id="g27">
+     id="g27"
+     transform="translate(38.609551,1.2928e-5)">
     <path
        d="M 1096.66,408.32 937.641,567.328 H 712.77 L 553.762,408.32 V 183.441 L 712.77,24.4297 H 937.641 L 1096.66,183.441"
        style="fill:#88ccee;fill-opacity:1;fill-rule:nonzero;stroke:none"
@@ -273,7 +286,8 @@
          id="tspan27243">cyan</tspan></text>
   </g>
   <g
-     id="g26">
+     id="g26"
+     transform="translate(38.609551,1.2928e-5)">
     <path
        d="M 1639.55,408.32 1480.54,567.328 H 1255.67 L 1096.66,408.32 V 183.441 L 1255.67,24.4297 h 224.87 l 159.01,159.0113"
        style="fill:#44aa99;fill-opacity:1;fill-rule:nonzero;stroke:none"
@@ -310,7 +324,8 @@
          id="tspan27247">teal</tspan></text>
   </g>
   <g
-     id="g25">
+     id="g25"
+     transform="translate(38.609551,1.2928e-5)">
     <path
        d="M 2182.45,408.32 2023.44,567.328 H 1798.57 L 1639.55,408.32 V 183.441 L 1798.57,24.4297 h 224.87 l 159.01,159.0113"
        style="fill:#117733;fill-opacity:1;fill-rule:nonzero;stroke:none"
@@ -347,7 +362,8 @@
          id="tspan27251">green</tspan></text>
   </g>
   <g
-     id="g24">
+     id="g24"
+     transform="translate(38.609551,1.2928e-5)">
     <path
        d="M 2725.35,408.32 2566.34,567.328 H 2341.46 L 2182.45,408.32 V 183.441 L 2341.46,24.4297 h 224.88 l 159.01,159.0113"
        style="fill:#999933;fill-opacity:1;fill-rule:nonzero;stroke:none"
@@ -383,7 +399,8 @@
          id="tspan27255">olive</tspan></text>
   </g>
   <g
-     id="g23">
+     id="g23"
+     transform="translate(38.609551,1.2928e-5)">
     <path
        d="M 3268.25,408.32 3109.24,567.328 H 2884.36 L 2725.35,408.32 V 183.441 L 2884.36,24.4297 h 224.88 l 159.01,159.0113"
        style="fill:#ddcc77;fill-opacity:1;fill-rule:nonzero;stroke:none"
@@ -421,7 +438,8 @@
          id="tspan27259">sand</tspan></text>
   </g>
   <g
-     id="g22">
+     id="g22"
+     transform="translate(38.609551,1.2928e-5)">
     <path
        d="M 3811.15,408.32 3652.14,567.328 H 3427.26 L 3268.25,408.32 V 183.441 L 3427.26,24.4297 h 224.88 l 159.01,159.0113"
        style="fill:#cc6677;fill-opacity:1;fill-rule:nonzero;stroke:none"
@@ -458,7 +476,8 @@
          id="tspan27263">rose</tspan></text>
   </g>
   <g
-     id="g21">
+     id="g21"
+     transform="translate(38.609551,1.2928e-5)">
     <path
        d="M 4354.05,408.32 4195.04,567.328 H 3970.16 L 3811.15,408.32 V 183.441 L 3970.16,24.4297 h 224.88 l 159.01,159.0113"
        style="fill:#882255;fill-opacity:1;fill-rule:nonzero;stroke:none"
@@ -495,7 +514,8 @@
          id="tspan27267">wine</tspan></text>
   </g>
   <g
-     id="g20">
+     id="g20"
+     transform="translate(38.609551,1.2928e-5)">
     <path
        d="M 4896.95,408.32 4737.93,567.328 H 4513.06 L 4354.05,408.32 V 183.441 L 4513.06,24.4297 h 224.87 l 159.02,159.0113"
        style="fill:#aa4499;fill-opacity:1;fill-rule:nonzero;stroke:none"
@@ -532,7 +552,8 @@
          id="tspan27271">purple</tspan></text>
   </g>
   <g
-     id="g19">
+     id="g19"
+     transform="translate(38.609551,1.2928e-5)">
     <path
        d="m 5589.14,295.879 c 0,75.59 -30.03,148.09 -83.48,201.543 -53.45,53.449 -125.95,83.476 -201.54,83.476 -75.59,0 -148.09,-30.027 -201.54,-83.476 -53.45,-53.453 -83.48,-125.953 -83.48,-201.543 0,-75.59 30.03,-148.09 83.48,-201.5392 53.45,-53.4492 125.95,-83.4804 201.54,-83.4804 75.59,0 148.09,30.0312 201.54,83.4804 53.45,53.4492 83.48,125.9492 83.48,201.5392"
        style="fill:#dddddd;fill-opacity:1;fill-rule:evenodd;stroke:none"

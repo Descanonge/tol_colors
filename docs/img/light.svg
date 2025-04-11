@@ -4,9 +4,9 @@
 <svg
    version="1.1"
    id="svg1"
-   width="639.81787"
-   height="71.204315"
-   viewBox="0 0 639.81787 71.204314"
+   width="671.43036"
+   height="71.076828"
+   viewBox="0 0 671.43036 71.076827"
    sodipodi:docname="light.svg"
    inkscape:version="1.4.1 (1:1.4.1+202503302257+93de688d07)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
@@ -170,8 +170,8 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:zoom="2.4975857"
-     inkscape:cx="448.23286"
-     inkscape:cy="35.434219"
+     inkscape:cx="-32.631513"
+     inkscape:cy="35.43422"
      inkscape:window-width="1680"
      inkscape:window-height="1013"
      inkscape:window-x="1920"
@@ -181,14 +181,15 @@
     <inkscape:page
        x="0"
        y="0"
-       width="639.81787"
-       height="71.204315"
+       width="671.43036"
+       height="71.076828"
        id="page2"
        margin="0"
        bleed="0" />
   </sodipodi:namedview>
   <g
-     id="g18">
+     id="g18"
+     transform="translate(31.676933,-0.06375039)">
     <path
        d="M 568.672,405.379 405.379,568.672 H 174.441 L 11.1484,405.379 V 174.441 L 174.441,11.1484 H 405.379 L 568.672,174.441"
        style="fill:#77aadd;fill-opacity:1;fill-rule:nonzero;stroke:none"
@@ -226,7 +227,8 @@
          id="tspan27702">lightblue</tspan></text>
   </g>
   <g
-     id="g19">
+     id="g19"
+     transform="translate(31.676933,-0.06375039)">
     <path
        d="M 1126.19,405.379 962.898,568.672 H 731.969 L 568.672,405.379 V 174.441 L 731.969,11.1484 H 962.898 L 1126.19,174.441"
        style="fill:#99ddff;fill-opacity:1;fill-rule:nonzero;stroke:none"
@@ -264,7 +266,8 @@
          id="tspan27706">lightcyan</tspan></text>
   </g>
   <g
-     id="g20">
+     id="g20"
+     transform="translate(31.676933,-0.06375039)">
     <path
        d="m 1683.72,405.379 -163.3,163.293 H 1289.49 L 1126.19,405.379 V 174.441 l 163.3,-163.2926 h 230.93 l 163.3,163.2926"
        style="fill:#44bb99;fill-opacity:1;fill-rule:nonzero;stroke:none"
@@ -302,7 +305,8 @@
          id="tspan27710">mint</tspan></text>
   </g>
   <g
-     id="g21">
+     id="g21"
+     transform="translate(31.676933,-0.06375039)">
     <path
        d="m 2241.24,405.379 -163.3,163.293 H 1847.01 L 1683.72,405.379 V 174.441 L 1847.01,11.1484 h 230.93 l 163.3,163.2926"
        style="fill:#bbcc33;fill-opacity:1;fill-rule:nonzero;stroke:none"
@@ -340,7 +344,8 @@
          id="tspan27714">pear</tspan></text>
   </g>
   <g
-     id="g22">
+     id="g22"
+     transform="translate(31.676933,-0.06375039)">
     <path
        d="M 2798.76,405.379 2635.47,568.672 H 2404.53 L 2241.24,405.379 V 174.441 L 2404.53,11.1484 h 230.94 l 163.29,163.2926"
        style="fill:#aaaa00;fill-opacity:1;fill-rule:nonzero;stroke:none"
@@ -376,7 +381,8 @@
          id="tspan27718">olive</tspan></text>
   </g>
   <g
-     id="g23">
+     id="g23"
+     transform="translate(31.676933,-0.06375039)">
     <path
        d="M 3356.28,405.379 3192.99,568.672 H 2962.06 L 2798.76,405.379 V 174.441 l 163.3,-163.2926 h 230.93 l 163.29,163.2926"
        style="fill:#eedd88;fill-opacity:1;fill-rule:nonzero;stroke:none"
@@ -414,7 +420,8 @@
          id="tspan27722">lightyellow</tspan></text>
   </g>
   <g
-     id="g24">
+     id="g24"
+     transform="translate(31.676933,-0.06375039)">
     <path
        d="m 3913.81,405.379 -163.3,163.293 H 3519.58 L 3356.28,405.379 V 174.441 l 163.3,-163.2926 h 230.93 l 163.3,163.2926"
        style="fill:#ee8866;fill-opacity:1;fill-rule:nonzero;stroke:none"
@@ -451,7 +458,8 @@
          id="tspan27726">orange</tspan></text>
   </g>
   <g
-     id="g25">
+     id="g25"
+     transform="translate(31.676933,-0.06375039)">
     <path
        d="m 4471.33,405.379 -163.3,163.293 H 4077.1 L 3913.81,405.379 V 174.441 L 4077.1,11.1484 h 230.93 l 163.3,163.2926"
        style="fill:#ffaabb;fill-opacity:1;fill-rule:nonzero;stroke:none"
@@ -489,7 +497,8 @@
          id="tspan27730">pink</tspan></text>
   </g>
   <g
-     id="g26">
+     id="g26"
+     transform="translate(31.676933,-0.06375039)">
     <path
        d="M 5028.85,405.379 4865.56,568.672 H 4634.62 L 4471.33,405.379 V 174.441 L 4634.62,11.1484 h 230.94 l 163.29,163.2926"
        style="fill:#dddddd;fill-opacity:1;fill-rule:nonzero;stroke:none"
@@ -526,4 +535,15 @@
          y="0"
          id="tspan27734">palegrey</tspan></text>
   </g>
+  <text
+     xml:space="preserve"
+     clip-path="none"
+     id="text1"
+     x="46.558937"
+     y="39.490894"
+     style="font-size:15.3418px;text-align:end;text-anchor:end;stroke-width:1.27848"><tspan
+       style="font-variant:normal;font-weight:normal;font-size:11.5063px;font-family:Carlito;text-align:end;writing-mode:lr-tb;text-anchor:end;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.27848"
+       x="19.664087"
+       y="39.490894"
+       id="tspan1">light</tspan></text>
 </svg>

@@ -4,9 +4,9 @@
 <svg
    version="1.1"
    id="svg1"
-   width="427.76855"
-   height="147.04135"
-   viewBox="0 0 427.76855 147.04135"
+   width="455.18954"
+   height="146.91322"
+   viewBox="0 0 455.18954 146.91322"
    sodipodi:docname="pale-dark.svg"
    inkscape:version="1.4.1 (1:1.4.1+202503302257+93de688d07)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
@@ -217,9 +217,9 @@
      inkscape:pageopacity="0.0"
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
-     inkscape:zoom="1.320757"
-     inkscape:cx="196.47823"
-     inkscape:cy="28.392808"
+     inkscape:zoom="3.7356649"
+     inkscape:cx="-15.659863"
+     inkscape:cy="59.025637"
      inkscape:window-width="1680"
      inkscape:window-height="1013"
      inkscape:window-x="1920"
@@ -227,17 +227,28 @@
      inkscape:window-maximized="1"
      inkscape:current-layer="svg1">
     <inkscape:page
-       x="0"
-       y="0"
-       width="427.76855"
-       height="147.04135"
+       x="1.8733605e-08"
+       y="8.500492e-10"
+       width="455.18954"
+       height="146.91322"
        id="page2"
        margin="0"
        bleed="0" />
   </sodipodi:namedview>
+  <text
+     xml:space="preserve"
+     clip-path="none"
+     id="text1"
+     x="46.789284"
+     y="39.589088"
+     style="font-size:15.3418px;text-align:end;text-anchor:end;stroke-width:1.27848"><tspan
+       style="font-variant:normal;font-weight:normal;font-size:11.5063px;font-family:Carlito;text-align:end;writing-mode:lr-tb;text-anchor:end;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.27848"
+       x="19.894438"
+       y="39.589088"
+       id="tspan1">pale</tspan></text>
   <g
      id="g27529"
-     transform="translate(-4251.4757,-77.716523)">
+     transform="translate(-4223.9899,-77.780586)">
     <g
        id="g34">
       <path
@@ -468,7 +479,7 @@
   </g>
   <g
      id="g27608"
-     transform="translate(-4251.4757,-77.716523)">
+     transform="translate(-4223.9899,-77.780586)">
     <g
        id="g28">
       <path
@@ -691,5 +702,20 @@
            y="0"
            id="tspan27606">darkgrey</tspan></text>
     </g>
+  </g>
+  <g
+     id="g1"
+     transform="translate(30.551739,56.366073)">
+    <text
+       xml:space="preserve"
+       clip-path="none"
+       id="text1-4"
+       x="16.726341"
+       y="58.850521"
+       style="font-size:15.3418px;text-align:end;text-anchor:end;stroke-width:1.27848"><tspan
+         style="font-variant:normal;font-weight:normal;font-size:11.5063px;font-family:Carlito;text-align:end;writing-mode:lr-tb;text-anchor:end;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.27848"
+         x="-10.168509"
+         y="58.850521"
+         id="tspan1-5">dark</tspan></text>
   </g>
 </svg>
