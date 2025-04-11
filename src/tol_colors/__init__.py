@@ -29,6 +29,13 @@ class ColorsetDefinitions:
 
     Each colorset has a class method to its name which return a corresponding
     named-tuple. The named-tuple class is defined as a class attribute.
+
+    NamedTuples are defined as class attributes. Corresponding class methods return
+    an instance with colors set as literal arguments. We avoid any mutability issue.
+
+    Named tuples are given in the order suggested by the technical notes.
+    For high-contrast, black and white are put first and last, respectively. That should
+    make an easy conversion to grayscale.
     """
 
     colorset_names = [
@@ -340,7 +347,7 @@ def get_colorset(name: str) -> NamedTuple: ...
 
 
 def get_colorset(
-    name: str,
+    name: str = "bright",
 ) -> (
     tuple[Any]
     | ColorsetDefinitions.Bright
