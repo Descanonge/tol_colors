@@ -32,14 +32,6 @@ Show the available colorsets, colormaps, and the discrete rainbow colormap:
 python -m tol_colors
 ```
 
-To change the default matplotlib colorset or colormap:
-``` python
-import matplotlib.pyplot as plt
-plt.rc('axes', prop_cycle=plt.cycler('color', list(tc.get_colorset('bright'))))
-plt.colormaps.register(name='rainbow_PuRd', cmap=tc.get_colormap('rainbow_PuRd'))
-plt.rc('image', cmap='rainbow_PuRd')
-```
-
 ## Requirements
 
 - numpy
@@ -87,6 +79,16 @@ and where the colored areas are small.
 Lastly, the scheme **"land-cover"** provides an alternative to the recommended colors for land cover data with distinct colors:
 
 ![land-cover](/docs/img/land-cover.svg)
+
+### Default matplotlib colors
+
+To change the default matplotlib colors (for lines, markers, patches, etc.), you must first obtain the list of color codes without the hexadecimal marker '#'.
+To obtain this list, in a python session run `[s[1:] for s in tol_colors.get_colorset("bright")]` for your set of choice.
+Copy the result in either a stylesheet or your [matplotlibrc file](https://matplotlib.org/stable/users/explain/customizing.html#the-matplotlibrc-file) like so (here the codes are for "bright"): 
+```
+axes.prop_cycle : cycler('color', ['4477AA', 'EE6677', '228833', 'CCBB44', '66CCEE', 'AA3377', 'BBBBBB'])
+```
+The sets are ordered following the technical note recommendations (not in the order shown here) and are thus adapted to this use.
 
 ## Colormaps
 
