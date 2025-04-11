@@ -125,6 +125,14 @@ For color-blind people, the light purples and light blues should not be mixed mu
 
 There is a discrete alternative named **"rainbow_discrete"** where the number of colors can be picked between 1 and 23 (`tc.get_colormap("rainbow_discrete", n_colors=14)`). See the technical note for details.
 
+## Simulations
+
+Here are the color schemes with approximations of red-blind and green-blind vision:
+
+![simulations](/docs/img/simulations.svg)
+
+
+
 ## See also
 
 Other packages already implement these colorschemes and might better suit your needs:
