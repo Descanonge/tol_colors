@@ -44,7 +44,7 @@ class ColorsetDefinitions:
     ]
     """List of available colorset. Must correspond to method names."""
 
-    Bright = namedtuple("Bright", "blue, red, green, yellow, cyan, purple, grey, black")
+    Bright = namedtuple("Bright", "blue, red, green, yellow, cyan, purple, grey")
 
     @classmethod
     def bright(cls) -> Bright:
@@ -57,12 +57,11 @@ class ColorsetDefinitions:
             cyan="#66CCEE",
             purple="#AA3377",
             grey="#BBBBBB",
-            black="#000000",
         )
 
     Muted = namedtuple(
         "Muted",
-        "rose, indigo, sand, green, cyan, wine, teal, olive, purple, pale_grey, black",
+        "rose, indigo, sand, green, cyan, wine, teal, olive, purple, pale_grey",
     )
 
     @classmethod
@@ -83,12 +82,9 @@ class ColorsetDefinitions:
             olive="#999933",
             purple="#AA4499",
             pale_grey="#DDDDDD",
-            black="#000000",
         )
 
-    Vibrant = namedtuple(
-        "Vibrant", "orange, blue, cyan, magenta, red, teal, grey, black"
-    )
+    Vibrant = namedtuple("Vibrant", "orange, blue, cyan, magenta, red, teal, grey")
 
     @classmethod
     def vibrant(cls) -> Vibrant:
@@ -106,10 +102,9 @@ class ColorsetDefinitions:
             red="#CC3311",
             teal="#009988",
             grey="#BBBBBB",
-            black="#000000",
         )
 
-    HighContrast = namedtuple("HighContrast", "blue, yellow, red, black")
+    HighContrast = namedtuple("HighContrast", "black, blue, yellow, red, white")
 
     @classmethod
     def high_contrast(cls) -> HighContrast:
@@ -119,12 +114,25 @@ class ColorsetDefinitions:
         for people with monochrome vision and in a monochrome printout.
         """
         return cls.HighContrast(
-            blue="#004488", yellow="#DDAA33", red="#BB5566", black="#000000"
+            black="#000000",
+            blue="#004488",
+            yellow="#DDAA33",
+            red="#BB5566",
+            white="#FFFFFF",
         )
 
     MediumContrast = namedtuple(
         "MediumContrast",
-        "light_blue, dark_blue, light_yellow, dark_yellow light_red, dark_red, black",
+        [
+            "white",
+            "light_blue",
+            "dark_blue",
+            "light_yellow",
+            "dark_yellow",
+            "light_red",
+            "dark_red",
+            "black",
+        ],
     )
 
     @classmethod
@@ -142,12 +150,13 @@ class ColorsetDefinitions:
             dark_yellow="#997700",
             light_red="#EE99AA",
             dark_red="#994455",
+            white="#FFFFFF",
             black="#000000",
         )
 
     Pale = namedtuple(
         "Pale",
-        "pale_blue, pale_red, pale_green, pale_yellow, pale_cyan, pale_grey, black",
+        "pale_blue, pale_red, pale_green, pale_yellow, pale_cyan, pale_grey",
     )
 
     @classmethod
@@ -168,7 +177,6 @@ class ColorsetDefinitions:
             pale_yellow="#EEEEBB",
             pale_cyan="#CCEEFF",
             pale_grey="#DDDDDD",
-            black="#000000",
         )
 
     Light = namedtuple(
@@ -183,7 +191,6 @@ class ColorsetDefinitions:
             "pear",
             "olive",
             "pale_grey",
-            "black",
         ],
     )
 
@@ -206,12 +213,11 @@ class ColorsetDefinitions:
             pear="#BBCC33",
             olive="#AAAA00",
             pale_grey="#DDDDDD",
-            black="#000000",
         )
 
     Dark = namedtuple(
         "Dark",
-        "dark_blue, dark_red, dark_green, dark_yellow, dark_cyan, dark_grey, black",
+        "dark_blue, dark_red, dark_green, dark_yellow, dark_cyan, dark_grey",
     )
 
     @classmethod
@@ -232,7 +238,6 @@ class ColorsetDefinitions:
             dark_yellow="#666633",
             dark_cyan="#225555",
             dark_grey="#555555",
-            black="#000000",
         )
 
     LandCover = namedtuple(
