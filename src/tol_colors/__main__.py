@@ -4,19 +4,17 @@ import numpy as np
 from matplotlib import pyplot as plt
 from matplotlib.patches import RegularPolygon
 
-from tol_colors import ColorsetDefinitions, get_colorset, tol_cmap
+from tol_colors import colormaps, colorsets, rainbow_discrete
 
 
 def main():
     """Create three plots to showcase colorsets, colormaps, and rainbow_discrete."""
     # Show colorsets get_colorset(<scheme>).
-    cset_names = ColorsetDefinitions.colorset_names
     fig, axes = plt.subplots(
-        ncols=len(cset_names), figsize=(11, 3.5), layout="constrained", sharey=True
+        ncols=len(colorsets), figsize=(13, 5), layout="constrained", sharey=True
     )
-    max_ncolors = max(len(get_colorset(n)) for n in cset_names)
-    for ax, cset_name in zip(axes, cset_names, strict=False):
-        cset = get_colorset(cset_name)
+    max_ncolors = max(len(cset) for cset in colorsets.values())
+    for ax, (cset_name, cset) in zip(axes, colorsets.items(), strict=False):
         names = cset._fields
         colors = list(cset)
         for i, (name, color) in enumerate(zip(names, colors, strict=False)):
@@ -38,30 +36,34 @@ def main():
         ax.set_ylim(0, max_ncolors + 1)
         ax.set_aspect("equal")
         ax.set_axis_off()
-        ax.set_title(cset_name, weight="bold")
-    # plt.show()
+        ax.set_title(cset_name, loc="left", weight="bold")
+    plt.show()
+    return
 
-    # Show colormaps tol_cmap(<scheme>).
-    schemes = tol_cmap()
+    # Show colormaps
+    cmaps_names = [
+        n for n in colormaps if not (n.endswith("_r") or n.startswith("rainbow"))
+    ]
+    cmaps_names += ["rainbow_WhBr", "rainbow_WhRd", "rainbow_PuBr", "rainbow_PuRd"]
     gradient = np.linspace(0, 1, 256)
     gradient = np.vstack((gradient, gradient))
-    fig, axes = plt.subplots(nrows=len(schemes))
+    fig, axes = plt.subplots(nrows=len(cmaps_names))
     fig.subplots_adjust(top=0.98, bottom=0.02, left=0.2, right=0.99)
-    for ax, scheme in zip(axes, schemes, strict=False):
+    for ax, cmap_name in zip(axes, cmaps_names, strict=False):
         pos = list(ax.get_position().bounds)
         ax.set_axis_off()
-        ax.imshow(gradient, aspect=4, cmap=tol_cmap(scheme))
+        ax.imshow(gradient, aspect=4, cmap=colormaps[cmap_name])
         fig.text(
             pos[0] - 0.01,
             pos[1] + pos[3] / 2.0,
-            scheme,
+            cmap_name,
             va="center",
             ha="right",
             fontsize=10,
         )
     # plt.show()
 
-    # Show colormaps tol_cmap('rainbow_discrete', <lut>).
+    # Show discrete rainbow.
     gradient = np.linspace(0, 1, 256)
     gradient = np.vstack((gradient, gradient))
     fig, axes = plt.subplots(nrows=23)
@@ -69,7 +71,7 @@ def main():
     for lut, ax in enumerate(axes, start=1):
         pos = list(ax.get_position().bounds)
         ax.set_axis_off()
-        ax.imshow(gradient, aspect=4, cmap=tol_cmap("rainbow_discrete", lut))
+        ax.imshow(gradient, aspect=4, cmap=rainbow_discrete(lut))
         fig.text(
             pos[0] - 0.01,
             pos[1] + pos[3] / 2.0,
