@@ -29,6 +29,15 @@ dependencies = [
     'matplotlib',
 ]
 
+[project.optional-dependencies]
+dev = [
+    'sphinx==8.0.*',
+    'sphinx-book-theme==1.1.*',
+    'ruff',
+    'mypy>=1.5',
+    'pytest>=7.4',
+]
+
 [project.urls]
 'Source' = 'https://github.com/Descanonge/tol_colors'
 
