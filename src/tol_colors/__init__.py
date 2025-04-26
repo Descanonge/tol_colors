@@ -54,7 +54,7 @@ Muted = namedtuple(
 muted = Muted(**_colors["colorsets"]["muted"])
 colorsets["muted"] = muted
 
-HighContrast = namedtuple("HighContrast", "black, blue, yellow, red, white")
+HighContrast = namedtuple("HighContrast", "black, blue, red, yellow, white")
 high_contrast = HighContrast(**_colors["colorsets"]["high_contrast"])
 colorsets["high_contrast"] = high_contrast
 

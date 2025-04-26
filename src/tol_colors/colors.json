@@ -33,8 +33,8 @@
         "high_contrast": {
             "black":"#000000",
             "blue":"#004488",
-            "yellow":"#DDAA33",
             "red":"#BB5566",
+            "yellow":"#DDAA33",
             "white":"#FFFFFF"
         },
         "medium_contrast": {
