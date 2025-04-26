@@ -26,7 +26,7 @@ def main():
                 xy=(0.0, max_ncolors - i + 0.5),
                 numVertices=8,
                 radius=r,
-                orientation=45 / np.sqrt(2),
+                orientation=np.pi / 360 * 45,
                 ec=None,
                 fc=color,
             )
