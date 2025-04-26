@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 from collections import namedtuple
 from collections.abc import Sequence
 from importlib import resources
@@ -126,6 +127,81 @@ LandCover = namedtuple(
 land_cover = LandCover(**_colors["colorsets"]["land_cover"])
 colorsets["land_cover"] = land_cover
 
+
+def set_default_colors(
+    cset: str = "bright", fname: str | None = None, dry: bool = False
+):
+    """Modify matplotlibrc to set default colors to those of one of the colorsets.
+
+    This will modify the colors used autmotically by matplotlib.
+    This function will add a new line in a matplotlibrc file or stylesheet for the
+    property "axes.prop_cycle". If a line setting a color cycler already exist in the
+    file, it will be overwritten.
+
+    This function can run without modifying the file and simply show the line to add
+    with the *dry* parameter.
+
+    Parameters
+    ----------
+    cset
+        Name of the colorset to set as new default. Default is "bright".
+    fname
+        Name of the file to modify. It can be an matplotlibrc or stylesheet file (see
+        the matplotlib documentation on `Customizang Matplotlib
+        <https://matplotlib.org/stable/users/explain/customizing.html>`__).
+        If left to None, it will default to:
+
+        - ``$MPLCONFIGDIR`` if set
+        - On Unix/Linux: ``$XDG_CONFIG_HOME/matplotlib/matplotlibrc`` if set, or
+          ``$HOME/.config/matplotlib/matplotlibrc``
+        - On other platforms ``$HOME/.matplotlib/matplotlibrc``
+
+        It will create the file and leading directories if it does not exist.
+    dry
+        If set to True, the function will only print the new configuration line to
+        stdout and will not modify any file. You can then copy-paste the line manually.
+    """
+    colors = [f"'{c[1:]}'" for c in colorsets[cset]]
+    newline = f"axes.prop_cycle : cycler('color', [{', '.join(colors)}])\n"
+    print(f"New config line: {newline}", end="")
+
+    if dry:
+        return
+
+    if fname is None:
+        fname = os.path.join(matplotlib.get_configdir(), "matplotlibrc")
+    print(f"Injecting line in file '{fname}'")
+
+    base_dir = os.path.dirname(fname)
+    if not os.path.exists(base_dir):
+        os.makedirs(base_dir, exist_ok=True)
+
+    if os.path.exists(fname):
+        # check if cycler for color already exists in file
+        with open(fname) as fp:
+            lines = fp.readlines()
+
+        has_line = False
+        line_idx = 0
+        for i, line in enumerate(lines):
+            if line.startswith("axes.prop") and (
+                "cycler('color')" or 'cycler("color")' in line
+            ):
+                has_line = True
+                line_idx = i
+                break
+
+        if has_line:
+            lines[line_idx] = newline
+        else:
+            lines.append(newline)
+    else:
+        lines = [newline]
+
+    with open(fname, "w") as fp:
+        fp.writelines(lines)
+
+
 ## Colormaps
 
 
@@ -224,5 +300,6 @@ def __dir__():
     attrs += list(colorsets.keys())
     attrs += list(colormaps.keys())
     attrs.append("rainbow_discrete")
+    attrs.append("set_default_colors")
     attrs.sort()
     return attrs
