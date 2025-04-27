@@ -8,6 +8,8 @@ from matplotlib.patches import RegularPolygon
 
 import tol_colors as tc
 
+savedir = "docs/source/img/"
+
 ## Colorsets
 
 
@@ -46,7 +48,11 @@ def detailed_colorset(name: str):
         )
         ax.add_artist(p)
 
-        text_col = "w" if name == "dark" or col_name in ["black", "indigo"] else "k"
+        text_col = (
+            "w"
+            if name == "dark" or col_name in ["black", "indigo", "blue", "dark_blue"]
+            else "k"
+        )
         ax.annotate(
             f"{color}\n{col_name}",
             xy=(0.5, 0.5),
@@ -72,7 +78,7 @@ def detailed_colorset(name: str):
             ax.add_artist(r)
             ax.set_ylim(-0.5 - r_height - v_pad, 0.5 + v_pad)
 
-        fig.savefig(f"docs/source/img/cset_{name}.svg")
+        fig.savefig(savedir + f"cset_{name}.svg")
         plt.close(fig)
 
 
@@ -130,15 +136,125 @@ def land_cover():
             clip_on=False,
         )
 
-        fig.savefig(f"docs/source/img/cset_{name}.svg")
+        fig.savefig(savedir + f"cset_{name}.svg")
         plt.close(fig)
 
 
-for name in tc.colorsets:
-    detailed_colorset(name)
+def condensed_csets():
+    fig = plt.figure(figsize=(6, 3.75), dpi=150)
+    margin = 0.1
+    ax = fig.add_axes((margin, 0, 1 - margin, 1))
 
-# special plot for land cover
-land_cover()
+    sets = ["bright", "vibrant", "muted", "light", "high_contrast", "medium_contrast"]
+    n_sets = len(sets)
+
+    max_n_colors = max(len(tc.colorsets[name]) for name in sets)
+    border = 0.1
+
+    for i_set, cset_name in enumerate(sets):
+        cset = tc.colorsets[cset_name]
+        x_left = (max_n_colors / 2) - len(cset) / 2
+        for i_col, (col_name, color) in enumerate(
+            zip(cset._fields, cset, strict=False)
+        ):
+            r = RegularPolygon(
+                (x_left + i_col + 0.5, -i_set * (1 + border) - 0.5),
+                numVertices=8,
+                radius=1.307 / (1 + np.sqrt(2)),
+                orientation=np.pi / 360 * 45,
+                fc=color,
+                ec="k" if col_name == "white" else color,
+                lw=0.1,
+            )
+            ax.add_artist(r)
+            if i_col == 0:
+                ax.annotate(
+                    cset_name,
+                    xy=(0, 0.5),
+                    xycoords=r,
+                    xytext=(-3, 0),
+                    textcoords="offset points",
+                    ha="right",
+                    va="center",
+                    size=9,
+                )
+
+    ax.set_axis_off()
+    ax.set_aspect("equal")
+    ax.set_xlim(0, max_n_colors)
+    ax.set_ylim(-n_sets * (1 + border), 0)
+
+    fig.savefig(savedir + "cset_condensed.svg")
+    plt.close(fig)
+
+
+def colorsets_cvd():
+    spaces = ["deuteranomaly", "protanomaly"]
+
+    fig, axes = plt.subplots(1, 2, figsize=(8, 2.7), layout="constrained", dpi=150)
+
+    sets = ["bright", "vibrant", "muted", "light", "high_contrast", "medium_contrast"]
+    n_sets = len(sets)
+
+    max_n_colors = max(len(tc.colorsets[name]) for name in sets)
+    border = 0.1
+
+    for i_ax, (ax, space_name) in enumerate(zip(axes, spaces, strict=False)):
+        space = dict(name="sRGB1+CVD", cvd_type=space_name, severity=100)
+
+        ax.set_axis_off()
+        ax.set_aspect("equal")
+        ax.set_xlim(0, max_n_colors)
+        ax.set_ylim(-n_sets * (1 + border), 0)
+
+        ax.annotate(
+            space_name.capitalize(),
+            xy=(0.5, 1),
+            xycoords="axes fraction",
+            xytext=(0, 3),
+            textcoords="offset points",
+            ha="center",
+            va="bottom",
+            size=12,
+        )
+
+        for i_set, cset_name in enumerate(sets):
+            cset = tc.colorsets[cset_name]
+            x_left = (max_n_colors / 2) - len(cset) / 2
+            for i_col, (col_name, color) in enumerate(
+                zip(cset._fields, cset, strict=False)
+            ):
+                rgb = to_rgb(color)
+                rgb = cspace_convert(rgb, space, "sRGB1")
+                rgb = np.clip(rgb, 0, 1)
+                p = RegularPolygon(
+                    (x_left + i_col + 0.5, -i_set * (1 + border) - 0.5),
+                    numVertices=8,
+                    radius=1.307 / (1 + np.sqrt(2)),
+                    orientation=np.pi / 360 * 45,
+                    fc=rgb,
+                    ec="k" if col_name == "white" else rgb,
+                    lw=0.1,
+                )
+                ax.add_artist(p)
+
+    # leave space for center annotations
+    fig.get_layout_engine().set(wspace=0.15)
+
+    for i_set, cset_name in enumerate(sets):
+        ann = axes[0].annotate(
+            cset_name,
+            xy=(0.5, -i_set * (1 + border) - 0.5),
+            xycoords=("figure fraction", "data"),
+            ha="center",
+            va="center",
+            size=11,
+        )
+        ann.set_in_layout(False)
+
+    fig.savefig(savedir + "cset_cvd.svg")
+    plt.close(fig)
+
 
 ## Colormaps
 
@@ -177,20 +293,77 @@ def detailed_cmap(name: str):
             )
             ax.add_artist(rect)
 
-    fig.savefig(f"docs/source/img/cmap_{name}.svg")
+    fig.savefig(savedir + f"cmap_{name}.svg")
     plt.close(fig)
 
 
-for name in [
-    "sunset",
-    "BuRd",
-    "PRGn",
-    "YlOrBr",
-    "WhOrBr",
-    "iridescent",
-    "rainbow_WhBr",
-    "rainbow_WhRd",
-    "rainbow_PuBr",
-    "rainbow_PuRd",
-]:
-    detailed_cmap(name)
+## discrete rainbow
+
+
+def rainbow_discrete():
+    fig = plt.figure(figsize=(6.1, 6), dpi=150)
+    ax = fig.add_axes((0, 0, 1, 1))
+
+    for n_col in range(1, 24):
+        cmap = tc.rainbow_discrete(n_col)
+
+        for i_col, color in enumerate(cmap.colors):
+            h = RegularPolygon(
+                (i_col - n_col / 2, -n_col),
+                numVertices=6,
+                radius=np.sqrt(3) / 3,
+                fc=color,
+                ec=color,
+                lw=0.1,
+            )
+            ax.add_artist(h)
+
+            if i_col == 0:
+                ax.annotate(
+                    str(n_col),
+                    xy=(0, 0.5),
+                    xycoords=h,
+                    xytext=(-5, 0),
+                    textcoords="offset points",
+                    ha="right",
+                    va="center",
+                    size=9,
+                )
+
+    ax.set_axis_off()
+    ax.set_aspect("equal")
+    ax.set_xlim(-13.5, 11.2)
+    ax.set_ylim(-24, -0.2)
+
+    fig.savefig(savedir + "cmap_rainbow_discrete.svg")
+    plt.close(fig)
+
+
+## Condensed colorsets
+
+
+if __name__ == "__main__":
+    for name in tc.colorsets:
+        detailed_colorset(name)
+
+    # special plot for land cover
+    land_cover()
+
+    condensed_csets()
+    colorsets_cvd()
+
+    for name in [
+        "sunset",
+        "BuRd",
+        "PRGn",
+        "YlOrBr",
+        "WhOrBr",
+        "iridescent",
+        "rainbow_WhBr",
+        "rainbow_WhRd",
+        "rainbow_PuBr",
+        "rainbow_PuRd",
+    ]:
+        detailed_cmap(name)
+
+    rainbow_discrete()
