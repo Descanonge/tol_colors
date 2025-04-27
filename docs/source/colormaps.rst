@@ -25,46 +25,41 @@ adding "_discrete" to their name (*eg* ``tc.sunset_discrete``).
 Sunset
 ------
 
-.. image:: /img/cmap_sunset.svg
+.. cmap:: sunset
     :alt: Sunset colormap
-    :class: img-padding
 
 BuRd
 ----
 
-.. image:: /img/cmap_BuRd.svg
+.. cmap:: BuRd
     :alt: Blue-Red colormap
-    :class: img-padding
 
 PRGn
 ----
 
-.. image:: /img/cmap_PRGn.svg
+.. cmap:: PRGn
     :alt: Purple-Green colormap
-    :class: img-padding
 
 YlOrBr
 ------
 
-.. image:: /img/cmap_YlOrBr.svg
+.. cmap:: YlOrBr
     :alt: Yellow-Orange-Brown colormap
-    :class: img-padding
 
 
 With variant WhOrBr that replaces the first color with pure white:
 
-.. image:: /img/cmap_WhOrBr.svg
+.. cmap:: WhOrBr
     :alt: White-Orange-Brown colormap
-    :class: img-padding
 
 Iridescent
 ----------
 
 This one is *not* available as discrete.
 
-.. image:: /img/cmap_iridescent.svg
+.. cmap:: iridescent
     :alt: iridescent colormap
-    :class: img-padding
+
 
 Linear rainbow
 ==============
@@ -73,29 +68,24 @@ Rainbow colormap. Only used linearly interpolated, for discrete see next
 section. For colorblind people should avoid using the whole range. Start at
 purple rather than white or/and end at red rather than brown.
 
-.. image:: /img/cmap_rainbow_WhBr.svg
+.. cmap:: rainbow_WhBr
     :alt: rainbow colormap (white to brown)
-    :class: img-padding
 
 text
 
-.. image:: /img/cmap_rainbow_WhRd.svg
+.. cmap:: rainbow_WhRd
     :alt: rainbow colormap (white to red)
-    :class: img-padding
-
 
 text
 
-.. image:: /img/cmap_rainbow_PuBr.svg
+.. cmap:: rainbow_PuBr
     :alt: rainbow colormap (purple to brown)
-    :class: img-padding
 
 
 text
 
-.. image:: /img/cmap_rainbow_PuRd.svg
+.. cmap:: rainbow_PuRd
     :alt: rainbow colormap (purple to red)
-    :class: img-padding
 
 Aliases.
 
@@ -107,3 +97,7 @@ Number of colors can be choosen between 1 and 23 (included). Use function to get
 
 colors are choosen with the following pattern.
 plot.
+
+.. image:: /img/cmap_rainbow_discrete.svg
+    :alt: discrete rainbow colormap
+    :class: img-padding

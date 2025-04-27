@@ -79,7 +79,8 @@ Matplotlib default colors
 
 use function to automatically change stuff.
 
-Simulation ?
-============
+Colorblindness
+==============
 
-maybe plot of simulation
+.. image:: /img/cset_cvd.svg
+    :width: 100%
