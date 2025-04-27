@@ -13,7 +13,10 @@ The various colormaps are available:
 Each colormap has a reversed variant directly available with the suffix "_r"
 (*eg* ``tc.sunset_r``)
 
-Click somewhere to show viscm visualization. Maybe collapsible section?
+.. tip::
+
+    Click on a colormap to show its `viscm
+    <https://github.com/matplotlib/viscm>`__ evaluation in a new tab.
 
 Linear colormaps
 ================
