@@ -32,11 +32,16 @@ with resources.open_text("tol_colors", "colors.json") as fp:
     _colors = json.load(fp)
 
 
+class ColorsetMapping(dict[str, NamedTuple]):
+    def __getitem__(self, key: str) -> NamedTuple:
+        return super().__getitem__(key.replace("-", "_"))
+
+
 ## Colorsets
 # I also define statically the colorsets to preserve type-checking and auto-completion
 # on the attributes of named tuples
 
-colorsets: dict[str, NamedTuple] = {}
+colorsets: ColorsetMapping = {}  # type: ignore[assignment]
 """Mapping of colorsets."""
 
 Bright = namedtuple("Bright", "blue, red, green, yellow, cyan, purple, grey")
