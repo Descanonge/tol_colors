@@ -21,11 +21,13 @@ release = "2.0.0"
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = ["sphinx.ext.autodoc"]
+extensions = ["sphinx.ext.napoleon", "sphinx.ext.autodoc", "sphinx.ext.intersphinx"]
 
 templates_path = ["_templates"]
 exclude_patterns = []
 
+# Intersphinx
+intersphinx_mapping = {"matplotlib": ("https://matplotlib.org/", None)}
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output

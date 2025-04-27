@@ -9,13 +9,17 @@ These are various sets of colors that can be used for lines, markers,
 qualitative maps, etc. Below is succinctly described how they are used and
 when to use each of them.
 
-Each colorset is accessible in the dictionnary :data:`tol_colors.colorsets`.
+All colorsets are given as named tuples. You can then access the colors by index or by name::
+
+    >>> cset = tc.bright
+    >>> cset.blue
+    '#4477AA'
+
+Each colorset is available as a module attribute: ``tc.bright`` for instance.
+All colorsets are also stored in the dictionnary :data:`tol_colors.colorsets`.
 This is a special mapping that will accepts both hyphen and underscore versions
 (``tc.colorsets["high-contrast"]`` and ``tc.colorsets["high_contrast"]`` will
 both work).
-
-Each colorset is also available as a module attribute: ``tc.bright`` for
-instance.
 
 Except for the *high* and *medium-constrast* colorsets that can be sorted by
 luminance, the colors can be used in any order. In this package, they are given
@@ -23,6 +27,8 @@ in the order suggested by the technical notes.
 
 Sets
 ====
+
+set design
 
 Bright
 ------
@@ -92,9 +98,10 @@ Matplotlib default colors
 =========================
 
 The package provides a function to easily set the default colors used by
-Matplotlib.
+Matplotlib to one of the colorsets.
 
 .. autofunction:: tol_colors.set_default_colors
+    :no-index:
 
 CVD Simulation
 ==============

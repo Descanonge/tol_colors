@@ -33,6 +33,8 @@ with resources.open_text("tol_colors", "colors.json") as fp:
 
 
 class ColorsetMapping(dict[str, NamedTuple]):
+    """Special mapping replacing hyphens by underscores when retrieving an item."""
+
     def __getitem__(self, key: str) -> NamedTuple:
         return super().__getitem__(key.replace("-", "_"))
 
@@ -144,7 +146,7 @@ def set_default_colors(
     file, it will be overwritten.
 
     This function can run without modifying the file and simply show the line to add
-    with the *dry* parameter.
+    by setting the *dry* parameter to True.
 
     Parameters
     ----------
@@ -152,12 +154,12 @@ def set_default_colors(
         Name of the colorset to set as new default. Default is "bright".
     fname
         Name of the file to modify. It can be an matplotlibrc or stylesheet file (see
-        the matplotlib documentation on `Customizang Matplotlib
+        the matplotlib documentation on `Customizing Matplotlib
         <https://matplotlib.org/stable/users/explain/customizing.html>`__).
         If left to None, it will default to:
 
         - ``$MPLCONFIGDIR`` if set
-        - On Unix/Linux: ``$XDG_CONFIG_HOME/matplotlib/matplotlibrc`` if set, or
+        - On Unix/Linux: ``$XDG_CONFIG_HOME/matplotlib/matplotlibrc`` if set, or else
           ``$HOME/.config/matplotlib/matplotlibrc``
         - On other platforms ``$HOME/.matplotlib/matplotlibrc``
 
