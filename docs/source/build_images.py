@@ -54,13 +54,23 @@ def detailed_colorset(name: str):
             else "k"
         )
         ax.annotate(
-            f"{color}\n{col_name}",
+            f"{color}",
             xy=(0.5, 0.5),
             xycoords=p,
+            xytext=(0, 2),
+            textcoords="offset points",
             ha="center",
-            va="center",
+            va="bottom",
             color=text_col,
             size=10,
+        )
+        ax.annotate(
+            f"{col_name}",
+            xy=(0.5, 0.35),
+            xycoords=p,
+            ha="center",
+            color=text_col,
+            size=10 + (1 - len(col_name) / 10) * 2.5,
         )
 
         if name.endswith("contrast"):
@@ -157,7 +167,7 @@ def condensed_csets():
         for i_col, (col_name, color) in enumerate(
             zip(cset._fields, cset, strict=False)
         ):
-            r = RegularPolygon(
+            p = RegularPolygon(
                 (x_left + i_col + 0.5, -i_set * (1 + border) - 0.5),
                 numVertices=8,
                 radius=1.307 / (1 + np.sqrt(2)),
@@ -166,12 +176,27 @@ def condensed_csets():
                 ec="k" if col_name == "white" else color,
                 lw=0.1,
             )
-            ax.add_artist(r)
+            ax.add_artist(p)
+            text_col = (
+                "w"
+                if cset_name == "dark"
+                or col_name in ["black", "indigo", "blue", "dark_blue"]
+                else "k"
+            )
+            ax.annotate(
+                col_name,
+                xy=(0.5, 0.5),
+                xycoords=p,
+                ha="center",
+                va="center",
+                color=text_col,
+                size=7 + (1 - len(col_name) / 10) * 2.5,
+            )
             if i_col == 0:
                 ax.annotate(
                     cset_name,
                     xy=(0, 0.5),
-                    xycoords=r,
+                    xycoords=p,
                     xytext=(-3, 0),
                     textcoords="offset points",
                     ha="right",
@@ -337,9 +362,6 @@ def rainbow_discrete():
 
     fig.savefig(savedir + "cmap_rainbow_discrete.svg")
     plt.close(fig)
-
-
-## Condensed colorsets
 
 
 if __name__ == "__main__":
