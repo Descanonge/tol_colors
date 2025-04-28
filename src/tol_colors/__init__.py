@@ -88,6 +88,13 @@ Pale = namedtuple(
 pale = Pale(**_colors["colorsets"]["pale"])
 colorsets["pale"] = pale
 
+Dark = namedtuple(
+    "Dark",
+    "dark_blue, dark_red, dark_green, dark_yellow, dark_cyan, dark_grey",
+)
+dark = Dark(**_colors["colorsets"]["dark"])
+colorsets["dark"] = dark
+
 Light = namedtuple(
     "Light",
     [
@@ -105,12 +112,6 @@ Light = namedtuple(
 light = Light(**_colors["colorsets"]["light"])
 colorsets["light"] = light
 
-Dark = namedtuple(
-    "Dark",
-    "dark_blue, dark_red, dark_green, dark_yellow, dark_cyan, dark_grey",
-)
-dark = Dark(**_colors["colorsets"]["dark"])
-colorsets["dark"] = dark
 
 LandCover = namedtuple(
     "LandCover",
@@ -153,17 +154,17 @@ def set_default_colors(
     cset
         Name of the colorset to set as new default. Default is "bright".
     fname
-        Name of the file to modify. It can be an matplotlibrc or stylesheet file (see
-        the matplotlib documentation on `Customizing Matplotlib
+        Name of the file to modify. It can be a matplotlibrc or stylesheet file (see the
+        matplotlib documentation on `Customizing Matplotlib
         <https://matplotlib.org/stable/users/explain/customizing.html>`__).
         If left to None, it will default to:
 
-        - ``$MPLCONFIGDIR`` if set
-        - On Unix/Linux: ``$XDG_CONFIG_HOME/matplotlib/matplotlibrc`` if set, or else
+        - ``$MPLCONFIGDIR`` if set, else
+        - On Unix/Linux: ``$XDG_CONFIG_HOME/matplotlib/matplotlibrc`` if set, else
           ``$HOME/.config/matplotlib/matplotlibrc``
         - On other platforms ``$HOME/.matplotlib/matplotlibrc``
 
-        It will create the file and leading directories if it does not exist.
+        It will create the file and leading directories if necessary.
     dry
         If set to True, the function will only print the new configuration line to
         stdout and will not modify any file. You can then copy-paste the line manually.

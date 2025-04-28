@@ -47,15 +47,15 @@ Colorsets
 
     .. autoclass:: Pale
 
-.. py:data:: light
-    :type: Light
-
-    .. autoclass:: Light
-
 .. py:data:: dark
     :type: Dark
 
     .. autoclass:: Dark
+
+.. py:data:: light
+    :type: Light
+
+    .. autoclass:: Light
 
 .. py:data:: land_cover
     :type: LandCover
