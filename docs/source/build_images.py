@@ -174,7 +174,7 @@ def condensed_csets():
                 orientation=np.pi / 360 * 45,
                 fc=color,
                 ec="k" if col_name == "white" else color,
-                lw=0.1,
+                lw=0.5 if col_name == "white" else 0.1,
             )
             ax.add_artist(p)
             text_col = (
@@ -259,7 +259,7 @@ def colorsets_cvd():
                     orientation=np.pi / 360 * 45,
                     fc=rgb,
                     ec="k" if col_name == "white" else rgb,
-                    lw=0.1,
+                    lw=0.5 if col_name == "white" else 0.1,
                 )
                 ax.add_artist(p)
 
