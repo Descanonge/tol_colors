@@ -133,7 +133,7 @@ rainbow_WhRd
 
 Often it is better to use only a limited range of the rainbow colors.
 *rainbow_WhRd* avoids the brown/deep reds, which is useful when the highest
-values (towards brown) occurs often in the data.
+values (towards brown) occur often in the data.
 
 .. cmap:: rainbow_WhRd
     :alt: rainbow colormap (white to red)
@@ -143,7 +143,7 @@ rainbow_PuBr
 
 Often it is better to use only a limited range of the rainbow colors.
 *rainbow_PuBr* avoids the white/light purple, which is useful when the lowest
-values (towards white) occurs often in the data. It is preferable to avoid
+values (towards white) occur often in the data. It is preferable to avoid
 mixing light purples and light blues too much for colorblind people.
 
 .. cmap:: rainbow_PuBr
@@ -153,8 +153,8 @@ rainbow_PuRd
 ------------
 
 Often it is better to use only a limited range of the rainbow colors.
-*rainbow_PuRd* avoids both ends, which is useful when the lowest and hightest
-values occurs often in the data.
+*rainbow_PuRd* avoids both ends, which is useful when the lowest and highest
+values occur often in the data.
 
 .. cmap:: rainbow_PuRd
     :alt: rainbow colormap (purple to red)
