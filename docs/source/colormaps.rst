@@ -29,8 +29,9 @@ Linear colormaps
 The colormaps are created by linear interpolation of carefully chosen colors.
 Those colors can be used as is for discrete colormaps and are shown below. These
 discrete variants are available by adding "_discrete" to the colormap name (*eg*
-``tc.sunset_discrete``). However, the *iridescent* and *rainbow* colormaps are
-**not** available as discrete colormaps.
+``tc.sunset_discrete``). Note the *iridescent* does not have a readily available
+discrete version, and one should use the :ref:`dedicated function
+<discrete-rainbow>` to obtain a discrete rainbow.
 
 To obtain discrete colormaps with a specific number of colors it is possible to
 resample a continuous colormap with::
@@ -80,7 +81,7 @@ YlOrBr
 
 This is the `Color-Brewer`_ *YlOrBr* scheme, with orange shifted to make it
 print-friendly.
-Bad data is :rawhtml:`<span style="background-color: #888888; padding: 3pt;">#888888</span>`.
+Bad data is :rawhtml:`<span style="color: white; background-color: #888888; padding: 3pt;">#888888</span>`.
 
 .. cmap:: YlOrBr
     :alt: Yellow-Orange-Brown colormap
@@ -97,7 +98,7 @@ Iridescent
 
 A colormap with linearly varying luminance that also works in colourblind
 vision.
-Bad data is :rawhtml:`<span style="background-color: #999999; padding: 3pt;">#999999</span>`.
+Bad data is :rawhtml:`<span style="color: white; background-color: #999999; padding: 3pt;">#999999</span>`.
 *iridescent* is not directly available as a discrete colormap.
 
 .. cmap:: iridescent
@@ -123,8 +124,8 @@ There are many pitfalls to using a continuous rainbow colormap for ordered data:
 
 .. important::
 
-    The following colormaps should only be used interpolated. For a discrete rainbow
-    colormap, see the :ref:`next section <discrete-rainbow>`.
+    The following colormaps should only be used interpolated. For a discrete
+    rainbow colormap, see the :ref:`next section <discrete-rainbow>`.
 
 rainbow_WhBr
 ------------
@@ -139,8 +140,8 @@ rainbow_WhRd
 ------------
 
 Often it is better to use only a limited range of the rainbow colors.
-*rainbow_WhRd* avoids the brown/deep reds, which is useful when the highest
-values (towards brown) occur often in the data.
+*rainbow_WhRd* stops at red and avoid the browns, which is useful when the
+highest values (towards brown) occur often in the data.
 
 .. cmap:: rainbow_WhRd
     :alt: rainbow colormap (white to red)
@@ -150,9 +151,9 @@ rainbow_PuBr
 ------------
 
 Often it is better to use only a limited range of the rainbow colors.
-*rainbow_PuBr* avoids the white/light purple, which is useful when the lowest
-values (towards white) occur often in the data. It is preferable to avoid
-mixing light purples and light blues too much for colorblind people.
+*rainbow_PuBr* starts at purple and avoids the light purple, which is useful
+when the lowest values (towards white) occur often in the data. It is preferable
+to avoid mixing light purples and light blues too much for colorblind people.
 
 .. cmap:: rainbow_PuBr
     :alt: rainbow colormap (purple to brown)

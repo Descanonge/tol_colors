@@ -21,7 +21,7 @@ access the colors by index or by name::
     >>> cset.blue
     '#4477AA'
 
-Each colorset is available as a module attribute: ``tc.bright`` for instance.
+Each colorset is available as a module attribute (``tc.bright``).
 All colorsets are also stored in the dictionnary :data:`tol_colors.colorsets`.
 This is a special mapping that will accepts both hyphen and underscore versions
 (``tc.colorsets["high-contrast"]`` and ``tc.colorsets["high_contrast"]`` will
