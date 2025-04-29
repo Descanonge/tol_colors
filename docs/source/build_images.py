@@ -285,6 +285,33 @@ def colorsets_cvd():
 
 
 def detailed_cmap(name: str):
+def plot_linear(ax, cmap, vext, cspace=None):
+    x = np.linspace(0, 1, 256)
+    x = np.vstack((x, x))
+    rgb = cmap(x)[..., :3]
+    if cspace is not None:
+        rgb = cspace_convert(rgb, cspace, "sRGB1")
+        rgb = np.clip(rgb, 0, 1)
+    ax.imshow(rgb, extent=(0, 1, *vext), transform=ax.transAxes)
+
+
+def plot_discrete(ax, cmap, vext, cspace=None):
+    width_rect = 1 / cmap.N
+    for i, color in enumerate(cmap.colors):
+        rgb = to_rgb(color)[:3]
+        if cspace is not None:
+            rgb = cspace_convert(rgb, cspace, "sRGB1")
+            rgb = np.clip(rgb, 0, 1)
+        rect = plt.Rectangle(
+            (i * width_rect, vext[0]),
+            width_rect,
+            vext[1] - vext[0],
+            fc=rgb,
+            ec=rgb,
+            lw=0.1,
+            transform=ax.transAxes,
+        )
+        ax.add_artist(rect)
     cmap = tc.colormaps[name]
     has_discrete = f"{name}_discrete" in tc.colormaps
 
@@ -296,33 +323,14 @@ def detailed_cmap(name: str):
     ax = fig.add_axes((0, 0, 1, 1))
     ax.set_axis_off()
 
-    x = np.linspace(0, 1, 256)
-    x = np.vstack((x, x))
-
     if not has_discrete:
-        ax.imshow(x, extent=(0, 1, 0, 1), cmap=cmap, transform=ax.transAxes)
+        plot_linear(ax, cmap, (0, 1))
     else:
-        ax.imshow(x, extent=(0, 1, 0.5, 1), cmap=cmap, transform=ax.transAxes)
-
-        cmap_d = tc.colormaps[f"{name}_discrete"]
-        width_rect = 1 / cmap_d.N
-        for i, color in enumerate(cmap_d.colors):
-            rect = plt.Rectangle(
-                (i * width_rect, 0.0),
-                width_rect,
-                0.5,
-                fc=color,
-                ec=color,
-                lw=0.1,
-                transform=ax.transAxes,
-            )
-            ax.add_artist(rect)
+        plot_linear(ax, cmap, (0.5, 1))
+        plot_discrete(ax, tc.colormaps[f"{name}_discrete"], (0, 0.5))
 
     fig.savefig(savedir + f"cmap_{name}.svg")
     plt.close(fig)
-
-
-## discrete rainbow
 
 
 def rainbow_discrete():
@@ -364,6 +372,127 @@ def rainbow_discrete():
     plt.close(fig)
 
 
+def cmaps_condensed():
+    cmaps_names = [
+        ("sunset",),
+        ("BuRd",),
+        ("PRGn",),
+        ("YlOrBr",),
+        ("iridescent",),
+        ("rainbow_WhBr", "rainbow_WhRd", "rainbow_PuRd", "rainbow_PuBr"),
+        ("rainbow_discrete",),
+    ]
+    fig = plt.figure(figsize=(10, 10), dpi=100)
+    fig.subplots_adjust(left=0.18, bottom=0.01, top=0.99, right=0.99)
+    gs = plt.GridSpec(
+        len(cmaps_names), 1, figure=fig, height_ratios=[2, 2, 2, 2, 1, 4, 1]
+    )
+
+    ann_kw = dict(
+        xycoords="axes fraction",
+        xytext=(-3, 0),
+        textcoords="offset points",
+        ha="right",
+        va="center",
+        family="monospace",
+        size=12,
+    )
+
+    for i, cmap_names_gs in enumerate(cmaps_names):
+        if len(cmap_names_gs) > 1:
+            axes = gs[i].subgridspec(len(cmap_names_gs), 1, hspace=0.08).subplots()
+        else:
+            axes = [fig.add_subplot(gs[i])]
+
+        for cmap_name, ax in zip(cmap_names_gs, axes, strict=False):
+            ax.set_axis_off()
+
+            if cmap_name == "rainbow_discrete":
+                plot_discrete(ax, tc.rainbow_discrete(22), (0, 1))
+                ax.annotate(cmap_name, (0, 0.5), **ann_kw)
+                continue
+
+            cmap = tc.colormaps[cmap_name]
+            if (cmap_d_name := f"{cmap_name}_discrete") in tc.colormaps:
+                cmap_d = tc.colormaps[cmap_d_name]
+                plot_linear(ax, cmap, (0.5, 1))
+                plot_discrete(ax, cmap_d, (0, 0.5))
+                ax.annotate(cmap_name, (0, 0.75), **ann_kw)
+                ax.annotate(cmap_d_name, (0, 0.25), **ann_kw)
+            else:
+                plot_linear(ax, cmap, (0, 1))
+                ax.annotate(cmap_name, (0, 0.5), **ann_kw)
+
+    fig.savefig(savedir + "cmaps_condensed.svg")
+    plt.close(fig)
+
+
+def cmaps_cvd():
+    cmaps_names = [
+        ("sunset",),
+        ("BuRd",),
+        ("PRGn",),
+        ("YlOrBr",),
+        ("iridescent",),
+        ("rainbow_WhBr", "rainbow_WhRd", "rainbow_PuRd", "rainbow_PuBr"),
+        ("rainbow_discrete",),
+    ]
+    fig = plt.figure(figsize=(10, 8), dpi=100)
+    fig.subplots_adjust(left=0.01, bottom=0.01, top=0.95, right=0.99)
+    gs = plt.GridSpec(
+        len(cmaps_names),
+        2,
+        figure=fig,
+        height_ratios=[2, 2, 2, 2, 1, 4, 1],
+        wspace=0.31,
+    )
+
+    cspaces = [
+        dict(name="sRGB1+CVD", cvd_type=name, severity=100)
+        for name in ["deuteranomaly", "protanomaly"]
+    ]
+
+    ann_kw = dict(
+        xycoords=("figure fraction", "axes fraction"), ha="center", va="center"
+    )
+
+    for i, cmap_names_gs in enumerate(cmaps_names):
+        for lr, cspace in enumerate(cspaces):
+            if len(cmap_names_gs) > 1:
+                axes = (
+                    gs[i, lr].subgridspec(len(cmap_names_gs), 1, hspace=0.08).subplots()
+                )
+            else:
+                axes = [fig.add_subplot(gs[i, lr])]
+
+            if i == 0:
+                axes[0].set_title(cspace["cvd_type"].capitalize())
+
+            for cmap_name, ax in zip(cmap_names_gs, axes, strict=False):
+                ax.set_axis_off()
+
+                if cmap_name == "rainbow_discrete":
+                    plot_discrete(ax, tc.rainbow_discrete(22), (0, 1), cspace=cspace)
+                    if lr == 0:
+                        ax.annotate(cmap_name, (0.5, 0.5), **ann_kw)
+                    continue
+
+                cmap = tc.colormaps[cmap_name]
+                if (cmap_d_name := f"{cmap_name}_discrete") in tc.colormaps:
+                    cmap_d = tc.colormaps[cmap_d_name]
+                    plot_linear(ax, cmap, (0.5, 1), cspace=cspace)
+                    plot_discrete(ax, cmap_d, (0, 0.5), cspace=cspace)
+
+                    if lr == 0:
+                        ax.annotate(cmap_name, (0.5, 0.75), **ann_kw)
+                        ax.annotate(cmap_d_name, (0.5, 0.25), **ann_kw)
+                else:
+                    plot_linear(ax, cmap, (0, 1), cspace=cspace)
+                    if lr == 0:
+                        ax.annotate(cmap_name, (0.5, 0.5), **ann_kw)
+
+    fig.savefig(savedir + "cmaps_cvd.svg")
+    plt.close(fig)
 if __name__ == "__main__":
     for name in tc.colorsets:
         detailed_colorset(name)
@@ -389,3 +518,5 @@ if __name__ == "__main__":
         detailed_cmap(name)
 
     rainbow_discrete()
+    cmaps_condensed()
+    cmaps_cvd()
