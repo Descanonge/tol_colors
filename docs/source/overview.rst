@@ -27,7 +27,7 @@ This is a special mapping that will accepts both hyphen and underscore versions
 (``tc.colorsets["high-contrast"]`` and ``tc.colorsets["high_contrast"]`` will
 both work).
 
-.. image:: /img/cset_condensed.svg
+.. image:: /img/csets_condensed.svg
     :width: 100%
 
 .. note::
@@ -39,4 +39,15 @@ both work).
 Colormaps
 ---------
 
-More details at :doc:`colormaps`.
+.. note::
+
+    More details at :doc:`colormaps`.
+
+Colormaps are available as module attributes (``tc.sunset``), stored in a
+dictionnary :data:`tol_colors.colormaps` (``tc.colormaps["sunset"]``), and
+registered in Matplotlib with the prefix "tol." (``plt.imshow(...,
+cmap="tol.sunset")``). Reversed variants are available by appending "_r" to the
+colormap name.
+
+.. image:: /img/cmaps_condensed.svg
+    :width: 100%

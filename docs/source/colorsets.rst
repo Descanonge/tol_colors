@@ -50,6 +50,7 @@ The default colorset of this package. Main scheme for lines and labels.
 
 .. image:: /img/cset_bright.svg
     :alt: Bright colorset
+    :width: 100%
     :class: img-padding
 
 Vibrant
@@ -62,6 +63,7 @@ to be print-friendly).
 .. image:: /img/cset_vibrant.svg
     :alt: Vibrant colorset
     :class: img-padding
+    :width: 100%
 
 Muted
 -----
@@ -72,6 +74,7 @@ but lacks a clear red or medium blue. Pale grey is meant for bad data in maps.
 .. image:: /img/cset_muted.svg
     :alt: Muted colorset
     :class: img-padding
+    :width: 100%
 
 High-contrast
 -------------
@@ -84,6 +87,7 @@ printout.
 .. image:: /img/cset_high_contrast.svg
     :alt: High-contrast colorset
     :class: img-padding
+    :width: 60%
 
 Medium-contrast
 ---------------
@@ -95,6 +99,7 @@ monochrome printout, but the differences are inevitably smaller.
 .. image:: /img/cset_medium_contrast.svg
     :alt: Medium-contrast colorset
     :class: img-padding
+    :width: 100%
 
 Pale
 ----
@@ -107,6 +112,7 @@ table. The text remains readable.
 .. image:: /img/cset_pale.svg
     :alt: Pale colorset
     :class: img-padding
+    :width: 100%
 
 Dark
 ----
@@ -118,6 +124,7 @@ colors for text on a white background. The text remains readable.
 .. image:: /img/cset_dark.svg
     :alt: Dark colorset
     :class: img-padding
+    :width: 100%
 
 Light
 -----
@@ -131,6 +138,7 @@ also be used for general qualitative data.
 .. image:: /img/cset_light.svg
     :alt: Light colorset
     :class: img-padding
+    :width: 100%
 
 
 Land-cover
@@ -143,6 +151,7 @@ the University of Maryland, with more subtle colors distinct in all visions.
 .. image:: /img/cset_land_cover.svg
     :alt: Land-cover colorset
     :class: img-padding
+    :width: 100%
 
 
 Matplotlib default colors
@@ -154,16 +163,16 @@ Matplotlib to one of the colorsets.
 .. autofunction:: tol_colors.set_default_colors
     :no-index:
 
-CVD Simulation
-==============
+CVD Simulations
+===============
 
-Below is a simulation of all the colorsets for total deuteranomaly and
+Below are simulations of all the colorsets for total deuteranomaly and
 protanomaly.
 Note that it was simulated using a different method than that of the technical
 notes. Here we relied on the `colorspacious
 <https://pypi.org/project/colorspacious/>`__ package, using the model from
 Machado, Oliveira and Fernandes (`DOI: 10.1109/TVCG.2009.113
-<https://doi.org/10.1109/TVCG.2009.113>`__)
+<https://doi.org/10.1109/TVCG.2009.113>`__).
 
-.. image:: /img/cset_cvd.svg
-    :width: 100%
+.. image:: /img/csets_cvd.svg
+     :width: 100%

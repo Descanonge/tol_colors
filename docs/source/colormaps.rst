@@ -54,6 +54,7 @@ bad data have to be shown white.
 
 .. cmap:: sunset
     :alt: Sunset colormap
+    :width: 70%
 
 BuRd
 ----
@@ -62,6 +63,7 @@ Bad data is :rawhtml:`<span style="background-color: #FFEE99; padding: 3pt;">#FF
 
 .. cmap:: BuRd
     :alt: Blue-Red colormap
+    :width: 70%
 
 PRGn
 ----
@@ -71,6 +73,7 @@ Bad data is :rawhtml:`<span style="background-color: #FFEE99; padding: 3pt;">#FF
 
 .. cmap:: PRGn
     :alt: Purple-Green colormap
+    :width: 70%
 
 YlOrBr
 ------
@@ -81,11 +84,13 @@ Bad data is :rawhtml:`<span style="background-color: #888888; padding: 3pt;">#88
 
 .. cmap:: YlOrBr
     :alt: Yellow-Orange-Brown colormap
+    :width: 70%
 
 The variant *WhOrBr* replaces the first color (pale yellow) with pure white:
 
 .. cmap:: WhOrBr
     :alt: White-Orange-Brown colormap
+    :width: 70%
 
 Iridescent
 ----------
@@ -97,6 +102,7 @@ Bad data is :rawhtml:`<span style="background-color: #999999; padding: 3pt;">#99
 
 .. cmap:: iridescent
     :alt: iridescent colormap
+    :width: 70%
 
 
 Linear rainbow
@@ -127,6 +133,7 @@ The full rainbow colormap. It is also available under the alias ``rainbow``.
 
 .. cmap:: rainbow_WhBr
     :alt: rainbow colormap (white to brown)
+    :width: 70%
 
 rainbow_WhRd
 ------------
@@ -137,6 +144,7 @@ values (towards brown) occur often in the data.
 
 .. cmap:: rainbow_WhRd
     :alt: rainbow colormap (white to red)
+    :width: 70%
 
 rainbow_PuBr
 ------------
@@ -148,6 +156,7 @@ mixing light purples and light blues too much for colorblind people.
 
 .. cmap:: rainbow_PuBr
     :alt: rainbow colormap (purple to brown)
+    :width: 70%
 
 rainbow_PuRd
 ------------
@@ -158,6 +167,7 @@ values occur often in the data.
 
 .. cmap:: rainbow_PuRd
     :alt: rainbow colormap (purple to red)
+    :width: 70%
 
 
 .. _discrete-rainbow:
@@ -180,3 +190,17 @@ padding: 3pt;">#777777</span>`.
 .. image:: /img/cmap_rainbow_discrete.svg
     :alt: discrete rainbow colormap
     :class: img-padding
+    :width: 63%
+
+
+CVD Simulations
+===============
+
+Below are simulations of all the colormaps for total deuteranomaly and
+protanomaly.
+Done using the `colorspacious <https://pypi.org/project/colorspacious/>`__
+package, using the model from Machado, Oliveira and Fernandes (`DOI:
+10.1109/TVCG.2009.113 <https://doi.org/10.1109/TVCG.2009.113>`__).
+
+.. image:: /img/cmaps_cvd.svg
+     :width: 100%

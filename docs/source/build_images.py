@@ -8,12 +8,15 @@ from matplotlib.patches import RegularPolygon
 
 import tol_colors as tc
 
+plt.matplotlib.rcdefaults()
+plt.rcParams["font.sans-serif"] = ["Noto Sans"]
+
 savedir = "docs/source/img/"
 
 ## Colorsets
 
 
-def detailed_colorset(name: str):
+def cset_detailed(name: str):
     cset = tc.colorsets[name]
     n_colors = len(cset)
 
@@ -99,7 +102,7 @@ def land_cover():
     h_pad = 0.01
     v_pad = 0.01
 
-    fig, ax = plt.subplots(figsize=(10, 2.1), layout="constrained", dpi=150)
+    fig, ax = plt.subplots(figsize=(10, 2.2), layout="constrained", dpi=150)
     # ax = fig.add_axes((0, 0, 1, 1))
     ax.set_xlim(0 - h_pad, n_colors + h_pad)
     ax.set_ylim(-0.5 - v_pad, 0.5 + v_pad)
@@ -130,7 +133,7 @@ def land_cover():
             xycoords=p,
             ha="center",
             va="center",
-            size=10,
+            size=9,
         )
 
         ax.annotate(
@@ -146,13 +149,13 @@ def land_cover():
             clip_on=False,
         )
 
-        fig.savefig(savedir + f"cset_{name}.svg")
+        fig.savefig(savedir + "cset_land_cover.svg")
         plt.close(fig)
 
 
-def condensed_csets():
-    fig = plt.figure(figsize=(6, 3.75), dpi=150)
-    margin = 0.1
+def csets_condensed():
+    fig = plt.figure(figsize=(10, 6.2), dpi=150)
+    margin = 0.10
     ax = fig.add_axes((margin, 0, 1 - margin, 1))
 
     sets = ["bright", "vibrant", "muted", "light", "high_contrast", "medium_contrast"]
@@ -190,18 +193,20 @@ def condensed_csets():
                 ha="center",
                 va="center",
                 color=text_col,
-                size=7 + (1 - len(col_name) / 10) * 2.5,
+                size=11 + (1 - len(col_name) / 10) * 2.5,
+                style="italic",
             )
             if i_col == 0:
                 ax.annotate(
                     cset_name,
                     xy=(0, 0.5),
                     xycoords=p,
-                    xytext=(-3, 0),
+                    xytext=(-5, 0),
                     textcoords="offset points",
                     ha="right",
                     va="center",
-                    size=9,
+                    size=12,
+                    weight="semibold",
                 )
 
     ax.set_axis_off()
@@ -209,14 +214,14 @@ def condensed_csets():
     ax.set_xlim(0, max_n_colors)
     ax.set_ylim(-n_sets * (1 + border), 0)
 
-    fig.savefig(savedir + "cset_condensed.svg")
+    fig.savefig(savedir + "csets_condensed.svg")
     plt.close(fig)
 
 
-def colorsets_cvd():
-    spaces = ["deuteranomaly", "protanomaly"]
+def csets_cvd():
+    spaces = ["protanomaly", "deuteranomaly"]
 
-    fig, axes = plt.subplots(1, 2, figsize=(8, 2.7), layout="constrained", dpi=150)
+    fig, axes = plt.subplots(1, 2, figsize=(10, 3.5), layout="constrained", dpi=150)
 
     sets = ["bright", "vibrant", "muted", "light", "high_contrast", "medium_contrast"]
     n_sets = len(sets)
@@ -224,7 +229,7 @@ def colorsets_cvd():
     max_n_colors = max(len(tc.colorsets[name]) for name in sets)
     border = 0.1
 
-    for i_ax, (ax, space_name) in enumerate(zip(axes, spaces, strict=False)):
+    for ax, space_name in zip(axes, spaces, strict=False):
         space = dict(name="sRGB1+CVD", cvd_type=space_name, severity=100)
 
         ax.set_axis_off()
@@ -277,14 +282,13 @@ def colorsets_cvd():
         )
         ann.set_in_layout(False)
 
-    fig.savefig(savedir + "cset_cvd.svg")
+    fig.savefig(savedir + "csets_cvd.svg")
     plt.close(fig)
 
 
 ## Colormaps
 
 
-def detailed_cmap(name: str):
 def plot_linear(ax, cmap, vext, cspace=None):
     x = np.linspace(0, 1, 256)
     x = np.vstack((x, x))
@@ -312,6 +316,9 @@ def plot_discrete(ax, cmap, vext, cspace=None):
             transform=ax.transAxes,
         )
         ax.add_artist(rect)
+
+
+def cmap_detailed(name: str):
     cmap = tc.colormaps[name]
     has_discrete = f"{name}_discrete" in tc.colormaps
 
@@ -495,13 +502,13 @@ def cmaps_cvd():
     plt.close(fig)
 if __name__ == "__main__":
     for name in tc.colorsets:
-        detailed_colorset(name)
+        cset_detailed(name)
 
     # special plot for land cover
     land_cover()
 
-    condensed_csets()
-    colorsets_cvd()
+    csets_condensed()
+    csets_cvd()
 
     for name in [
         "sunset",
@@ -515,7 +522,7 @@ if __name__ == "__main__":
         "rainbow_PuBr",
         "rainbow_PuRd",
     ]:
-        detailed_cmap(name)
+        cmap_detailed(name)
 
     rainbow_discrete()
     cmaps_condensed()
