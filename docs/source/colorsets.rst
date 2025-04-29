@@ -157,7 +157,7 @@ the University of Maryland, with more subtle colors distinct in all visions.
 Matplotlib default colors
 =========================
 
-The package provides a function to easily set the default colors used by
+This package provides a function to easily set the default colors used by
 Matplotlib to one of the colorsets.
 
 .. autofunction:: tol_colors.set_default_colors

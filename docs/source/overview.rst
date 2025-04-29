@@ -49,5 +49,8 @@ registered in Matplotlib with the prefix "tol." (``plt.imshow(...,
 cmap="tol.sunset")``). Reversed variants are available by appending "_r" to the
 colormap name.
 
+A discrete rainbow colormap is available by specifying the number of colors
+between 1 and 23 (``tc.get_colormap("rainbow_discrete", n_colors=14)``).
+
 .. image:: /img/cmaps_condensed.svg
     :width: 100%

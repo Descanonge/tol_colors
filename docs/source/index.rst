@@ -37,6 +37,11 @@ From source::
    cd tol_colors
    pip install .
 
+Show the available colorsets and colormaps::
+
+   python -m tol_colors
+
+
 Contents
 ========
 

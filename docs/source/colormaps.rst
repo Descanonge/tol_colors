@@ -26,7 +26,7 @@ Each colormap has a reversed variant directly available with the suffix "_r"
 Linear colormaps
 ================
 
-The colormaps are created by linear interpolation of carefully chosen colors.
+The colormaps were created by linear interpolation of carefully chosen colors.
 Those colors can be used as is for discrete colormaps and are shown below. These
 discrete variants are available by adding "_discrete" to the colormap name (*eg*
 ``tc.sunset_discrete``). Note the *iridescent* does not have a readily available
