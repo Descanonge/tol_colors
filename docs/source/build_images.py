@@ -500,6 +500,44 @@ def cmaps_cvd():
 
     fig.savefig(savedir + "cmaps_cvd.svg")
     plt.close(fig)
+
+
+def icon():
+    d = 1 / 3
+    t = d / np.sqrt(3)
+
+    def draw_oct(xy, color):
+        p = RegularPolygon(
+            xy,
+            numVertices=6,
+            radius=t,
+            orientation=np.pi / 2,
+            fc=color,
+            ec=color,
+            lw=0.1,
+            transform=ax.transAxes,
+        )
+        ax.add_artist(p)
+        return p
+
+    fig = plt.figure(figsize=(5 * t, 1), dpi=500)
+    ax = fig.add_axes((0, 0, 1, 1))
+    ax.set_axis_off()
+    ax.set_aspect("equal")
+    cset = tc.bright
+
+    draw_oct((0.5, 0.5), cset.grey)
+    draw_oct((0.5, 5 / 6), cset.green)
+    draw_oct((0.5, 1 / 6), cset.purple)
+    draw_oct((0.5 + 3 * t / 2, 1 / 3), cset.red)
+    draw_oct((0.5 - 3 * t / 2, 1 / 3), cset.blue)
+    draw_oct((0.5 + 3 * t / 2, 2 / 3), cset.yellow)
+    draw_oct((0.5 - 3 * t / 2, 2 / 3), cset.cyan)
+
+    fig.savefig(savedir + "icon.svg", facecolor="none")
+    plt.close(fig)
+
+
 if __name__ == "__main__":
     for name in tc.colorsets:
         cset_detailed(name)

@@ -36,6 +36,9 @@ html_theme = "pydata_sphinx_theme"
 html_static_path = ["_static"]
 html_css_files = ["custom.css"]
 html_title = "Tol-colors"
+html_logo = "_static/icon.svg"
+html_favicon = "_static/favicon.ico"
+html_scaled_image_link = False
 html_theme_options = dict(
     # Social icons
     icon_links=[
@@ -50,6 +53,7 @@ html_theme_options = dict(
             icon="fa-brands fa-python",
         ),
     ],
+    logo=dict(text="Tol-colors"),
     # TOC
     secondary_sidebar_items=["page-toc"],
     show_toc_level=2,
