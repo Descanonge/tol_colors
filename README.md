@@ -1,8 +1,6 @@
 
 # Tol_colors
 
-![logo](/docs/source/_static/logo.svg) Color schemes for lines and maps, color-blind safe
-
 <div align="left">
 
 [![PyPI](https://img.shields.io/pypi/v/tol-colors)](https://pypi.org/project/tol-colors)
@@ -10,10 +8,12 @@
 
 </div>
 
+<img alt="icon" src="/docs/source/_static/icon.svg" width="128" align="left">
+
 Those color schemes were designed by Paul Tol. This repository is packaging his work so that it can be easily installed using pip.
-This packages and its documentation follow the technical notes of the color schemes (issue 3.2, 2021), which are archived in this [repository](/docs/technical_notes.pdf).
+This packages and its documentation follow the technical notes of the color schemes (issue 3.2, 2021), which are archived in this [repository](/docs/technical_notes.pdf). Details and implementation for other lanugages can be found on Paul Tols's [website](https://personal.sron.nl/~pault/).
+
 A more user-friendly documentation is available at <https://tol-colors.readthedocs.io>, detailing how and when to use the various colorsets and colormaps.
-Other than the technical notes, more details can be found on Paul Tol [website](https://personal.sron.nl/~pault/).
 
 ## Install
 
@@ -74,11 +74,7 @@ Rather than resampling the interpolated colormaps, discrete rainbow colormap is
 available by specifying the number of colors between 1 and 23
 (`tc.get_colormap("rainbow_discrete", n_colors=14)`).
 
-## Simulations
-
-Here are the color schemes with approximations of red-blind and green-blind vision:
-
-![simulations](/docs/img/simulations.svg)
+![colorsmaps](/docs/source/img/cmaps_condensed.svg)
 
 ## See also
 
