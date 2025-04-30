@@ -28,7 +28,8 @@ __version__ = "1.4.0"
 log = logging.getLogger(__name__)
 
 # Load data
-with resources.open_text("tol_colors", "colors.json") as fp:
+
+with resources.files("tol_colors").joinpath("colors.json").open("r") as fp:
     _colors = json.load(fp)
 
 
