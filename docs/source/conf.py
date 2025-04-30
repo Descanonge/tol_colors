@@ -10,13 +10,16 @@ from sphinx.application import Sphinx
 from sphinx.util.osutil import copyfile
 from sphinx.writers.html import HTMLTranslator
 
+import tol_colors
+
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = "Tol-colors"
 copyright = "2025, Clément Haëck, Paul Tol"
 author = "Clément Haëck, Paul Tol"
-release = "2.0.0"
+
+release = tol_colors.__version__
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
