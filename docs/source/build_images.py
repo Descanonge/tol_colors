@@ -220,9 +220,8 @@ def csets_condensed():
 
 def csets_cvd():
     cvds_names = dict(deuteranomaly="Deuteranopia", protanomaly="Protanopia")
-    spaces = ["protanomaly", "deuteranomaly"]
 
-    fig, axes = plt.subplots(1, 2, figsize=(10, 3.5), layout="constrained", dpi=150)
+    fig, axes = plt.subplots(1, 2, figsize=(8, 2.7), layout="constrained", dpi=150)
 
     sets = ["bright", "vibrant", "muted", "light", "high_contrast", "medium_contrast"]
     n_sets = len(sets)
@@ -230,8 +229,8 @@ def csets_cvd():
     max_n_colors = max(len(tc.colorsets[name]) for name in sets)
     border = 0.1
 
-    for ax, space_name in zip(axes, spaces, strict=False):
-        space = dict(name="sRGB1+CVD", cvd_type=space_name, severity=100)
+    for ax, (cvd_type, cvd_name) in zip(axes, cvds_names.items(), strict=False):
+        space = dict(name="sRGB1+CVD", cvd_type=cvd_type, severity=100)
 
         ax.set_axis_off()
         ax.set_aspect("equal")
@@ -239,7 +238,7 @@ def csets_cvd():
         ax.set_ylim(-n_sets * (1 + border), 0)
 
         ax.annotate(
-            cvds_names[space_name],
+            cvd_name,
             xy=(0.5, 1),
             xycoords="axes fraction",
             xytext=(0, 3),
@@ -445,7 +444,7 @@ def cmaps_cvd():
         ("rainbow_WhBr", "rainbow_WhRd", "rainbow_PuRd", "rainbow_PuBr"),
         ("rainbow_discrete",),
     ]
-    fig = plt.figure(figsize=(10, 8), dpi=100)
+    fig = plt.figure(figsize=(8, 7), dpi=100)
     fig.subplots_adjust(left=0.01, bottom=0.01, top=0.95, right=0.99)
     gs = plt.GridSpec(
         len(cmaps_names),
