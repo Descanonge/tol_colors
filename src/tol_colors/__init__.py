@@ -10,7 +10,7 @@ All rights reserved.
 License:  Standard 3-clause BSD
 """
 
-from __future__ import annotations
+# ruff: noqa: N815, N816
 
 import json
 import logging
@@ -18,10 +18,10 @@ import os
 from collections import namedtuple
 from collections.abc import Sequence
 from importlib import resources
-from typing import NamedTuple
+from typing import Literal, NamedTuple, overload
 
 import matplotlib
-from matplotlib.colors import Colormap, LinearSegmentedColormap, ListedColormap
+from matplotlib.colors import LinearSegmentedColormap, ListedColormap
 
 __version__ = "1.4.0"
 
@@ -32,39 +32,17 @@ with resources.open_text("tol_colors", "colors.json") as fp:
     _colors = json.load(fp)
 
 
-class ColorsetMapping(dict[str, NamedTuple]):
-    """Special mapping replacing hyphens by underscores when retrieving an item."""
-
-    def __getitem__(self, key: str) -> NamedTuple:
-        return super().__getitem__(key.replace("-", "_"))
-
-
 ## Colorsets
-# I also define statically the colorsets to preserve type-checking and auto-completion
-# on the attributes of named tuples
-
-colorsets: ColorsetMapping = {}  # type: ignore[assignment]
-"""Mapping of colorsets."""
+# Colorsets are defined statically to provide robust type-checking and auto-completion
 
 Bright = namedtuple("Bright", "blue, red, green, yellow, cyan, purple, grey")
-bright = Bright(**_colors["colorsets"]["bright"])
-colorsets["bright"] = bright
-
 Vibrant = namedtuple("Vibrant", "orange, blue, cyan, magenta, red, teal, grey")
-vibrant = Vibrant(**_colors["colorsets"]["vibrant"])
-colorsets["vibrant"] = vibrant
-
 Muted = namedtuple(
     "Muted",
     "rose, indigo, sand, green, cyan, wine, teal, olive, purple, pale_grey",
 )
-muted = Muted(**_colors["colorsets"]["muted"])
-colorsets["muted"] = muted
 
 HighContrast = namedtuple("HighContrast", "black, blue, red, yellow, white")
-high_contrast = HighContrast(**_colors["colorsets"]["high_contrast"])
-colorsets["high_contrast"] = high_contrast
-
 MediumContrast = namedtuple(
     "MediumContrast",
     [
@@ -78,23 +56,15 @@ MediumContrast = namedtuple(
         "black",
     ],
 )
-medium_contrast = MediumContrast(**_colors["colorsets"]["medium_contrast"])
-colorsets["medium_contrast"] = medium_contrast
 
 Pale = namedtuple(
     "Pale",
     "pale_blue, pale_red, pale_green, pale_yellow, pale_cyan, pale_grey",
 )
-pale = Pale(**_colors["colorsets"]["pale"])
-colorsets["pale"] = pale
-
 Dark = namedtuple(
     "Dark",
     "dark_blue, dark_red, dark_green, dark_yellow, dark_cyan, dark_grey",
 )
-dark = Dark(**_colors["colorsets"]["dark"])
-colorsets["dark"] = dark
-
 Light = namedtuple(
     "Light",
     [
@@ -109,9 +79,6 @@ Light = namedtuple(
         "pale_grey",
     ],
 )
-light = Light(**_colors["colorsets"]["light"])
-colorsets["light"] = light
-
 
 LandCover = namedtuple(
     "LandCover",
@@ -132,8 +99,73 @@ LandCover = namedtuple(
         "urban_and_built_up",  # 13
     ],
 )
+
+bright = Bright(**_colors["colorsets"]["bright"])
+vibrant = Vibrant(**_colors["colorsets"]["vibrant"])
+muted = Muted(**_colors["colorsets"]["muted"])
+high_contrast = HighContrast(**_colors["colorsets"]["high_contrast"])
+medium_contrast = MediumContrast(**_colors["colorsets"]["medium_contrast"])
+pale = Pale(**_colors["colorsets"]["pale"])
+dark = Dark(**_colors["colorsets"]["dark"])
+light = Light(**_colors["colorsets"]["light"])
 land_cover = LandCover(**_colors["colorsets"]["land_cover"])
-colorsets["land_cover"] = land_cover
+
+
+class ColorsetMapping(dict[str, NamedTuple]):
+    """Special mapping replacing hyphens by underscores when retrieving an item."""
+
+    # Some overloading for static type-checking
+
+    @overload
+    def __getitem__(self, key: Literal["bright"]) -> Bright: ...
+
+    @overload
+    def __getitem__(self, key: Literal["vibrant"]) -> Vibrant: ...
+
+    @overload
+    def __getitem__(self, key: Literal["muted"]) -> Muted: ...
+
+    @overload
+    def __getitem__(
+        self, key: Literal["high_contrast", "high-contrast"]
+    ) -> HighContrast: ...
+
+    @overload
+    def __getitem__(
+        self, key: Literal["medium_contrast", "medium-contrast"]
+    ) -> MediumContrast: ...
+
+    @overload
+    def __getitem__(self, key: Literal["pale"]) -> Pale: ...
+
+    @overload
+    def __getitem__(self, key: Literal["dark"]) -> Dark: ...
+
+    @overload
+    def __getitem__(self, key: Literal["light"]) -> Light: ...
+
+    @overload
+    def __getitem__(self, key: Literal["land_cover", "land-cover"]) -> LandCover: ...
+
+    @overload
+    def __getitem__(self, key: str) -> NamedTuple: ...
+
+    def __getitem__(self, key: str) -> NamedTuple:
+        return super().__getitem__(key.replace("-", "_"))
+
+
+colorsets = ColorsetMapping(
+    bright=bright,
+    vibrant=vibrant,
+    muted=muted,
+    high_contrast=high_contrast,
+    medium_contrast=medium_contrast,
+    pale=pale,
+    dark=dark,
+    light=light,
+    land_cover=land_cover,
+)
+"""Mapping of colorsets."""
 
 
 def set_default_colors(
@@ -227,7 +259,45 @@ def _make_discrete_cmap(name: str, colors: Sequence[str], bad: str) -> ListedCol
     return cmap
 
 
-colormaps: dict[str, Colormap] = {}
+class ColormapMapping(dict[str, LinearSegmentedColormap | ListedColormap]):
+    """Mapping type to have better type checking."""
+
+    @overload
+    def __getitem__(
+        self,
+        key: Literal[
+            "sunset", "sunset_r", "BuRd", "BuRd_r", "PRGn", "PRGn_r",
+            "YlOrBr", "YlOrBr_r", "WhOrBr", "WhOrBr_r",
+            "iridescent", "iridescent_r",
+            "rainbow_WhBr", "rainbow_WhBr_r", "rainbow", "rainbow_r",
+            "rainbow_WhRd", "rainbow_WhRd_r",
+            "rainbow_PuRd", "rainbow_PuRd_r",
+            "rainbow_PuBr", "rainbow_PuBr_r",
+        ],
+    ) -> LinearSegmentedColormap:  # fmt: skip
+        ...
+
+    @overload
+    def __getitem__(
+        self,
+        key: Literal[
+            "sunset_discrete", "sunset_discrete_r",
+            "BuRd_discrete", "BuRd_discrete_r",
+            "PRGn_discrete", "PRGn_discrete_r",
+            "YlOrBr_discrete", "YlOrBr_discrete_r",
+            "WhOrBr_discrete", "WhOrBr_discrete_r",
+        ],
+    ) -> ListedColormap:  # fmt: skip
+        ...
+
+    @overload
+    def __getitem__(self, key: str) -> LinearSegmentedColormap | ListedColormap: ...
+
+    def __getitem__(self, key: str) -> LinearSegmentedColormap | ListedColormap:
+        return super().__getitem__(key)
+
+
+colormaps = ColormapMapping()
 """Mapping of colormaps."""
 
 # Standard colormaps
@@ -293,13 +363,8 @@ def rainbow_discrete(n_colors: int = 22) -> ListedColormap:
     return cmap
 
 
-def __getattr__(key: str):
-    # Add colormaps as module attributes
-    if key in colormaps:
-        return colormaps[key]
-
-    # normal lookup
-    raise AttributeError
+# Add colormaps as module attributes
+locals().update(colormaps)
 
 
 def __dir__():
@@ -311,3 +376,44 @@ def __dir__():
     attrs.append("set_default_colors")
     attrs.sort()
     return attrs
+
+
+# Static type-checking
+sunset: LinearSegmentedColormap
+sunset_r: LinearSegmentedColormap
+sunset_discrete: ListedColormap
+sunset_discrete_r: ListedColormap
+
+BuRd: LinearSegmentedColormap
+BuRd_r: LinearSegmentedColormap
+BuRd_discrete: ListedColormap
+BuRd_discrete_r: ListedColormap
+
+PRGn: LinearSegmentedColormap
+PRGn_r: LinearSegmentedColormap
+PRGn_discrete: ListedColormap
+PRGn_discrete_r: ListedColormap
+
+YlOrBr: LinearSegmentedColormap
+YlOrBr_r: LinearSegmentedColormap
+YlOrBr_discrete: ListedColormap
+YlOrBr_discrete_r: ListedColormap
+
+WhOrBr: LinearSegmentedColormap
+WhOrBr_r: LinearSegmentedColormap
+WhOrBr_discrete: ListedColormap
+WhOrBr_discrete_r: ListedColormap
+
+iridescent: LinearSegmentedColormap
+iridescent_r: LinearSegmentedColormap
+
+rainbow_WhBr: LinearSegmentedColormap
+rainbow_WhBr_r: LinearSegmentedColormap
+rainbow_WhRd: LinearSegmentedColormap
+rainbow_WhRd_r: LinearSegmentedColormap
+rainbow_PuRd: LinearSegmentedColormap
+rainbow_PuRd_r: LinearSegmentedColormap
+rainbow_PuBr: LinearSegmentedColormap
+rainbow_PuBr_r: LinearSegmentedColormap
+rainbow: LinearSegmentedColormap
+rainbow_r: LinearSegmentedColormap
