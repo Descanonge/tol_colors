@@ -219,6 +219,7 @@ def csets_condensed():
 
 
 def csets_cvd():
+    cvds_names = dict(deuteranomaly="Deuteranopia", protanomaly="Protanopia")
     spaces = ["protanomaly", "deuteranomaly"]
 
     fig, axes = plt.subplots(1, 2, figsize=(10, 3.5), layout="constrained", dpi=150)
@@ -238,7 +239,7 @@ def csets_cvd():
         ax.set_ylim(-n_sets * (1 + border), 0)
 
         ax.annotate(
-            space_name.capitalize(),
+            cvds_names[space_name],
             xy=(0.5, 1),
             xycoords="axes fraction",
             xytext=(0, 3),
@@ -454,9 +455,9 @@ def cmaps_cvd():
         wspace=0.31,
     )
 
+    cvds_names = dict(deuteranomaly="Deuteranopia", protanomaly="Protanopia")
     cspaces = [
-        dict(name="sRGB1+CVD", cvd_type=name, severity=100)
-        for name in ["deuteranomaly", "protanomaly"]
+        dict(name="sRGB1+CVD", cvd_type=name, severity=100) for name in cvds_names
     ]
 
     ann_kw = dict(
@@ -473,7 +474,7 @@ def cmaps_cvd():
                 axes = [fig.add_subplot(gs[i, lr])]
 
             if i == 0:
-                axes[0].set_title(cspace["cvd_type"].capitalize())
+                axes[0].set_title(cvds_names[cspace["cvd_type"]])
 
             for cmap_name, ax in zip(cmap_names_gs, axes, strict=False):
                 ax.set_axis_off()
