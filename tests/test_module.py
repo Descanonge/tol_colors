@@ -1,5 +1,7 @@
 """Test all module."""
 
+import os
+
 import matplotlib.pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap, ListedColormap
 
@@ -46,8 +48,47 @@ class TestColorsets:
         assert tc.dark.dark_green == "#225522"
         assert tc.land_cover.mixed_forest == "#55AA22"
 
-    def test_set_default(self):
-        pass
+    def test_set_default(self, capfd, tmp_path):
+        def config_line(cset):
+            colors = [f"'{c[1:]}'" for c in tc.colorsets[cset]]
+            line = f"axes.prop_cycle : cycler('color', [{', '.join(colors)}])"
+            return line
+
+        target_bright = (
+            "axes.prop_cycle : cycler('color', ['4477AA', 'EE6677', '228833', "
+            "'CCBB44', '66CCEE', 'AA3377', 'BBBBBB'])"
+        )
+        assert config_line("bright") == target_bright
+
+        # Test dry-run
+        fname = tmp_path / "matplotlibrc"
+        tc.set_default_colors("bright", fname=fname, dry=True)
+        assert not os.path.exists(fname)
+        captured = capfd.readouterr()
+        assert captured.out.splitlines()[-1] == "New config line: " + target_bright
+
+        # Test writing to file
+        tc.set_default_colors("bright", fname=fname)
+        with open(fname) as fd:
+            lines = fd.readlines()
+            assert len(lines) == 1
+            assert lines[0] == target_bright + "\n"
+
+        # Test changing existing file (only one line in file)
+        tc.set_default_colors("vibrant", fname=fname)
+        with open(fname) as fd:
+            lines = fd.readlines()
+            assert len(lines) == 1
+            assert lines[0] == config_line("vibrant") + "\n"
+
+        # changing existing file (multiple lines)
+        lines += ["\n", "font.size : 9\n"]
+        with open(fname, "w") as fd:
+            fd.writelines(lines)
+        tc.set_default_colors("pale", fname=fname)
+        with open(fname) as fd:
+            lines = fd.readlines()
+            assert lines == [config_line("pale") + "\n", "\n", "font.size : 9\n"]
 
 
 class TestColormaps:
