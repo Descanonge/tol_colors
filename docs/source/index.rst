@@ -12,17 +12,17 @@ Tol-colors documentation
    Color schemes for lines and maps, color-blind safe
 
 Those color schemes were designed by Paul Tol. This repository is only packaging
-his work so that it can be easily installed using pip. His work and details on
-how to use those schemes can be found on his `website
-<https://personal.sron.nl/~pault/>`__, in the khroma R package `documentation
-<https://cran.r-project.org/web/packages/khroma/vignettes/tol.html>`__. This
-package and documentation is built using the technical notes issue 3.2 (2021)
-that can be found in this project `repository
-<https://github.com/Descanonge/tol_colors/blob/master/docs/colourschemes.pdf>`__.
+his work so that it can be easily installed using pip. This packages and its
+documentation follow the technical notes of the color schemes [#tech]_, which
+are archived in this project `repository
+<https://github.com/Descanonge/tol_colors/blob/master/docs/technical_notes.pdf>`__.
+More details and implementations for other languages can be found on Paul Tols's
+`website <https://personal.sron.nl/~pault/>`__.
 
 Have a quick look at all available colorsets and colormaps at :doc:`overview`,
 or see in more details how and when to use the :doc:`colorsets` and
 :doc:`colormaps` in the dedicated pages.
+
 
 Install
 =======
@@ -55,3 +55,5 @@ Contents
    colormaps
 
    api
+
+.. [#tech] *Colour Schemes*, Paul Tol, SRON/EPS/TN/09-002, issue 3.2, 18 August 2021

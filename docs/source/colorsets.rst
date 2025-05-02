@@ -16,7 +16,7 @@ All colorsets are given as named tuples. You can then access the colors by index
     '#4477AA'
 
 Each colorset is available as a module attribute: ``tc.bright`` for instance.
-All colorsets are also stored in the dictionnary :data:`tol_colors.colorsets`.
+All colorsets are also stored in the dictionary :data:`tol_colors.colorsets`.
 This is a special mapping that will accepts both hyphen and underscore versions
 (``tc.colorsets["high-contrast"]`` and ``tc.colorsets["high_contrast"]`` will
 both work).
@@ -68,7 +68,7 @@ to be print-friendly).
 Muted
 -----
 
-An other alternative to *bright*, equally colorblind-safe. It has more colors,
+Another alternative to *bright*, equally colorblind-safe. It has more colors,
 but lacks a clear red or medium blue. Pale grey is meant for bad data in maps.
 
 .. image:: /img/cset_muted.svg
@@ -93,8 +93,8 @@ Medium-contrast
 ---------------
 
 An alternative to *high-contrast*, also colorblind-safe and designed for
-situations needing color pairs. It is also optimized for contrast to work in a
-monochrome printout, but the differences are inevitably smaller.
+situations needing color pairs. It is also optimized for contrast and to work in
+a monochrome printout, but the differences are inevitably smaller.
 
 .. image:: /img/cset_medium_contrast.svg
     :alt: Medium-contrast colorset
@@ -105,9 +105,9 @@ Pale
 ----
 
 The colors of this set are not very distinct in either normal or colorblind
-vision; they are not meant for lines or maps, but for marking text. Use the pale
-colors for the background of black text, for example to highlight cells in a
-table. The text remains readable.
+vision; they are not meant for lines or maps, but for highlighting text. Use the
+pale colors for the *background* of black text, for example to highlight cells
+in a table. The text remains readable.
 
 .. image:: /img/cset_pale.svg
     :alt: Pale colorset
@@ -129,8 +129,8 @@ colors for text on a white background. The text remains readable.
 Light
 -----
 
-An alternative to the *pale* colorset, designed to fill labelled cells with more
-and lighter colors than in *bright*, and with more distinct colors than *pale*,
+An alternative to the *pale* colorset, designed to fill labeled cells with more
+and lighter colors than *bright*, and with more distinct colors than *pale*,
 while keeping black text readable.
 As the colors are reasonably distinct in normal and colorblind vision, it can
 also be used for general qualitative data.
@@ -146,7 +146,7 @@ Land-cover
 
 A specialized colorset for the global land classification of AVHRR data. An
 alternative to the recommended scheme given by the Department of Geography at
-the University of Maryland, with more subtle colors distinct in all visions.
+the University of Maryland, with more subtle colors, distinct in all visions.
 
 .. image:: /img/cset_land_cover.svg
     :alt: Land-cover colorset
@@ -158,7 +158,7 @@ Matplotlib default colors
 =========================
 
 This package provides a function to easily set the default colors used by
-Matplotlib to one of the colorsets.
+Matplotlib to those from one of the colorsets.
 
 .. autofunction:: tol_colors.set_default_colors
     :no-index:

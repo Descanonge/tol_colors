@@ -21,19 +21,18 @@ access the colors by index or by name::
     >>> cset.blue
     '#4477AA'
 
-Each colorset is available as a module attribute (``tc.bright``).
-All colorsets are also stored in the dictionnary :data:`tol_colors.colorsets`.
-This is a special mapping that will accepts both hyphen and underscore versions
-(``tc.colorsets["high-contrast"]`` and ``tc.colorsets["high_contrast"]`` will
-both work).
+Each colorset is available as a module attribute (``tc.bright``) and in the
+dictionnary :data:`tol_colors.colorsets`. This is a special mapping that will
+accepts both hyphen and underscore versions (``tc.colorsets["high-contrast"]``
+and ``tc.colorsets["high_contrast"]`` will both work).
 
 .. image:: /img/csets_condensed.svg
     :width: 100%
 
 .. note::
 
-    Additional sets *dark* and *pale* (not shown above) are available for text
-    and text background, respectively.
+    An additional set *land-cover* (not shown above) is available for global
+    land classification.
 
 
 Colormaps
