@@ -3,6 +3,7 @@
 import os
 
 import matplotlib.pyplot as plt
+import pytest
 from matplotlib.colors import LinearSegmentedColormap, ListedColormap
 
 import tol_colors as tc
@@ -143,3 +144,7 @@ class TestColormaps:
             cmap = tc.rainbow_discrete(i)
             assert isinstance(cmap, ListedColormap)
             assert cmap.N == i
+
+        for i in [0, 25]:
+            with pytest.raises(ValueError):
+                tc.rainbow_discrete(i)
