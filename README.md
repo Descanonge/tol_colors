@@ -8,6 +8,7 @@
 [![PyPI](https://img.shields.io/pypi/v/tol-colors)](https://pypi.org/project/tol-colors)
 [![GitHub release](https://img.shields.io/github/v/release/Descanonge/tol_colors)](https://github.com/Descanonge/tol_colors/releases)
 [![Tests](https://github.com/Descanonge/tol_colors/actions/workflows/tests.yml/badge.svg)](https://github.com/Descanonge/tol_colors/actions/workflows/tests.yml)
+[![Documentation](https://readthedocs.org/projects/tol-colors/badge/?version=latest)](https://tol-colors.readthedocs.io/en/latest/)
 
 </div>
 
