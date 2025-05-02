@@ -194,3 +194,18 @@ Rainbow
 
 .. py:data:: rainbow_PuRd_r
     :type: ~matplotlib.colors.LinearSegmentedColormap
+
+
+Legacy API
+==========
+
+Present for backward compatibility, but should be replaced by alternatives
+above.
+
+.. autofunction:: get_colorset
+
+.. autofunction:: tol_cset
+
+.. autofunction:: get_colormap
+
+.. autofunction:: tol_cmap

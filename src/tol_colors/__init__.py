@@ -12,9 +12,11 @@ License:  Standard 3-clause BSD
 
 # ruff: noqa: N815, N816
 
+import functools
 import json
 import logging
 import os
+import warnings
 from collections import namedtuple
 from collections.abc import Sequence
 from importlib import resources
@@ -23,7 +25,7 @@ from typing import Literal, NamedTuple, overload
 import matplotlib
 from matplotlib.colors import LinearSegmentedColormap, ListedColormap
 
-__version__ = "1.4.0"
+__version__ = "2.0.0"
 
 log = logging.getLogger(__name__)
 
@@ -418,3 +420,127 @@ rainbow_PuBr: LinearSegmentedColormap
 rainbow_PuBr_r: LinearSegmentedColormap
 rainbow: LinearSegmentedColormap
 rainbow_r: LinearSegmentedColormap
+
+
+## Legacy API
+
+
+def deprecated(replacements: list[str], version: str):  # noqa: D103
+    replacements_ = ", ".join([f"tol_colors.{r}" for r in replacements])
+
+    def decorator(func):
+        name = func.__name__
+
+        @functools.wraps(func)
+        def wrapped(*args, **kwargs):
+            warnings.warn(
+                f"{name} is soft-deprecated since {version}, "
+                f"please use {replacements_} instead",
+                DeprecationWarning,
+                stacklevel=2,
+            )
+            return func(*args, **kwargs)
+
+        return wrapped
+
+    return decorator
+
+
+@deprecated(["colorsets"], "2.0")
+def get_colorset(name: str = "bright"):
+    """Return discrete colorsets for qualitative data.
+
+    ..  deprecated:: 2.0
+        This function is soft-deprecated, please use :data:`colorsets` instead.
+
+    Parameters
+    ----------
+    name
+        Name of the color set. Hyphens are automatically replaced, so "hight-contrast"
+        works as well.
+    """
+    return colorsets[name]
+
+
+@deprecated(["colorsets"], "2.0")
+def tol_cset(colorset=None):
+    """Return discrete color sets for qualitative data.
+
+    ..  deprecated:: 2.0
+        This function is soft-deprecated, please use :data:`colorsets` instead.
+
+    Parameters
+    ----------
+    colorset: str
+        Name of the color set. Hyphens are automatically replaced. If None return the
+        list of possible sets. If not in defined sets, will default to 'bright'.
+    """
+    namelist = list(colorsets.keys())
+    if colorset is None:
+        return namelist
+    if colorset not in namelist:
+        colorset = "bright"
+        log.warning(
+            "Requested colorset not defined, using '%s'. " "Known colorsets are %s.",
+            colorset,
+            namelist,
+        )
+    return get_colorset(colorset)
+
+
+@deprecated(["colormaps", "rainbow_discrete"], "2.0")
+def get_colormap(
+    name: str, n_colors: int = 22
+) -> LinearSegmentedColormap | ListedColormap:
+    """Return continuous and discrete colormaps for ordered data.
+
+    .. deprecated:: 2.0
+       This function is soft-deprecated, please use :data:`colorsets` or
+       :func:`rainbow_discrete` instead.
+
+    Parameters
+    ----------
+    name
+        Name of the colormap. Hyphens are automatically replaced.
+    n_colors
+        Only used for "rainbow_discrete": number of discrete colors to use.
+    """
+    if name.replace("-", "_") == "rainbow_discrete":
+        if n_colors < 1 or n_colors > 23:
+            log.warning(
+                "Number of colors should be between 1 and 23, using default (22)."
+            )
+            n_colors = 22
+        return rainbow_discrete(n_colors)
+    return colormaps[name]
+
+
+@deprecated(["colormaps", "rainbow_discrete"], "2.0")
+def tol_cmap(
+    colormap: str | None = None, lut: int = 22
+) -> LinearSegmentedColormap | ListedColormap | list[str]:
+    """Return continuous and discrete colormaps for ordered data.
+
+    .. deprecated:: 2.0
+       This function is soft-deprecated, please use :data:`colorsets` or
+       :func:`rainbow_discrete` instead.
+
+    Parameters
+    ----------
+    name
+        Name of the colormap. Hyphens are automatically replaced. If None return a list
+        available colormaps. If not in defined maps, will default to 'rainbow_PuRd'.
+    lut
+        Only used for "rainbow_discrete": number of discrete colors to use.
+    """
+    cmaps_name = list(colormaps.keys()) + ["rainbow_discrete"]
+    if colormap is None:
+        return cmaps_name
+    if colormap not in cmaps_name:
+        colormap = "rainbow_PuRd"
+        log.warning(
+            "Requested colormap not defined, using '%s'. " "Known colormaps are %s.",
+            colormap,
+            cmaps_name,
+        )
+    return get_colormap(colormap, lut)
