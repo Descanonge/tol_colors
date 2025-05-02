@@ -1,13 +1,10 @@
 """Definitions and user functions.
 
-Definition of colour schemes for lines and maps that also work for colour-blind
-people. See https://personal.sron.nl/~pault/ for background information and
-best usage of the schemes.
-
 Copyright (c) 2019, Paul Tol, Clément Haëck
 All rights reserved.
-
 License:  Standard 3-clause BSD
+Colorsets and colormaps designed by PT. Software initially written by PT. Software
+expanded, packaged, and maintained by CH.
 """
 
 # ruff: noqa: N815, N816
