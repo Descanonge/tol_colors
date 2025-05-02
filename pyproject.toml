@@ -3,18 +3,26 @@
 [build-system]
 requires = ['setuptools']
 build-backend = 'setuptools.build_meta'
+[tool.setuptools.packages.find]
+where = ["src"]
+[tool.setuptools.package-data]
+tol_colors = ["colors.json"]
 
 [project]
 version = '1.4.0'
 
 name = 'tol_colors'
 authors = [
+    {name='Clément Haëck', email='clement.haeck@posteo.net'},
+    {name='Paul Tol'}
+]
+maintainers = [
     {name='Clément Haëck', email='clement.haeck@posteo.net'}
 ]
 description = 'Color schemes for lines and maps, color-blind safe'
+keywords = ['visualization', 'colorsets', 'colormaps', 'colorblind']
 
 readme = 'README.md'
-requires-python = '>=3.9'
 classifiers = [
     'Programming Language :: Python :: 3',
     'License :: OSI Approved :: BSD License',
@@ -24,6 +32,7 @@ classifiers = [
     'Topic :: Scientific/Engineering :: Visualization'
 ]
 
+requires-python = '>=3.9'
 dependencies = [
     'numpy',
     'matplotlib',
@@ -46,6 +55,7 @@ docs = [
 
 [project.urls]
 'Source' = 'https://github.com/Descanonge/tol_colors'
+'Documentation' = 'https://tol-colors.readthedocs.io'
 
 [tool.mypy]
 disable_error_code = ['annotation-unchecked']
