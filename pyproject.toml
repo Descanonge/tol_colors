@@ -49,6 +49,7 @@ docs = [
     'pydata-sphinx-theme==0.15.*',
     'colorspacious',
     'viscm',
+    'PyQt5'
 ]
 tests = [
     'pytest>=7.4'
