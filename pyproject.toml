@@ -32,7 +32,7 @@ classifiers = [
     'Topic :: Scientific/Engineering :: Visualization'
 ]
 
-license = 'MIT'
+license = 'BSD-3-Clause'
 license-files = ['LICENSE*']
 
 requires-python = '>=3.9'

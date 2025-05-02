@@ -4,7 +4,7 @@ Definition of colour schemes for lines and maps that also work for colour-blind
 people. See https://personal.sron.nl/~pault/ for background information and
 best usage of the schemes.
 
-Copyright (c) 2019, Paul Tol
+Copyright (c) 2019, Paul Tol, Clément Haëck
 All rights reserved.
 
 License:  Standard 3-clause BSD
