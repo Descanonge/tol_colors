@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from colorspacious import cspace_convert
 from matplotlib.colors import to_rgb
-from matplotlib.patches import RegularPolygon
+from matplotlib.patches import ConnectionPatch, RegularPolygon
 
 import tol_colors as tc
 
@@ -154,11 +154,20 @@ def land_cover():
 
 
 def csets_condensed():
-    fig = plt.figure(figsize=(10, 6.2), dpi=150)
+    fig = plt.figure(figsize=(10, 8), dpi=100)
     margin = 0.10
     ax = fig.add_axes((margin, 0, 1 - margin, 1))
 
-    sets = ["bright", "vibrant", "muted", "light", "high_contrast", "medium_contrast"]
+    sets = [
+        "bright",
+        "vibrant",
+        "muted",
+        "pale",
+        "dark",
+        "light",
+        "high_contrast",
+        "medium_contrast",
+    ]
     n_sets = len(sets)
 
     max_n_colors = max(len(tc.colorsets[name]) for name in sets)
@@ -193,7 +202,7 @@ def csets_condensed():
                 ha="center",
                 va="center",
                 color=text_col,
-                size=11 + (1 - len(col_name) / 10) * 2.5,
+                size=18 - len(col_name) * 0.8,
                 style="italic",
             )
             if i_col == 0:
@@ -205,7 +214,7 @@ def csets_condensed():
                     textcoords="offset points",
                     ha="right",
                     va="center",
-                    size=12,
+                    size=14,
                     weight="semibold",
                 )
 
@@ -221,14 +230,24 @@ def csets_condensed():
 def csets_cvd():
     cvds_names = dict(deuteranomaly="Deuteranopia", protanomaly="Protanopia")
 
-    fig, axes = plt.subplots(1, 2, figsize=(8, 2.7), layout="constrained", dpi=150)
+    fig, axes = plt.subplots(1, 2, figsize=(8, 3.5), layout="constrained", dpi=150)
 
-    sets = ["bright", "vibrant", "muted", "light", "high_contrast", "medium_contrast"]
+    sets = [
+        "bright",
+        "vibrant",
+        "muted",
+        "pale",
+        "dark",
+        "light",
+        "high_contrast",
+        "medium_contrast",
+    ]
     n_sets = len(sets)
 
     max_n_colors = max(len(tc.colorsets[name]) for name in sets)
     border = 0.1
 
+    octs = dict(deuteranomaly=[], protanomaly=[])
     for ax, (cvd_type, cvd_name) in zip(axes, cvds_names.items(), strict=False):
         space = dict(name="sRGB1+CVD", cvd_type=cvd_type, severity=100)
 
@@ -251,6 +270,7 @@ def csets_cvd():
         for i_set, cset_name in enumerate(sets):
             cset = tc.colorsets[cset_name]
             x_left = (max_n_colors / 2) - len(cset) / 2
+            octs[cvd_type].append([])
             for i_col, (col_name, color) in enumerate(
                 zip(cset._fields, cset, strict=False)
             ):
@@ -266,25 +286,56 @@ def csets_cvd():
                     ec="k" if col_name == "white" else rgb,
                     lw=0.5 if col_name == "white" else 0.1,
                 )
+                octs[cvd_type][-1].append(p)
                 ax.add_artist(p)
 
     # leave space for center annotations
     fig.get_layout_engine().set(wspace=0.15)
 
+    from matplotlib.transforms import ScaledTranslation, blended_transform_factory
+
     for i_set, cset_name in enumerate(sets):
+        y = -i_set * (1 + border) - 0.5
         ann = axes[0].annotate(
             cset_name,
-            xy=(0.5, -i_set * (1 + border) - 0.5),
+            xy=(0.5, y),
             xycoords=("figure fraction", "data"),
             ha="center",
-            va="center",
+            va="center_baseline",
             size=11,
         )
         ann.set_in_layout(False)
+        if cset_name in ["muted", "medium_contrast"]:
+            continue
+        left_oct = octs["deuteranomaly"][i_set][-1]
+        right_oct = octs["protanomaly"][i_set][0]
+        offset = len(cset_name) / 2 * 7 / 72
+        line = ConnectionPatch(
+            xyA=[left_oct.xy[0] + 0.8, y],
+            xyB=[0.5, y],
+            coordsA=axes[0].transData,
+            coordsB=blended_transform_factory(
+                fig.transFigure + ScaledTranslation(-offset, 0, fig.dpi_scale_trans),
+                axes[0].transData,
+            ),
+        )
+        fig.add_artist(line)
+        line = ConnectionPatch(
+            xyA=[right_oct.xy[0] - 0.8, y],
+            xyB=[0.5, y],
+            coordsA=axes[1].transData,
+            coordsB=blended_transform_factory(
+                fig.transFigure + ScaledTranslation(offset, 0, fig.dpi_scale_trans),
+                axes[1].transData,
+            ),
+        )
+        fig.add_artist(line)
 
     fig.savefig(savedir + "csets_cvd.svg")
-    plt.close(fig)
+    # plt.close(fig)
 
+
+csets_cvd()
 
 ## Colormaps
 
