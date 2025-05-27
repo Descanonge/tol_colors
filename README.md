@@ -12,10 +12,10 @@
 
 </div>
 
-<img alt="icon" src="/docs/source/_static/icon.svg" width="128" align="left">
+<img alt="icon" src="https://raw.githubusercontent.com/Descanonge/tol_colors/refs/heads/master/docs/source/_static/icon.svg" width="128" align="left">
 
 Those color schemes were designed by Paul Tol. This repository is packaging his work so that it can be easily installed using pip.
-This packages and its documentation follow the technical notes of the color schemes[^1], which are archived in this [repository](/docs/technical_notes.pdf). Details and implementations for other languages can be found on Paul Tols's [website](https://personal.sron.nl/~pault/).
+This packages and its documentation follow the technical notes of the color schemes[^1], which are archived in this [repository](https://github.com/Descanonge/tol_colors/blob/master/docs/technical_notes.pdf). Details and implementations for other languages can be found on Paul Tols's [website](https://personal.sron.nl/~pault/).
 
 A more user-friendly documentation is available at <https://tol-colors.readthedocs.io>, detailing how and when to use the various colorsets and colormaps in this package.
 
@@ -57,7 +57,7 @@ Each colorset is available as a module attribute (`tc.bright`) and stored in the
 (`tc.colorsets["high-contrast"]` and `tc.colorsets["high_contrast"]` will
 both work).
 
-![colorsets](/docs/source/img/csets_condensed.svg)
+![colorsets](https://raw.githubusercontent.com/Descanonge/tol_colors/refs/heads/master/docs/source/img/csets_condensed.svg)
 
 This package also provides a function to easily set the default colors used by Matplotlib to one of the colorsets. This will change your matplotlibrc file or a given stylesheet file.
 
@@ -79,7 +79,7 @@ Rather than resampling the interpolated colormaps, discrete rainbow colormap is
 available by specifying the number of colors between 1 and 23
 (`tc.get_colormap("rainbow_discrete", n_colors=14)`).
 
-![colorsmaps](/docs/source/img/cmaps_condensed.svg)
+![colorsmaps](https://raw.githubusercontent.com/Descanonge/tol_colors/refs/heads/master/docs/source/img/cmaps_condensed.svg)
 
 ## See also
 
