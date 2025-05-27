@@ -88,4 +88,4 @@ Other packages already implement these colorschemes and might better suit your n
  - [pyplot-themes](https://github.com/raybuhr/pyplot-themes)
  - [khroma](https://cran.r-project.org/web/packages/khroma): R package that includes those schemes 
 
-[1](#f1): *Colour Schemes*, Paul Tol, SRON/EPS/TN/09-002, issue 3.2, 18 August 2021 [↩](#a1)
+<b id="f1">1</b>: *Colour Schemes*, Paul Tol, SRON/EPS/TN/09-002, issue 3.2, 18 August 2021 [↩](#a1)
