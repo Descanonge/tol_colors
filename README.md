@@ -15,7 +15,7 @@
 <img alt="icon" src="https://raw.githubusercontent.com/Descanonge/tol_colors/refs/heads/master/docs/source/_static/icon.svg" width="128" align="left">
 
 Those color schemes were designed by Paul Tol. This repository is packaging his work so that it can be easily installed using pip.
-This packages and its documentation follow the technical notes of the color schemes[^1], which are archived in this [repository](https://github.com/Descanonge/tol_colors/blob/master/docs/technical_notes.pdf). Details and implementations for other languages can be found on Paul Tols's [website](https://personal.sron.nl/~pault/).
+This packages and its documentation follow the technical notes of the color schemes<sup id="a1">[1](#f1)</sup>, which are archived in this [repository](https://github.com/Descanonge/tol_colors/blob/master/docs/technical_notes.pdf). Details and implementations for other languages can be found on Paul Tols's [website](https://personal.sron.nl/~pault/).
 
 A more user-friendly documentation is available at <https://tol-colors.readthedocs.io>, detailing how and when to use the various colorsets and colormaps in this package.
 
@@ -88,4 +88,4 @@ Other packages already implement these colorschemes and might better suit your n
  - [pyplot-themes](https://github.com/raybuhr/pyplot-themes)
  - [khroma](https://cran.r-project.org/web/packages/khroma): R package that includes those schemes 
 
-[^1]: *Colour Schemes*, Paul Tol, SRON/EPS/TN/09-002, issue 3.2, 18 August 2021
+[1](#f1): *Colour Schemes*, Paul Tol, SRON/EPS/TN/09-002, issue 3.2, 18 August 2021 [↩](#a1)
