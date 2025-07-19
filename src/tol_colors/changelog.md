@@ -1,4 +1,9 @@
 
+# v2.1
+
+- Colormaps mapping returns copies
+- Fix `__main__` invocation
+
 # v2.0
 
 - Put color data in separate json file
