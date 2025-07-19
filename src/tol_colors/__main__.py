@@ -37,8 +37,6 @@ def main():
         ax.set_aspect("equal")
         ax.set_axis_off()
         ax.set_title(cset_name, loc="left", weight="bold")
-    plt.show()
-    return
 
     # Show colormaps
     cmaps_names = [
@@ -61,7 +59,6 @@ def main():
             ha="right",
             fontsize=10,
         )
-    # plt.show()
 
     # Show discrete rainbow.
     gradient = np.linspace(0, 1, 256)
@@ -80,6 +77,7 @@ def main():
             ha="right",
             fontsize=10,
         )
+
     plt.show()
 
 
