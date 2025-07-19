@@ -36,7 +36,7 @@ def main():
         ax.set_ylim(0, max_ncolors + 1)
         ax.set_aspect("equal")
         ax.set_axis_off()
-        ax.set_title(cset_name, loc="left", weight="bold")
+        ax.set_title(cset_name, loc="left", weight="bold", size=9)
 
     # Show colormaps
     cmaps_names = [
