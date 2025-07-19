@@ -15,7 +15,7 @@
 <img alt="icon" src="https://raw.githubusercontent.com/Descanonge/tol_colors/refs/heads/master/docs/source/_static/icon.svg" width="128" align="left">
 
 Those color schemes were designed by Paul Tol. This repository is packaging his work so that it can be easily installed using pip.
-This packages and its documentation follow the technical notes of the color schemes<sup id="a1">[1](#f1)</sup>, which are archived in this [repository](https://github.com/Descanonge/tol_colors/blob/master/docs/technical_notes.pdf). Details and implementations for other languages can be found on Paul Tols's [website](https://personal.sron.nl/~pault/).
+This packages and its documentation follow the technical notes of the color schemes<sup id="a1">[1](#f1)</sup>, which are archived in this [repository](https://github.com/Descanonge/tol_colors/blob/master/docs/technical_notes.pdf). Details and implementations for other languages can be found on Paul Tols's [website](https://sronpersonalpages.nl/~pault/).
 
 A more user-friendly documentation is available at <https://tol-colors.readthedocs.io>, detailing how and when to use the various colorsets and colormaps in this package.
 
