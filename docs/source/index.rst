@@ -17,7 +17,7 @@ documentation follow the technical notes of the color schemes [#tech]_, which
 are archived in this project `repository
 <https://github.com/Descanonge/tol_colors/blob/master/docs/technical_notes.pdf>`__.
 More details and implementations for other languages can be found on Paul Tols's
-`website <https://personal.sron.nl/~pault/>`__.
+`website <https://sronpersonalpages.nl/~pault/>`__.
 
 Have a quick look at all available colorsets and colormaps at :doc:`overview`,
 or see in more details how and when to use the :doc:`colorsets` and
