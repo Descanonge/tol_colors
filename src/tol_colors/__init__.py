@@ -294,11 +294,11 @@ class ColormapMapping(dict[str, LinearSegmentedColormap | ListedColormap]):
     def __getitem__(self, key: str) -> LinearSegmentedColormap | ListedColormap: ...
 
     def __getitem__(self, key: str) -> LinearSegmentedColormap | ListedColormap:
-        return super().__getitem__(key)
+        return super().__getitem__(key).copy()
 
 
 colormaps = ColormapMapping()
-"""Mapping of colormaps."""
+"""Mapping of colormaps. Returns copies."""
 
 # Standard colormaps
 for name, data in _colors["colormaps"].items():
