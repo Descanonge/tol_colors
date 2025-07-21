@@ -17,7 +17,7 @@ import warnings
 from collections import namedtuple
 from collections.abc import Sequence
 from importlib import resources
-from typing import Literal, NamedTuple, overload
+from typing import Literal, NamedTuple, cast, overload
 
 import matplotlib
 from matplotlib.colors import LinearSegmentedColormap, ListedColormap
@@ -294,7 +294,9 @@ class ColormapMapping(dict[str, LinearSegmentedColormap | ListedColormap]):
     def __getitem__(self, key: str) -> LinearSegmentedColormap | ListedColormap: ...
 
     def __getitem__(self, key: str) -> LinearSegmentedColormap | ListedColormap:
-        return super().__getitem__(key).copy()
+        return cast(
+            LinearSegmentedColormap | ListedColormap, super().__getitem__(key).copy()
+        )
 
 
 colormaps = ColormapMapping()
