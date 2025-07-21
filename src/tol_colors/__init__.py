@@ -10,6 +10,7 @@ expanded, packaged, and maintained by CH.
 # ruff: noqa: N815, N816
 
 import functools
+import importlib.metadata
 import json
 import logging
 import os
@@ -22,7 +23,7 @@ from typing import Literal, NamedTuple, cast, overload
 import matplotlib
 from matplotlib.colors import LinearSegmentedColormap, ListedColormap
 
-__version__ = "2.0.0"
+__version__ = importlib.metadata.version("tol_colors")
 
 log = logging.getLogger(__name__)
 
