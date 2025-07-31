@@ -95,6 +95,65 @@ def cset_detailed(name: str):
         plt.close(fig)
 
 
+def cset_dark():
+    cset = tc.dark
+    n_colors = len(cset)
+
+    height = 1.0
+    width = 1.0 * (n_colors - 1)
+
+    h_pad = 0.01
+    v_pad = h_pad / (n_colors - 2)  # approximately the plot aspect
+
+    fig = plt.figure(figsize=(width, height), dpi=200)
+    ax = fig.add_axes((0, 0, 1, 1))
+    ax.set_xlim(0 - h_pad, n_colors + h_pad)
+    ax.set_ylim(-0.5 - v_pad, 0.5 + v_pad)
+    ax.set_aspect("equal")
+    ax.set_axis_off()
+
+    names = cset._fields
+    colors = list(cset)
+    for i, (col_name, color) in enumerate(zip(names, colors, strict=True)):
+        # octogon side
+        a = 1.0 / (1 + np.sqrt(2))
+        # outer radius
+        r = 1.307 * a
+        p = RegularPolygon(
+            (i + 0.5, 0.0),
+            numVertices=8,
+            radius=r,
+            orientation=np.pi / 360 * 45,
+            fc="w",
+            ec="k",
+            lw=0.5,
+        )
+        ax.add_artist(p)
+
+        ax.annotate(
+            f"{color}",
+            xy=(0.5, 0.5),
+            xycoords=p,
+            xytext=(0, 2),
+            textcoords="offset points",
+            ha="center",
+            va="bottom",
+            color=color,
+            size=10,
+        )
+        ax.annotate(
+            f"{col_name}",
+            xy=(0.5, 0.35),
+            xycoords=p,
+            ha="center",
+            color=color,
+            size=10 + (1 - len(col_name) / 10) * 2.5,
+        )
+
+        fig.savefig(savedir + "cset_dark.svg")
+        plt.close(fig)
+
+
 def land_cover():
     cset = tc.land_cover
     n_colors = len(cset)
@@ -332,7 +391,7 @@ def csets_cvd():
         fig.add_artist(line)
 
     fig.savefig(savedir + "csets_cvd.svg")
-    # plt.close(fig)
+    plt.close(fig)
 
 
 csets_cvd()
@@ -593,6 +652,8 @@ if __name__ == "__main__":
     for name in tc.colorsets:
         cset_detailed(name)
 
+    # special plot for dark
+    cset_dark()
     # special plot for land cover
     land_cover()
 

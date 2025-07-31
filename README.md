@@ -67,7 +67,7 @@ The following colormaps were created by linear interpolation of carefully chosen
 colors. Those colors can be used as is for discrete colormaps. These discrete
 variants are available by adding "_discrete" to the colormap name (*eg*
 `tc.sunset_discrete`). Note the *iridescent* does not have a readily available
-discrete version, and one should use the a dedicated function to obtain a
+discrete version, and that one should use the dedicated function to obtain a
 discrete rainbow.
 
 Colormaps are available as module attributes (`tc.sunset`), stored in a
