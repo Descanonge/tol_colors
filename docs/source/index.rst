@@ -12,7 +12,7 @@ Tol-colors documentation
    Color schemes for lines and maps, color-blind safe
 
 Those color schemes were designed by Paul Tol. This repository is only packaging
-his work so that it can be easily installed using pip. This packages and its
+his work so that it can be easily installed using pip. This package and its
 documentation follow the technical notes of the color schemes [#tech]_, which
 are archived in this project `repository
 <https://github.com/Descanonge/tol_colors/blob/master/docs/technical_notes.pdf>`__.
