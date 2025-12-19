@@ -13,15 +13,15 @@ Tol-colors documentation
 
 Those color schemes were designed by Paul Tol. This repository is only packaging
 his work so that it can be easily installed using pip. This package and its
-documentation follow the technical notes of the color schemes [#tech]_, which
-are archived in this project `repository
+documentation follow his technical notes [#tech]_, which are archived in this
+project `repository
 <https://github.com/Descanonge/tol_colors/blob/master/docs/technical_notes.pdf>`__.
 More details and implementations for other languages can be found on Paul Tols's
 `website <https://sronpersonalpages.nl/~pault/>`__.
 
-Have a quick look at all available colorsets and colormaps at :doc:`overview`,
-or see in more details how and when to use the :doc:`colorsets` and
-:doc:`colormaps` in the dedicated pages.
+Have a quick look at all available colorsets and colormaps below, or see in more
+details how and when to use the :doc:`colorsets` and :doc:`colormaps` in the
+dedicated pages.
 
 
 Install
@@ -42,18 +42,37 @@ Show the available colorsets and colormaps::
    python -m tol_colors
 
 
+Colorsets
+=========
+
+.. image:: /img/csets_condensed.svg
+    :width: 100%
+
+.. note::
+
+    An additional set *land-cover* (not shown above) is available for global
+    land classification.
+
+
+Colormaps
+=========
+
+.. image:: /img/cmaps_condensed.svg
+    :width: 100%
+
+
 Contents
 ========
 
 .. toctree::
    :maxdepth: 2
 
-   overview
-
    colorsets
 
    colormaps
 
    api
+
+------
 
 .. [#tech] *Colour Schemes*, Paul Tol, SRON/EPS/TN/09-002, issue 3.2, 18 August 2021

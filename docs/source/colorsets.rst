@@ -6,20 +6,24 @@ Colorsets
 *********
 
 These are various sets of colors that can be used for lines, markers,
-qualitative maps, etc. Below is succinctly described how they are used and
-when to use each of them.
+qualitative maps, etc.
 
-All colorsets are given as named tuples. You can then access the colors by index or by name::
+The various colorsets are available:
 
+- as attributes of the ``tol_colors`` module (*eg* ``tc.bright``)
+- stored in the dictionary :data:`tol_colors.colorsets`. This is a special
+  mapping that will accepts both hyphen and underscore versions
+  (``tc.colorsets["high-contrast"]`` and ``tc.colorsets["high_contrast"]`` will
+  both work).
+
+
+All colorsets are given as named tuples. You can access the colors by index or
+by name::
+
+    >>> import tol_colors as tc
     >>> cset = tc.bright
     >>> cset.blue
     '#4477AA'
-
-Each colorset is available as a module attribute: ``tc.bright`` for instance.
-All colorsets are also stored in the dictionary :data:`tol_colors.colorsets`.
-This is a special mapping that will accepts both hyphen and underscore versions
-(``tc.colorsets["high-contrast"]`` and ``tc.colorsets["high_contrast"]`` will
-both work).
 
 Except for the *high* and *medium-constrast* colorsets that can be sorted by
 luminance, the colors can be used in any order. In this package, they are given

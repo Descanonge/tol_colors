@@ -10,9 +10,10 @@ Colormaps
 
 The various colormaps are available:
 
-- in the dictionary :data:`tol_colors.colormaps` (*eg* ``tc.colormaps["sunset"]``)
-- as attributes of the :mod:`tol_colors` module (*eg* ``tc.sunset``)
-- directly in matplotlib, registered with the prefix "tol."
+- as attributes of the ``tol_colors`` module (*eg* ``tc.sunset``)
+- in the dictionary :data:`tol_colors.colormaps` (*eg*
+  ``tc.colormaps["sunset"]``). This returns copies that you can modify safely.
+- registered in matplotlib with the prefix "tol."
   (*eg* ``plt.imshow(..., cmap="tol.sunset")``)
 
 Each colormap has a reversed variant directly available with the suffix "_r"
@@ -27,16 +28,16 @@ Linear colormaps
 ================
 
 The colormaps were created by linear interpolation of carefully chosen colors.
-Those colors can be used as is for discrete colormaps and are shown below. These
-discrete variants are available by adding "_discrete" to the colormap name (*eg*
-``tc.sunset_discrete``). Note the *iridescent* does not have a readily available
-discrete version, and one should use the :ref:`dedicated function
-<discrete-rainbow>` to obtain a discrete rainbow.
-
-To obtain discrete colormaps with a specific number of colors it is possible to
+Those colors can be used as is for discrete colormaps. Discrete variants are
+available by adding "_discrete" to the colormap name (*eg*
+``tc.sunset_discrete``).
+To obtain discrete colormaps with a different number of colors it is possible to
 resample a continuous colormap with::
 
   tc.sunset.resampled(n_colors)
+
+However do not resample the rainbow colormaps, instead use the :ref:`dedicated
+function <discrete-rainbow>`.
 
 .. important::
 
@@ -69,8 +70,9 @@ Bad data is :rawhtml:`<span style="background-color: #FFEE99; padding: 3pt;">#FF
 PRGn
 ----
 
-This is the `Color-Brewer`_ *PRGn* scheme, with green to make it print-friendly.
-Bad data is :rawhtml:`<span style="background-color: #FFEE99; padding: 3pt;">#FFEE99</span>`.
+This is the `Color-Brewer`_ *PRGn* scheme, with green shifted to make it
+print-friendly. Bad data is :rawhtml:`<span style="background-color: #FFEE99;
+padding: 3pt;">#FFEE99</span>`.
 
 .. cmap:: PRGn
     :alt: Purple-Green colormap
@@ -97,9 +99,11 @@ Iridescent
 ----------
 
 A colormap with linearly varying luminance that also works in colourblind
-vision.
-Bad data is :rawhtml:`<span style="color: white; background-color: #999999; padding: 3pt;">#999999</span>`.
-*iridescent* is not directly available as a discrete colormap.
+vision. Bad data is :rawhtml:`<span style="color: white; background-color:
+#999999; padding: 3pt;">#999999</span>`. It is not directly available as a
+discrete colormap. You you can still use
+:meth:`tc.iridescent.resampled(N)<matplotlib.colors.Colormap.resampled>` to
+obtain a discrete version.
 
 .. cmap:: iridescent
     :alt: iridescent colormap
@@ -114,8 +118,8 @@ There are many pitfalls to using a continuous rainbow colormap for ordered data:
 - The spectral order of visible light carries no inherent magnitude message.
   However, a rainbow provides a scheme with many colors, showing subtle effects
   in the data clearer or making it easier to read the value in a map. There are
-  also cases where a scheme is preferred that does not have pale colors at the
-  low end or middle of the range.
+  also cases where it is preferred to have a colormap that does not have pale
+  colors at the low end or middle of the range.
 - Most rainbow schemes contain bands of almost constant hue with sharp
   transitions between them, which are perceived as jumps in the data. This can
   be avoided with careful design.

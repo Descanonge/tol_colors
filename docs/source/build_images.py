@@ -588,10 +588,13 @@ def cmaps_cvd():
             for cmap_name, ax in zip(cmap_names_gs, axes, strict=False):
                 ax.set_axis_off()
 
+                if lr == 0:
+                    ax.annotate(
+                        cmap_name.removesuffix("_discrete"), (0.5, 0.5), **ann_kw
+                    )
+
                 if cmap_name == "rainbow_discrete":
                     plot_discrete(ax, tc.rainbow_discrete(22), (0, 1), cspace=cspace)
-                    if lr == 0:
-                        ax.annotate(cmap_name, (0.5, 0.5), **ann_kw)
                     continue
 
                 cmap = tc.colormaps[cmap_name]
@@ -600,13 +603,8 @@ def cmaps_cvd():
                     plot_linear(ax, cmap, (0.5, 1), cspace=cspace)
                     plot_discrete(ax, cmap_d, (0, 0.5), cspace=cspace)
 
-                    if lr == 0:
-                        ax.annotate(cmap_name, (0.5, 0.75), **ann_kw)
-                        ax.annotate(cmap_d_name, (0.5, 0.25), **ann_kw)
                 else:
                     plot_linear(ax, cmap, (0, 1), cspace=cspace)
-                    if lr == 0:
-                        ax.annotate(cmap_name, (0.5, 0.5), **ann_kw)
 
     fig.savefig(savedir + "cmaps_cvd.svg")
     plt.close(fig)

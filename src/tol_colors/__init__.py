@@ -174,7 +174,7 @@ def set_default_colors(
 ):
     """Modify matplotlibrc to set default colors to those of one of the colorsets.
 
-    This will modify the colors used autmotically by matplotlib.
+    This will modify the colors used automatically by matplotlib.
     This function will add a new line in a matplotlibrc file or stylesheet for the
     property "axes.prop_cycle". If a line setting a color cycler already exist in the
     file, it will be overwritten.
@@ -261,7 +261,7 @@ def _make_discrete_cmap(name: str, colors: Sequence[str], bad: str) -> ListedCol
 
 
 class ColormapMapping(dict[str, LinearSegmentedColormap | ListedColormap]):
-    """Mapping type to have better type checking."""
+    """Mapping type to have better type checking. Will return copies."""
 
     @overload
     def __getitem__(
