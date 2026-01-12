@@ -444,7 +444,7 @@ def cmap_detailed(name: str):
         plot_linear(ax, cmap, (0, 1))
     else:
         plot_linear(ax, cmap, (0.5, 1))
-        plot_discrete(ax, tc.colormaps[f"{name}_discrete"], (0, 0.5))
+        plot_discrete(ax, tc.colormaps[f"{name}_discrete"], (0, 0.505))
 
     fig.savefig(savedir + f"cmap_{name}.svg")
     plt.close(fig)
@@ -492,17 +492,19 @@ def rainbow_discrete():
 def cmaps_condensed():
     cmaps_names = [
         ("sunset",),
+        ("nightfall",),
         ("BuRd",),
         ("PRGn",),
         ("YlOrBr",),
         ("iridescent",),
+        ("incandescent",),
         ("rainbow_WhBr", "rainbow_WhRd", "rainbow_PuRd", "rainbow_PuBr"),
         ("rainbow_discrete",),
     ]
-    fig = plt.figure(figsize=(10, 10), dpi=100)
-    fig.subplots_adjust(left=0.18, bottom=0.01, top=0.99, right=0.99)
+    fig = plt.figure(figsize=(10, 11), dpi=100)
+    fig.subplots_adjust(left=0.20, bottom=0.01, top=0.99, right=0.99)
     gs = plt.GridSpec(
-        len(cmaps_names), 1, figure=fig, height_ratios=[2, 2, 2, 2, 1, 4, 1]
+        len(cmaps_names), 1, figure=fig, height_ratios=[2, 2, 2, 2, 2, 1, 1, 4, 1]
     )
 
     ann_kw = dict(
@@ -533,7 +535,7 @@ def cmaps_condensed():
             if (cmap_d_name := f"{cmap_name}_discrete") in tc.colormaps:
                 cmap_d = tc.colormaps[cmap_d_name]
                 plot_linear(ax, cmap, (0.5, 1))
-                plot_discrete(ax, cmap_d, (0, 0.5))
+                plot_discrete(ax, cmap_d, (0, 0.505))
                 ax.annotate(cmap_name, (0, 0.75), **ann_kw)
                 ax.annotate(cmap_d_name, (0, 0.25), **ann_kw)
             else:
@@ -547,20 +549,22 @@ def cmaps_condensed():
 def cmaps_cvd():
     cmaps_names = [
         ("sunset",),
+        ("nightfall",),
         ("BuRd",),
         ("PRGn",),
         ("YlOrBr",),
         ("iridescent",),
+        ("incandescent",),
         ("rainbow_WhBr", "rainbow_WhRd", "rainbow_PuRd", "rainbow_PuBr"),
         ("rainbow_discrete",),
     ]
-    fig = plt.figure(figsize=(8, 7), dpi=100)
+    fig = plt.figure(figsize=(8, 8), dpi=100)
     fig.subplots_adjust(left=0.01, bottom=0.01, top=0.95, right=0.99)
     gs = plt.GridSpec(
         len(cmaps_names),
         2,
         figure=fig,
-        height_ratios=[2, 2, 2, 2, 1, 4, 1],
+        height_ratios=[2, 2, 2, 2, 2, 1, 1, 4, 1],
         wspace=0.31,
     )
 
@@ -601,7 +605,7 @@ def cmaps_cvd():
                 if (cmap_d_name := f"{cmap_name}_discrete") in tc.colormaps:
                     cmap_d = tc.colormaps[cmap_d_name]
                     plot_linear(ax, cmap, (0.5, 1), cspace=cspace)
-                    plot_discrete(ax, cmap_d, (0, 0.5), cspace=cspace)
+                    plot_discrete(ax, cmap_d, (0, 0.505), cspace=cspace)
 
                 else:
                     plot_linear(ax, cmap, (0, 1), cspace=cspace)
@@ -660,11 +664,13 @@ if __name__ == "__main__":
 
     for name in [
         "sunset",
+        "nightfall",
         "BuRd",
         "PRGn",
         "YlOrBr",
         "WhOrBr",
         "iridescent",
+        "incandescent",
         "rainbow_WhBr",
         "rainbow_WhRd",
         "rainbow_PuBr",
