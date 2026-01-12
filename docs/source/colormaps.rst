@@ -24,44 +24,55 @@ Each colormap has a reversed variant directly available with the suffix "_r"
     Click on a colormap to show its `viscm <https://pypi.org/project/viscm/>`__
     evaluation in a new tab.
 
-Linear colormaps
-================
-
 The colormaps were created by linear interpolation of carefully chosen colors.
-Those colors can be used as is for discrete colormaps. Discrete variants are
-available by adding "_discrete" to the colormap name (*eg*
-``tc.sunset_discrete``).
-To obtain discrete colormaps with a different number of colors it is possible to
-resample a continuous colormap with::
+For most colormaps, a discrete variant is available by adding "_discrete" to the
+colormap name (*eg* ``tc.sunset_discrete``). To obtain discrete colormaps with a
+different number of colors it is always possible to resample a continuous
+colormap with::
 
   tc.sunset.resampled(n_colors)
 
 However do not resample the rainbow colormaps, instead use the :ref:`dedicated
 function <discrete-rainbow>`.
 
+Diverging
+=========
+
 .. important::
 
-    The three diverging schemes (*sunset*, *BuRd* and *PRGn*) look similar in
-    color-blind vision, so if more than one is used, do not reverse the
-    direction in one of them.
+    The four diverging schemes look similar in color-blind vision, so if more
+    than one is used, do not reverse the direction in one of them.
 
 Sunset
 ------
 
-.. _Color-Brewer: http://colorbrewer2.org
 
-The scheme is related to the `Color-Brewer`_ *RdYlBu* scheme, but with darker
-central colors and made more symmetric. Sunset is designed for situations where
-bad data have to be shown white.
+The scheme is related to the Color-Brewer :cbrewer:`diverging:RdYlBu:11` scheme,
+but with darker central colors and made more symmetric. Sunset is designed for
+situations where bad data have to be shown white.
 
 .. cmap:: sunset
     :alt: Sunset colormap
     :width: 70%
 
+Nightfall
+---------
+
+The scheme is inspired py the Color-Brewer :cbrewer:`diverging:PuBuGn:9` and
+:cbrewer:`diverging:YlOrRd:9` schemes. Like Sunset, it is designed for
+situations where bad data have to be shown white but with more hues. The
+discrete variant uses less colors than the linear definition.
+
+.. cmap:: nightfall
+    :alt: nightfall colormap
+    :width: 70%
+
 BuRd
 ----
-This is the reversed and tweaked `Color-Brewer`_ *RdBu* scheme.
-Bad data is :rawhtml:`<span style="background-color: #FFEE99; padding: 3pt;">#FFEE99</span>`.
+
+This is the reversed and tweaked Color-Brewer :cbrewer:`diverging:RdBu:9`
+scheme. Bad data is :rawhtml:`<span style="background-color: #FFEE99; padding:
+3pt;">#FFEE99</span>`.
 
 .. cmap:: BuRd
     :alt: Blue-Red colormap
@@ -70,20 +81,23 @@ Bad data is :rawhtml:`<span style="background-color: #FFEE99; padding: 3pt;">#FF
 PRGn
 ----
 
-This is the `Color-Brewer`_ *PRGn* scheme, with green shifted to make it
-print-friendly. Bad data is :rawhtml:`<span style="background-color: #FFEE99;
-padding: 3pt;">#FFEE99</span>`.
+This is the Color-Brewer :cbrewer:`diverging:PRGn:9` scheme, with green shifted
+to make it print-friendly. Bad data is :rawhtml:`<span style="background-color:
+#FFEE99; padding: 3pt;">#FFEE99</span>`.
 
 .. cmap:: PRGn
     :alt: Purple-Green colormap
     :width: 70%
 
+Sequential
+==========
+
 YlOrBr
 ------
 
-This is the `Color-Brewer`_ *YlOrBr* scheme, with orange shifted to make it
-print-friendly.
-Bad data is :rawhtml:`<span style="color: white; background-color: #888888; padding: 3pt;">#888888</span>`.
+This is the Color-Brewer :cbrewer:`sequential:YlOrBr:9` scheme, with orange
+shifted to make it print-friendly. Bad data is :rawhtml:`<span style="color:
+white; background-color: #888888; padding: 3pt;">#888888</span>`.
 
 .. cmap:: YlOrBr
     :alt: Yellow-Orange-Brown colormap
@@ -101,14 +115,25 @@ Iridescent
 A colormap with linearly varying luminance that also works in colourblind
 vision. Bad data is :rawhtml:`<span style="color: white; background-color:
 #999999; padding: 3pt;">#999999</span>`. It is not directly available as a
-discrete colormap. You you can still use
-:meth:`tc.iridescent.resampled(N)<matplotlib.colors.Colormap.resampled>` to
-obtain a discrete version.
+discrete colormap.
 
 .. cmap:: iridescent
     :alt: iridescent colormap
     :width: 70%
 
+Incandescent
+------------
+
+A colormap with linearly varying luminance that also works in colourblind
+vision, but is not print-friendly. Bad data is :rawhtml:`<span style="color:
+white; background-color: #888888; padding: 3pt;">#888888</span>`. It is not
+directly available as a discrete colormap. The pale cyan :rawhtml:`<span
+style="color: black; background-color: #CEFFFF; padding: 3pt;">#CEFFFF</span>`
+is almost white in red-blind vision.
+
+.. cmap:: incandescent
+    :alt: incandescent colormap
+    :width: 70%
 
 Linear rainbow
 ==============

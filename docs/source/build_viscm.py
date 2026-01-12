@@ -18,11 +18,13 @@ def make_viz(cmap: str, cmap_type: str):
 
 
 make_viz("sunset", "diverging")
+make_viz("nightfall", "diverging")
 make_viz("BuRd", "diverging")
 make_viz("PRGn", "diverging")
 make_viz("YlOrBr", "linear")
 make_viz("WhOrBr", "linear")
 make_viz("iridescent", "linear")
+make_viz("incandescent", "linear")
 make_viz("rainbow_WhBr", "linear")
 make_viz("rainbow_WhRd", "linear")
 make_viz("rainbow_PuBr", "linear")

@@ -4,9 +4,10 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 import os
 
-from docutils.nodes import Element
+from docutils import nodes
 from docutils.parsers.rst import directives
 from sphinx.application import Sphinx
+from sphinx.util.docutils import SphinxRole
 from sphinx.util.osutil import copyfile
 from sphinx.writers.html import HTMLTranslator
 
@@ -80,6 +81,8 @@ html_sidebars = {"**": []}
 
 
 class CmapImage(directives.images.Image):
+    """Insert image of colormap."""
+
     option_spec = directives.images.Image.option_spec
 
     @property
@@ -108,10 +111,31 @@ class CmapImage(directives.images.Image):
         return node
 
 
+class ColorBrewer(SphinxRole):
+    """Link to color brewer scheme.
+
+    Arguments are separated by a color ':'.
+    - kind (sequential, diverging)
+    - scheme name
+    - number of colors
+    """
+
+    def run(self) -> tuple[list[nodes.Node], list[nodes.system_message]]:
+        kind, scheme, n = self.text.split(":")
+        text = nodes.inline(text=scheme)
+        node = nodes.reference(
+            "",
+            "",
+            text,
+            refuri=f"https://colorbrewer2.org/#type={kind}&scheme={scheme}&n={n}",
+        )
+        return [node], []
+
+
 class PatchedHTMLTranslator(HTMLTranslator):
     def visit_reference(self, node):
         if "newtab" in node.get("classes") or any(
-            isinstance(c, Element) and "newtab" in c.get("classes")
+            isinstance(c, nodes.Element) and "newtab" in c.get("classes")
             for c in node.children
         ):
             node["target"] = "_blank"
@@ -121,4 +145,5 @@ class PatchedHTMLTranslator(HTMLTranslator):
 
 def setup(app: Sphinx):
     app.add_directive("cmap", CmapImage)
+    app.add_role("cbrewer", ColorBrewer())
     app.set_translator("html", PatchedHTMLTranslator)
