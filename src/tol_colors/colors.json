@@ -109,6 +109,29 @@
             "bad": "#FFFFFF",
             "discrete": true
         },
+        "nightfall": {
+            "colors": [
+                "#125A56",
+                "#00767B",
+                "#238F9D",
+                "#42A7C6",
+                "#60BCE9",
+                "#9DCCEF",
+                "#C6DBED",
+                "#DEE6E7",
+                "#ECEADA",
+                "#F0E6B2",
+                "#F9D576",
+                "#FFB954",
+                "#FD9A44",
+                "#F57634",
+                "#E94C1F",
+                "#D11807",
+                "#A01813"
+            ],
+            "bad": "#FFFFFF",
+            "discrete": true
+        },
         "BuRd": {
             "colors": [
                 "#2166AC",
@@ -177,6 +200,23 @@
                 "#9A709E", "#906388", "#805770", "#684957", "#46353A"
             ],
             "bad": "#999999",
+            "discrete": false
+        },
+        "incandescent": {
+            "colors": [
+                "#CEFFFF",
+                "#C6F7D6",
+                "#A2F49B",
+                "#BBE453",
+                "#D5CE04",
+                "#E7B503",
+                "#F19903",
+                "#F6790B",
+                "#F94902",
+                "#E40515",
+                "#A80003"
+            ],
+            "bad": "#888888",
             "discrete": false
         }
     },

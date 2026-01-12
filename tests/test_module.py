@@ -93,9 +93,10 @@ class TestColorsets:
 
 
 class TestColormaps:
-    cmaps_discrete = ["sunset", "BuRd", "PRGn", "YlOrBr", "WhOrBr"]
+    cmaps_discrete = ["sunset", "nightfall", "BuRd", "PRGn", "YlOrBr", "WhOrBr"]
     cmaps_linear = [
         "iridescent",
+        "incandescent",
         "rainbow",
         "rainbow_WhBr",
         "rainbow_WhRd",

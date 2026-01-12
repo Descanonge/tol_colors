@@ -267,9 +267,9 @@ class ColormapMapping(dict[str, LinearSegmentedColormap | ListedColormap]):
     def __getitem__(
         self,
         key: Literal[
-            "sunset", "sunset_r", "BuRd", "BuRd_r", "PRGn", "PRGn_r",
-            "YlOrBr", "YlOrBr_r", "WhOrBr", "WhOrBr_r",
-            "iridescent", "iridescent_r",
+            "sunset", "sunset_r", "nightfall", "nightfall_r", "BuRd", "BuRd_r",
+            "PRGn", "PRGn_r", "YlOrBr", "YlOrBr_r", "WhOrBr", "WhOrBr_r",
+            "iridescent", "iridescent_r", "incandescent", "incandescent_r",
             "rainbow_WhBr", "rainbow_WhBr_r", "rainbow", "rainbow_r",
             "rainbow_WhRd", "rainbow_WhRd_r",
             "rainbow_PuRd", "rainbow_PuRd_r",
@@ -283,6 +283,7 @@ class ColormapMapping(dict[str, LinearSegmentedColormap | ListedColormap]):
         self,
         key: Literal[
             "sunset_discrete", "sunset_discrete_r",
+            "incandescent_discrete", "incendescent_discrete_r",
             "BuRd_discrete", "BuRd_discrete_r",
             "PRGn_discrete", "PRGn_discrete_r",
             "YlOrBr_discrete", "YlOrBr_discrete_r",
@@ -308,7 +309,10 @@ for name, data in _colors["colormaps"].items():
     colormaps[name] = _make_linear_cmap(name, data["colors"], data["bad"])
     if data["discrete"]:
         dname = f"{name}_discrete"
-        colormaps[dname] = _make_discrete_cmap(dname, data["colors"], data["bad"])
+        colors = data["colors"]
+        if name == "nightfall":
+            colors = colors[::2]
+        colormaps[dname] = _make_discrete_cmap(dname, colors, data["bad"])
 
 # Linear rainbow colormaps
 _rainbow_lin = _colors["rainbow_linear"]
