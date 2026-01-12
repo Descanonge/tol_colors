@@ -1,5 +1,9 @@
 
-# v2.1
+## v2.2
+
+- Add 'nightfall' and 'incandescent' colormaps
+
+## v2.1
 
 - Colormaps mapping returns copies
 - Fix `__main__` invocation
