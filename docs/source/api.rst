@@ -84,6 +84,20 @@ Sunset
 .. py:data:: sunset_discrete_r
     :type: ~matplotlib.colors.ListedColormap
 
+Nightfall
+---------
+
+.. py:data:: nightfall
+    :type: ~matplotlib.colors.LinearSegmentedColormap
+
+.. py:data:: nightfall_r
+    :type: ~matplotlib.colors.LinearSegmentedColormap
+
+.. py:data:: nightfall_discrete
+    :type: ~matplotlib.colors.ListedColormap
+
+.. py:data:: nightfall_discrete_r
+    :type: ~matplotlib.colors.ListedColormap
 
 BuRd
 ----
@@ -152,6 +166,15 @@ Iridescent
     :type: ~matplotlib.colors.LinearSegmentedColormap
 
 .. py:data:: iridescent_r
+    :type: ~matplotlib.colors.LinearSegmentedColormap
+
+Incandescent
+------------
+
+.. py:data:: incandescent
+    :type: ~matplotlib.colors.LinearSegmentedColormap
+
+.. py:data:: incandescent_r
     :type: ~matplotlib.colors.LinearSegmentedColormap
 
 Rainbow
