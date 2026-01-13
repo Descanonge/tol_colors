@@ -632,7 +632,7 @@ def icon():
         ax.add_artist(p)
         return p
 
-    fig = plt.figure(figsize=(5 * t, 1), dpi=500)
+    fig = plt.figure(figsize=(0.64, 0.64), dpi=100)
     ax = fig.add_axes((0, 0, 1, 1))
     ax.set_axis_off()
     ax.set_aspect("equal")
@@ -646,7 +646,7 @@ def icon():
     draw_oct((0.5 + 3 * t / 2, 2 / 3), cset.yellow)
     draw_oct((0.5 - 3 * t / 2, 2 / 3), cset.cyan)
 
-    fig.savefig(savedir + "icon.svg", facecolor="none")
+    fig.savefig(savedir + "icon.svg", transparent=True)
     plt.close(fig)
 
 
