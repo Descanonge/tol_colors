@@ -8,7 +8,7 @@ Colorsets
 These are various sets of colors that can be used for lines, markers,
 qualitative maps, etc.
 
-The various colorsets are available:
+The colorsets are available:
 
 - as attributes of the ``tol_colors`` module (*eg* ``tc.bright``)
 - stored in the dictionary :data:`tol_colors.colorsets`. This is a special
@@ -17,18 +17,16 @@ The various colorsets are available:
   both work).
 
 
-All colorsets are given as named tuples. You can access the colors by index or
-by name::
+All colorsets are given as named tuples from which you can access the colors by
+index or by name::
 
     >>> import tol_colors as tc
     >>> cset = tc.bright
     >>> cset.blue
     '#4477AA'
 
-Except for the *high* and *medium-constrast* colorsets that can be sorted by
-luminance, the colors can be used in any order. In this package, they are given
-in the order suggested by the technical notes.
-
+Colors within a set can be used in any order. In this package, they are given in
+the order suggested by the technical notes.
 
 Sets
 ====
@@ -91,7 +89,7 @@ printout.
 .. image:: /img/cset_high_contrast.svg
     :alt: High-contrast colorset
     :class: img-padding
-    :width: 60%
+    :width: 100%
 
 Medium-contrast
 ---------------
@@ -110,8 +108,8 @@ Pale
 
 The colors of this set are not very distinct in either normal or colorblind
 vision; they are not meant for lines or maps, but for highlighting text. Use the
-pale colors for the *background* of black text, for example to highlight cells
-in a table. The text remains readable.
+pale colors for the background of black text, for example to highlight cells in
+a table. The text remains readable.
 
 .. image:: /img/cset_pale.svg
     :alt: Pale colorset

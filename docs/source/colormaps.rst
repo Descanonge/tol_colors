@@ -138,7 +138,8 @@ is almost white in red-blind vision.
 Linear rainbow
 ==============
 
-There are many pitfalls to using a continuous rainbow colormap for ordered data:
+There are a number of pitfalls to using a continuous rainbow colormap for
+ordered data:
 
 - The spectral order of visible light carries no inherent magnitude message.
   However, a rainbow provides a scheme with many colors, showing subtle effects
@@ -168,7 +169,7 @@ The full rainbow colormap. It is also available under the alias ``rainbow``.
 rainbow_WhRd
 ------------
 
-Often it is better to use only a limited range of the rainbow colors.
+It is often better to only use a limited range of the rainbow colors.
 *rainbow_WhRd* stops at red and avoid the browns, which is useful when the
 highest values (towards brown) occur often in the data.
 
@@ -179,10 +180,11 @@ highest values (towards brown) occur often in the data.
 rainbow_PuBr
 ------------
 
-Often it is better to use only a limited range of the rainbow colors.
+It is often better to only use a limited range of the rainbow colors.
 *rainbow_PuBr* starts at purple and avoids the light purple, which is useful
-when the lowest values (towards white) occur often in the data. It is preferable
-to avoid mixing light purples and light blues too much for colorblind people.
+when the lowest values (towards white) occur often in the data as it is
+preferable to avoid mixing light purples and light blues too much for colorblind
+people.
 
 .. cmap:: rainbow_PuBr
     :alt: rainbow colormap (purple to brown)
@@ -191,7 +193,7 @@ to avoid mixing light purples and light blues too much for colorblind people.
 rainbow_PuRd
 ------------
 
-Often it is better to use only a limited range of the rainbow colors.
+It is often better to only use a limited range of the rainbow colors.
 *rainbow_PuRd* avoids both ends, which is useful when the lowest and highest
 values occur often in the data.
 
