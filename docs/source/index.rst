@@ -31,11 +31,9 @@ Using pip::
 
    pip install tol-colors
 
-From source::
+Or conda::
 
-   git clone https://github.com/Descanonge/tol_colors.git
-   cd tol_colors
-   pip install .
+   conda install -c conda-forge tol-colors
 
 Show the available colorsets and colormaps::
 

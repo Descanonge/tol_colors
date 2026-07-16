@@ -14,10 +14,10 @@
 
 <img alt="icon" src="https://raw.githubusercontent.com/Descanonge/tol_colors/refs/heads/master/docs/source/_static/icon.svg" width="128" align="left">
 
-Those color schemes were designed by Paul Tol. This repository is packaging his work so that it can be easily installed using pip.
+Those color schemes were designed by Paul Tol. This repository is packaging his work so that it can be easily installed and used.
 This package and its documentation follow his technical notes<sup id="a1">[1](#f1)</sup>, which are archived in this [repository](https://github.com/Descanonge/tol_colors/blob/master/docs/technical_notes.pdf). Details and implementations for other languages can be found on Paul Tols's [website](https://sronpersonalpages.nl/~pault/).
 
-A more user-friendly documentation is available at <https://tol-colors.readthedocs.io>, detailing how and when to use the various colorsets and colormaps in this package.
+Documentation is available at <https://tol-colors.readthedocs.io>, detailing how and when to use the various colorsets and colormaps in this package.
 
 ## Install
 
@@ -26,11 +26,9 @@ Using pip:
 pip install tol-colors
 ```
 
-From source:
+Or conda:
 ``` sh
-git clone https://github.com/Descanonge/tol_colors.git
-cd tol_colors
-pip install .
+conda install -c conda-forge tol-colors
 ```
 
 Show the available colorsets, colormaps, and the discrete rainbow colormap:
@@ -38,15 +36,16 @@ Show the available colorsets, colormaps, and the discrete rainbow colormap:
 python -m tol_colors
 ```
 
-## Requirements
+### Requirements
 
+- python >= 3.10
 - numpy
 - matplotlib
 
 ## Discrete/qualitative schemes
 
 Sets of colors that can be used for lines, markers, qualitative maps, etc.
-All colorsets are given as named tuples. You can then access the colors by index or by name:
+All colorsets are given as named tuples from which you can access the colors by index or by name:
 ``` python
 >>> import tol_colors as tc
 >>> cset = tc.bright
@@ -70,7 +69,7 @@ colors. Those colors can be used as is for discrete colormaps. Discrete variants
 are available by adding "_discrete" to the colormap name (*eg*
 `tc.sunset_discrete`).
 
-The `iridescent` colormap is meant to be used interpolated; you can still use
+The `iridescent` and `incendescent` colormaps are meant to be used interpolated; you can still use
 `tc.iridescent.resampled(N)` to obtain a discrete version. To obtain a discrete
 rainbow colormap, use `tc.rainbow_discrete(n_colors=14)` with a number between 1
 and 23.
