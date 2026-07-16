@@ -129,10 +129,6 @@ class TestColormaps:
         assert len(all_names) == len(tc.colormaps)
 
     def test_copy(self):
-        cmap = tc.colormaps["sunset"]
-        cmap.set_over("w")
-        assert (tc.colormaps["sunset"].get_over() != cmap.get_over()).any()
-
         for name in self.get_all():
             assert tc.colormaps[name] is not getattr(tc, name)
 

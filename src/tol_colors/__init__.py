@@ -249,14 +249,12 @@ def set_default_colors(
 def _make_linear_cmap(
     name: str, colors: Sequence[str], bad: str
 ) -> LinearSegmentedColormap:
-    cmap = LinearSegmentedColormap.from_list(name, colors)
-    cmap.set_bad(bad)
+    cmap = LinearSegmentedColormap.from_list(name, colors, bad=bad)
     return cmap
 
 
 def _make_discrete_cmap(name: str, colors: Sequence[str], bad: str) -> ListedColormap:
-    cmap = ListedColormap(colors, name=name)
-    cmap.set_bad(bad)
+    cmap = ListedColormap(colors, name=name, bad=bad)
     return cmap
 
 
@@ -485,7 +483,7 @@ def tol_cset(colorset=None):
     if colorset not in namelist:
         colorset = "bright"
         log.warning(
-            "Requested colorset not defined, using '%s'. " "Known colorsets are %s.",
+            "Requested colorset not defined, using '%s'. Known colorsets are %s.",
             colorset,
             namelist,
         )
@@ -543,7 +541,7 @@ def tol_cmap(
     if colormap not in cmaps_name:
         colormap = "rainbow_PuRd"
         log.warning(
-            "Requested colormap not defined, using '%s'. " "Known colormaps are %s.",
+            "Requested colormap not defined, using '%s'. Known colormaps are %s.",
             colormap,
             cmaps_name,
         )
