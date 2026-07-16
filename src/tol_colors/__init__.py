@@ -43,18 +43,16 @@ Muted = namedtuple(
     "rose, indigo, sand, green, cyan, wine, teal, olive, purple, pale_grey",
 )
 
-HighContrast = namedtuple("HighContrast", "black, blue, red, yellow, white")
+HighContrast = namedtuple("HighContrast", "blue, red, yellow")
 MediumContrast = namedtuple(
     "MediumContrast",
     [
-        "white",
         "light_blue",
         "dark_blue",
         "light_yellow",
+        "dark_red",
         "dark_yellow",
         "light_red",
-        "dark_red",
-        "black",
     ],
 )
 

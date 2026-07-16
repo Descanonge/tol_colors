@@ -31,11 +31,9 @@
             "pale_grey":"#DDDDDD"
         },
         "high_contrast": {
-            "black":"#000000",
             "blue":"#004488",
             "red":"#BB5566",
-            "yellow":"#DDAA33",
-            "white":"#FFFFFF"
+            "yellow":"#DDAA33"
         },
         "medium_contrast": {
             "light_blue":"#6699CC",
@@ -43,9 +41,7 @@
             "light_yellow":"#EECC66",
             "dark_yellow":"#997700",
             "light_red":"#EE99AA",
-            "dark_red":"#994455",
-            "white":"#FFFFFF",
-            "black":"#000000"
+            "dark_red":"#994455"
         },
         "pale": {
             "pale_blue":"#BBCCEE",
