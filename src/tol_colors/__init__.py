@@ -192,7 +192,7 @@ def set_default_colors(
         <https://matplotlib.org/stable/users/explain/customizing.html>`__).
         If left to None, it will default to:
 
-        - ``$MPLCONFIGDIR`` if set, else
+        - ``$MPLCONFIGDIR/matplotlibrc`` if set, else
         - On Unix/Linux: ``$XDG_CONFIG_HOME/matplotlib/matplotlibrc`` if set, else
           ``$HOME/.config/matplotlib/matplotlibrc``
         - On other platforms ``$HOME/.matplotlib/matplotlibrc``
