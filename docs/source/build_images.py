@@ -202,7 +202,7 @@ def land_cover():
             col_name,
             xy=(0.5, 0.0),
             xycoords=p,
-            xytext=(2, -5),
+            xytext=(2, -7),
             textcoords="offset points",
             rotation=45,
             rotation_mode="anchor",
@@ -265,7 +265,6 @@ def csets_condensed():
                 va="center",
                 color=text_col,
                 size=18 - len(col_name) * 0.8,
-                style="italic",
             )
             if i_col == 0:
                 ax.annotate(
@@ -322,7 +321,7 @@ def csets_cvd():
             cvd_name,
             xy=(0.5, 1),
             xycoords="axes fraction",
-            xytext=(0, 3),
+            xytext=(0, 2),
             textcoords="offset points",
             ha="center",
             va="bottom",
@@ -363,11 +362,11 @@ def csets_cvd():
             xy=(0.5, y),
             xycoords=("figure fraction", "data"),
             ha="center",
-            va="center_baseline",
+            va="center",
             size=11,
         )
         ann.set_in_layout(False)
-        if cset_name in ["muted", "medium_contrast"]:
+        if cset_name == "muted":
             continue
         left_oct = octs["deuteranomaly"][i_set][-1]
         right_oct = octs["protanomaly"][i_set][0]
@@ -396,8 +395,6 @@ def csets_cvd():
     fig.savefig(savedir + "csets_cvd.svg")
     plt.close(fig)
 
-
-csets_cvd()
 
 ## Colormaps
 
