@@ -21,7 +21,8 @@ def cset_detailed(name: str):
     n_colors = len(cset)
 
     height = 1.0
-    width = 1.0 * (n_colors - 1)
+    width = 1.0 * (max(n_colors, 6) - 1)
+    # avoid figures that are too thin
 
     h_pad = 0.01
     v_pad = h_pad / (n_colors - 2)  # approximately the plot aspect
@@ -30,7 +31,7 @@ def cset_detailed(name: str):
     ax = fig.add_axes((0, 0, 1, 1))
     ax.set_xlim(0 - h_pad, n_colors + h_pad)
     ax.set_ylim(-0.5 - v_pad, 0.5 + v_pad)
-    ax.set_aspect("equal")
+    ax.set_aspect("equal", anchor="NW")
     ax.set_axis_off()
 
     names = cset._fields
@@ -58,20 +59,23 @@ def cset_detailed(name: str):
         )
         ax.annotate(
             f"{color}",
-            xy=(0.5, 0.5),
+            xy=(0.5, 2 / 3),
             xycoords=p,
-            xytext=(0, 2),
+            xytext=(0, 5),
             textcoords="offset points",
             ha="center",
-            va="bottom",
+            va="top",
             color=text_col,
             size=10,
         )
         ax.annotate(
             f"{col_name}",
-            xy=(0.5, 0.35),
+            xy=(0.5, 1 / 3),
             xycoords=p,
+            xytext=(0, -2),
+            textcoords="offset points",
             ha="center",
+            va="baseline",
             color=text_col,
             size=10 + (1 - len(col_name) / 10) * 2.5,
         )
@@ -79,7 +83,7 @@ def cset_detailed(name: str):
         if name.endswith("contrast"):
             r_height = 0.2
             luminance = cspace_convert(to_rgb(color), "sRGB1", "JCh")[0]
-            gray_col = f"{luminance/100:f}"
+            gray_col = f"{luminance / 100:f}"
             r = plt.Rectangle(
                 (i, -0.5 - r_height),
                 1,
@@ -109,7 +113,7 @@ def cset_dark():
     ax = fig.add_axes((0, 0, 1, 1))
     ax.set_xlim(0 - h_pad, n_colors + h_pad)
     ax.set_ylim(-0.5 - v_pad, 0.5 + v_pad)
-    ax.set_aspect("equal")
+    ax.set_aspect("equal", anchor="NW")
     ax.set_axis_off()
 
     names = cset._fields
@@ -162,7 +166,6 @@ def land_cover():
     v_pad = 0.01
 
     fig, ax = plt.subplots(figsize=(10, 2.2), layout="constrained", dpi=150)
-    # ax = fig.add_axes((0, 0, 1, 1))
     ax.set_xlim(0 - h_pad, n_colors + h_pad)
     ax.set_ylim(-0.5 - v_pad, 0.5 + v_pad)
     ax.set_aspect("equal")
@@ -199,12 +202,12 @@ def land_cover():
             col_name,
             xy=(0.5, 0.0),
             xycoords=p,
-            xytext=(0, -3),
+            xytext=(2, -5),
             textcoords="offset points",
             rotation=45,
             rotation_mode="anchor",
             ha="right",
-            va="top",
+            va="baseline",
             clip_on=False,
         )
 
